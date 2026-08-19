@@ -80,6 +80,15 @@
   .frame .cap{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--bronze); padding:var(--s13) var(--s8) var(--s5)}
   .frame.wide .inner{aspect-ratio:16/9}
   .frame.phone .inner{aspect-ratio:9/17}
+  /* image-backed frames: let the artwork set its own height */
+  .frame .inner.shot{aspect-ratio:auto; min-height:0; background:transparent; box-shadow:var(--press)}
+  .frame .inner.shot img{display:block; width:100%; height:auto}
+  /* photographic frames: crop to a band instead of running tall */
+  .frame .inner.shot.crop{aspect-ratio:16/7; min-height:0}
+  .frame .inner.shot.crop img{height:100%; object-fit:cover}
+  /* a hero must never outgrow the viewport, whatever shape the artwork is */
+  .hero-figure .inner.shot{min-height:0}
+  .hero-figure .inner.shot img{max-height:76vh; object-fit:contain}
 
   .hero-figure{margin-top:var(--s34)}
   .hero-figure .inner{min-height:340px; aspect-ratio:16/7}
@@ -229,7 +238,7 @@
       <div class="m"><div class="k">Tools</div><div class="v">Tableau, Figma, React, Python</div></div>
     </div>
     <figure class="frame wide hero-figure reveal">
-      <div class="inner"><span class="ph">[ Hero: a dashboard collection &middot; Figma 420:12820 ]</span></div>
+      <div class="inner shot"><img src="../images/data-and-design/hero-dashboard-collection.png" alt="A collection of dashboards grouped by type: marketing analytics, media and content effectiveness, customer and sales analysis, and a financial overview." loading="lazy" decoding="async"></div>
       <figcaption class="cap">Figure 01 &middot; selected dashboards</figcaption>
     </figure>
   </section>
@@ -271,12 +280,12 @@
       <p>A collection of dashboards across very different problems, each a distinct approach to the same goal: clear, intuitive, actionable presentation for people who have to decide something.</p>
     </div>
     <div class="screens" style="grid-template-columns:repeat(3,1fr)">
-      <figure class="frame wide reveal"><div class="inner"><span class="ph">Marketing Analytics</span></div><figcaption class="cap">Campaign reach &amp; engagement</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner"><span class="ph">Financial Overview</span></div><figcaption class="cap">Business health at a glance</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner"><span class="ph">Customer &amp; Sales</span></div><figcaption class="cap">Where the revenue moves</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner"><span class="ph">Automotive Manufacturing</span></div><figcaption class="cap">Plant &amp; cost views</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner"><span class="ph">Automotive Executive</span></div><figcaption class="cap">The one-screen briefing</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner"><span class="ph">Scenario Planning</span></div><figcaption class="cap">Sales what-ifs</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/marketing-analytics.png" alt="Complex dashboards built in Figma and Tableau: a web analytics dashboard, a brand-fan lifetime value flow, a soybean-volume Sankey, and a mobile business health index." loading="lazy" decoding="async"></div><figcaption class="cap">Campaign reach &amp; engagement</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/financial-overview.png" alt="A business finance overview dashboard." loading="lazy" decoding="async"></div><figcaption class="cap">Business health at a glance</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/customer-and-sales.png" alt="A guided-interface dashboard that walks the viewer through the analysis." loading="lazy" decoding="async"></div><figcaption class="cap">Where the revenue moves</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/automotive-manufacturing.png" alt="A manufacturing cost dashboard for automotive plants." loading="lazy" decoding="async"></div><figcaption class="cap">Plant &amp; cost views</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/automotive-executive.png" alt="An automotive executive dashboard: the one-screen briefing." loading="lazy" decoding="async"></div><figcaption class="cap">The one-screen briefing</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/scenario-planning.png" alt="An automotive sales scenario-planning dashboard for testing what-ifs." loading="lazy" decoding="async"></div><figcaption class="cap">Sales what-ifs</figcaption></figure>
     </div>
   </section>
 
@@ -294,7 +303,7 @@
         </ul>
       </div>
       <figure class="frame wide reveal">
-        <div class="inner"><span class="ph">[ Coral Resilience Data Platform &middot; Figma export ]</span></div>
+        <div class="inner shot"><img src="../images/data-and-design/coral-resilience.png" alt="The Coral Resilience Data Platform: user research, the community coral dataset dashboard, and the main data-analysis dashboard." loading="lazy" decoding="async"></div>
         <figcaption class="cap">Figure &middot; Coral Resilience dashboard</figcaption>
       </figure>
     </div>

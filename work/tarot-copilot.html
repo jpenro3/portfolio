@@ -80,6 +80,15 @@
   .frame .cap{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--bronze); padding:var(--s13) var(--s8) var(--s5)}
   .frame.wide .inner{aspect-ratio:16/9}
   .frame.phone .inner{aspect-ratio:9/17}
+  /* image-backed frames: let the artwork set its own height */
+  .frame .inner.shot{aspect-ratio:auto; min-height:0; background:transparent; box-shadow:var(--press)}
+  .frame .inner.shot img{display:block; width:100%; height:auto}
+  /* photographic frames: crop to a band instead of running tall */
+  .frame .inner.shot.crop{aspect-ratio:16/7; min-height:0}
+  .frame .inner.shot.crop img{height:100%; object-fit:cover}
+  /* a hero must never outgrow the viewport, whatever shape the artwork is */
+  .hero-figure .inner.shot{min-height:0}
+  .hero-figure .inner.shot img{max-height:76vh; object-fit:contain}
 
   .hero-figure{margin-top:var(--s34)}
   .hero-figure .inner{min-height:340px; aspect-ratio:16/7}
@@ -229,7 +238,7 @@
       <div class="m"><div class="k">Theme</div><div class="v">Tradition &times; technology</div></div>
     </div>
     <figure class="frame wide hero-figure reveal">
-      <div class="inner"><span class="ph">[ Hero: Tarot CoPilot &middot; Figma 439:15615 ]</span></div>
+      <div class="inner shot"><img src="../images/tarot-copilot/hero-tarot-copilot.png" alt="The Tarot CoPilot custom GPT landing screen, with four starter prompts including &quot;I am new to Tarot, what should I ask?&quot;" loading="lazy" decoding="async"></div>
       <figcaption class="cap">Figure 01 &middot; Tarot CoPilot</figcaption>
     </figure>
   </section>

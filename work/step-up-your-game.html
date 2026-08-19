@@ -80,6 +80,15 @@
   .frame .cap{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--bronze); padding:var(--s13) var(--s8) var(--s5)}
   .frame.wide .inner{aspect-ratio:16/9}
   .frame.phone .inner{aspect-ratio:9/17}
+  /* image-backed frames: let the artwork set its own height */
+  .frame .inner.shot{aspect-ratio:auto; min-height:0; background:transparent; box-shadow:var(--press)}
+  .frame .inner.shot img{display:block; width:100%; height:auto}
+  /* photographic frames: crop to a band instead of running tall */
+  .frame .inner.shot.crop{aspect-ratio:16/7; min-height:0}
+  .frame .inner.shot.crop img{height:100%; object-fit:cover}
+  /* a hero must never outgrow the viewport, whatever shape the artwork is */
+  .hero-figure .inner.shot{min-height:0}
+  .hero-figure .inner.shot img{max-height:76vh; object-fit:contain}
 
   .hero-figure{margin-top:var(--s34)}
   .hero-figure .inner{min-height:340px; aspect-ratio:16/7}
@@ -229,7 +238,7 @@
       <div class="m"><div class="k">Deliverable</div><div class="v">Wireframes &amp; product flow</div></div>
     </div>
     <figure class="frame wide hero-figure reveal">
-      <div class="inner"><span class="ph">[ Hero: major screens &middot; Figma 368:16674 ]</span></div>
+      <div class="inner shot"><img src="../images/step-up-your-game/hero-major-screens.png" alt="Step Up Your Game major screens: a phone held in hand showing the virtual sports-medicine doctor welcome, and project highlights covering ethnography, concept, and prototyping." loading="lazy" decoding="async"></div>
       <figcaption class="cap">Figure 01 &middot; major screens</figcaption>
     </figure>
   </section>
@@ -266,10 +275,10 @@
       <h2 id="p3">The interface, screen by screen</h2>
     </div>
     <div class="screens">
-      <figure class="frame phone reveal"><div class="inner"><span class="ph">Home</span></div><figcaption class="cap">Feed &amp; today</figcaption></figure>
-      <figure class="frame phone reveal"><div class="inner"><span class="ph">Custom Profile</span></div><figcaption class="cap">Interests &amp; account totals</figcaption></figure>
-      <figure class="frame phone reveal"><div class="inner"><span class="ph">Event Details</span></div><figcaption class="cap">Quick details &amp; location</figcaption></figure>
-      <figure class="frame phone reveal"><div class="inner"><span class="ph">Map / Route</span></div><figcaption class="cap">Getting there</figcaption></figure>
+      <figure class="frame phone reveal"><div class="inner shot"><img src="../images/step-up-your-game/wireframe-home.png" alt="Medium-fidelity wireframe of the home feed." loading="lazy" decoding="async"></div><figcaption class="cap">Feed &amp; today</figcaption></figure>
+      <figure class="frame phone reveal"><div class="inner shot"><img src="../images/step-up-your-game/wireframe-profile.png" alt="Medium-fidelity wireframe of the custom profile with interests and account totals." loading="lazy" decoding="async"></div><figcaption class="cap">Interests &amp; account totals</figcaption></figure>
+      <figure class="frame phone reveal"><div class="inner shot"><img src="../images/step-up-your-game/wireframe-event.png" alt="Medium-fidelity wireframe of the event details screen." loading="lazy" decoding="async"></div><figcaption class="cap">Quick details &amp; location</figcaption></figure>
+      <figure class="frame phone reveal"><div class="inner shot"><img src="../images/step-up-your-game/wireframe-map.png" alt="Medium-fidelity wireframe of the map and route screen." loading="lazy" decoding="async"></div><figcaption class="cap">Getting there</figcaption></figure>
     </div>
   </section>
 

@@ -80,6 +80,15 @@
   .frame .cap{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--bronze); padding:var(--s13) var(--s8) var(--s5)}
   .frame.wide .inner{aspect-ratio:16/9}
   .frame.phone .inner{aspect-ratio:9/17}
+  /* image-backed frames: let the artwork set its own height */
+  .frame .inner.shot{aspect-ratio:auto; min-height:0; background:transparent; box-shadow:var(--press)}
+  .frame .inner.shot img{display:block; width:100%; height:auto}
+  /* photographic frames: crop to a band instead of running tall */
+  .frame .inner.shot.crop{aspect-ratio:16/7; min-height:0}
+  .frame .inner.shot.crop img{height:100%; object-fit:cover}
+  /* a hero must never outgrow the viewport, whatever shape the artwork is */
+  .hero-figure .inner.shot{min-height:0}
+  .hero-figure .inner.shot img{max-height:76vh; object-fit:contain}
 
   .hero-figure{margin-top:var(--s34)}
   .hero-figure .inner{min-height:340px; aspect-ratio:16/7}
@@ -166,9 +175,9 @@
   .obj p{margin:0; font-size:15px; color:var(--ink)}
 
   /* app screens */
-  .screens{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s21); margin-top:var(--s21)}
-  @media(max-width:860px){.screens{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:520px){.screens{grid-template-columns:1fr 1fr}}
+  /* these four are annotated screens, not bare phones, so they run 2-up */
+  .screens{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--s21); margin-top:var(--s21)}
+  @media(max-width:620px){.screens{grid-template-columns:1fr}}
 
   /* next / cta */
   .cta{background:var(--greige); border-radius:28px; box-shadow:var(--raise); padding:clamp(var(--s34),4vw,var(--s55)); text-align:center; display:flex; flex-direction:column; align-items:center; gap:var(--s21)}
@@ -233,7 +242,7 @@
     </div>
 
     <figure class="frame wide hero-figure reveal">
-      <div class="inner"><span class="ph">[ Hero: a youth design-thinking workshop in progress ]</span></div>
+      <div class="inner shot crop"><img src="../images/youth-as-experts/hero-workshop.jpg" alt="A hand-built model from the workshop: a foam-board floor plan of &quot;The Ultimate Hangout&quot; with a game room, movie theater, snack bar, and chill-out cave modelled in clay." loading="lazy" decoding="async"></div>
       <figcaption class="cap">Figure 01 &middot; workshop, Kansas City Public Library</figcaption>
     </figure>
   </section>
@@ -396,7 +405,7 @@
         </ul>
       </div>
       <figure class="frame wide reveal">
-        <div class="inner"><span class="ph">[ Web app: event authoring + community feed &middot; Figma 429:13485 ]</span></div>
+        <div class="inner shot"><img src="../images/youth-as-experts/web-app.png" alt="The educator web application for authoring events and viewing the community feed." loading="lazy" decoding="async"></div>
         <figcaption class="cap">Figure &middot; educator web application</figcaption>
       </figure>
     </div>
@@ -409,10 +418,10 @@
         <p>A phone app for young people to discover, share, and track local learning events: a social profile with community badges and a points system, personal stats, and the feature the research demanded most.</p>
       </div>
       <div class="screens" style="margin-top:var(--s21)">
-        <figure class="frame phone reveal"><div class="inner"><span class="ph">Social Profile</span></div><figcaption class="cap">Badges, points, rideshare balance</figcaption></figure>
-        <figure class="frame phone reveal"><div class="inner"><span class="ph">Community feed</span></div><figcaption class="cap">Events sorted by time</figcaption></figure>
-        <figure class="frame phone reveal"><div class="inner"><span class="ph">Map &amp; route</span></div><figcaption class="cap">Transit options &middot; 7.8 mi, 15 min</figcaption></figure>
-        <figure class="frame phone reveal"><div class="inner"><span class="ph">Event details</span></div><figcaption class="cap">One tap to sign up</figcaption></figure>
+        <figure class="frame wide reveal"><div class="inner shot"><img src="../images/youth-as-experts/screen-profile.png" alt="Annotated profile screen: badges, points, and rideshare balance called out around a phone mockup." loading="lazy" decoding="async"></div><figcaption class="cap">Badges, points, rideshare balance</figcaption></figure>
+        <figure class="frame wide reveal"><div class="inner shot"><img src="../images/youth-as-experts/screen-feed.png" alt="Annotated home screen: menu, feed and map toggle, custom profile, badges, account totals, and personal interests called out around a phone mockup." loading="lazy" decoding="async"></div><figcaption class="cap">Events sorted by time</figcaption></figure>
+        <figure class="frame wide reveal"><div class="inner shot"><img src="../images/youth-as-experts/screen-map.png" alt="Annotated map screen: transit options and route called out around a phone mockup." loading="lazy" decoding="async"></div><figcaption class="cap">Transit options &middot; 7.8 mi, 15 min</figcaption></figure>
+        <figure class="frame wide reveal"><div class="inner shot"><img src="../images/youth-as-experts/screen-event.png" alt="Annotated event screen: quick details, location, and one-tap sign up called out around a phone mockup." loading="lazy" decoding="async"></div><figcaption class="cap">One tap to sign up</figcaption></figure>
       </div>
     </div>
 
