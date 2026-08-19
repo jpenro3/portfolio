@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Step Up Your Game</title>
+<meta name="description" content="A product and UX case study: wireframing a one-stop platform that gives young athletes a high athletic IQ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --greige:#E7E4DC; --greige-hi:#FBF9F3; --greige-lo:#C9C4B8; --paper:#EFECE4;
+    --ink:#211E18; --graphite:#6B6557;
+    --champagne:#C2A06B; --bronze:#A77F4A;
+    --led-green:#7FD7A0; --led-amber:#E6B45C; --led-cyan:#79C9D6; --led-magenta:#D88FC0;
+    --glass:rgba(255,255,255,.40); --glass-edge:rgba(255,255,255,.65);
+    --phi:1.618;
+    --t-micro:13px; --t-body:16px; --t-lead:21px; --t-h3:34px; --t-h2:55px; --t-h1:89px;
+    --s3:3px; --s5:5px; --s8:8px; --s13:13px; --s21:21px; --s34:34px; --s55:55px; --s89:89px; --s144:144px;
+    --grotesk:'Space Grotesk',system-ui,sans-serif;
+    --sans:'Inter',system-ui,sans-serif;
+    --mono:'Space Mono',ui-monospace,monospace;
+    --raise:-8px -8px 18px var(--greige-hi), 8px 8px 18px var(--greige-lo);
+    --raise-sm:-4px -4px 9px var(--greige-hi), 4px 4px 9px var(--greige-lo);
+    --press:inset -4px -4px 9px var(--greige-hi), inset 4px 4px 9px var(--greige-lo);
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--ink); font-family:var(--sans); font-size:var(--t-body); line-height:var(--phi);
+    background:var(--greige);
+    background-image:
+      radial-gradient(40% 30% at 88% 4%, rgba(200,170,230,.20), transparent 70%),
+      radial-gradient(36% 26% at 4% 40%, rgba(150,210,190,.16), transparent 70%),
+      radial-gradient(30% 24% at 96% 92%, rgba(245,200,180,.18), transparent 70%);
+    background-attachment:fixed; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:0 var(--s34)}
+  .narrow{max-width:760px}
+  @media(max-width:640px){.wrap{padding:0 var(--s21)}}
+  section{padding:var(--s55) 0}
+  .eyebrow{font-family:var(--mono); font-size:var(--t-micro); letter-spacing:.18em; text-transform:uppercase; color:var(--bronze); margin:0 0 var(--s21)}
+  .mono{font-family:var(--mono); font-size:var(--t-micro); letter-spacing:.04em; color:var(--graphite); text-transform:uppercase}
+  h1,h2,h3{font-family:var(--grotesk); font-weight:700; line-height:1.05; letter-spacing:-.02em; margin:0; text-wrap:balance}
+  h2{font-size:clamp(30px,4.4vw,44px)}
+  h3{font-size:var(--t-lead); font-weight:600}
+  p{color:var(--graphite)}
+  .lead-p{font-size:var(--t-lead); color:var(--ink); max-width:60ch}
+  a{color:var(--bronze); text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--champagne); outline-offset:3px; border-radius:4px}
+
+  /* top bar */
+  .topbar{position:sticky; top:0; z-index:20; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    background:linear-gradient(to bottom, rgba(231,228,220,.86), rgba(231,228,220,.5))}
+  .topbar .row{display:flex; align-items:center; justify-content:space-between; gap:var(--s21); padding:var(--s13) 0}
+  .back{display:inline-flex; align-items:center; gap:var(--s8); font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--graphite)}
+  .back:hover{color:var(--ink)}
+  .pill{display:inline-flex; gap:var(--s8); align-items:center; padding:var(--s8) var(--s21); border-radius:999px; box-shadow:var(--raise-sm); font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--graphite); background:var(--greige)}
+  .led{width:9px; height:9px; border-radius:50%; background:var(--led-green); box-shadow:0 0 8px var(--led-green); flex:none}
+  @keyframes breathe{0%,100%{opacity:1}50%{opacity:.45}}
+  .led.live{animation:breathe 2.6s var(--ease) infinite}
+
+  /* hero */
+  .chero{padding:var(--s55) 0 var(--s34)}
+  .kicker{display:flex; gap:var(--s13); flex-wrap:wrap; align-items:center; margin-bottom:var(--s21)}
+  .tag{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); padding:var(--s5) var(--s13); border-radius:999px; box-shadow:var(--raise-sm)}
+  .chero h1{font-size:clamp(38px,6vw,72px); letter-spacing:-.035em; line-height:1; margin-bottom:var(--s21)}
+  .chero .sub{font-size:var(--t-lead); color:var(--graphite); max-width:64ch}
+  .metarow{display:grid; grid-template-columns:repeat(4,auto); gap:var(--s34); margin-top:var(--s34); padding-top:var(--s21); border-top:1px solid rgba(33,30,24,.1)}
+  @media(max-width:640px){.metarow{grid-template-columns:1fr 1fr; gap:var(--s21)}}
+  .metarow .m .k{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--bronze)}
+  .metarow .m .v{font-family:var(--grotesk); font-weight:600; color:var(--ink); font-size:15px; margin-top:2px}
+
+  /* framed image slot (placeholder until real assets are pulled) */
+  .frame{border-radius:20px; box-shadow:var(--raise); background:var(--greige); padding:var(--s13)}
+  .frame .inner{border-radius:12px; box-shadow:var(--press); background:linear-gradient(150deg, rgba(255,255,255,.30), rgba(201,196,184,.22)); position:relative; overflow:hidden; display:grid; place-items:center; min-height:200px}
+  .frame .inner .ph{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); text-align:center; padding:var(--s21); opacity:.75}
+  .frame .cap{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--bronze); padding:var(--s13) var(--s8) var(--s5)}
+  .frame.wide .inner{aspect-ratio:16/9}
+  .frame.phone .inner{aspect-ratio:9/17}
+
+  .hero-figure{margin-top:var(--s34)}
+  .hero-figure .inner{min-height:340px; aspect-ratio:16/7}
+
+  /* quote */
+  .pullquote{margin:var(--s21) 0; padding:var(--s34); border-radius:20px; box-shadow:var(--raise); background:var(--greige)}
+  .pullquote p{font-family:var(--grotesk); font-weight:600; font-size:clamp(21px,2.6vw,30px); color:var(--ink); letter-spacing:-.01em; line-height:1.2; margin:0; max-width:30ch}
+  .pullquote .who{margin-top:var(--s13); font-family:var(--mono); font-size:12px; color:var(--bronze); letter-spacing:.06em}
+
+  /* screen readout (question) */
+  .readout{border-radius:18px; box-shadow:var(--press); padding:var(--s34); background:linear-gradient(160deg, rgba(255,255,255,.32), rgba(201,196,184,.22)); margin-top:var(--s21)}
+  .readout .k{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--bronze); margin-bottom:var(--s13)}
+  .readout p{font-family:var(--grotesk); font-weight:600; font-size:clamp(20px,2.4vw,28px); color:var(--ink); margin:0; line-height:1.25; max-width:34ch}
+
+  /* generic blocks */
+  .headblock{max-width:62ch}
+  .headblock p{margin-top:var(--s13)}
+  .body-col{max-width:66ch; display:flex; flex-direction:column; gap:var(--s21)}
+  .body-col p{margin:0; font-size:16px}
+
+  /* challenge cards */
+  .three{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s21); margin-top:var(--s34)}
+  @media(max-width:860px){.three{grid-template-columns:1fr}}
+  .qcard{background:var(--greige); border-radius:18px; box-shadow:var(--raise); padding:var(--s34); display:flex; flex-direction:column; gap:var(--s13)}
+  .qcard .n{width:26px; height:26px; border-radius:50%; box-shadow:var(--raise-sm); display:grid; place-items:center; font-family:var(--mono); font-size:12px; color:var(--bronze)}
+  .qcard p{margin:0; font-size:15px; color:var(--ink)}
+
+  /* process rail (real sequence) */
+  .rail{display:grid; grid-template-columns:repeat(6,1fr); gap:var(--s13); margin-top:var(--s34)}
+  @media(max-width:900px){
+    .rail{grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:minmax(160px,1fr);
+      overflow-x:auto; padding:var(--s13) var(--s21) var(--s21); margin-inline:calc(var(--s21) * -1); scroll-padding-inline:var(--s21)}
+  }
+  .step{background:var(--greige); border-radius:16px; box-shadow:var(--raise); padding:var(--s21); display:flex; flex-direction:column; gap:var(--s8)}
+  .step .i{font-family:var(--mono); font-size:11px; color:var(--bronze)}
+  .step .name{font-family:var(--grotesk); font-weight:600; font-size:var(--t-lead)}
+  .step .d{font-size:13px; margin:0}
+
+  /* personas */
+  .personas{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s21); margin-top:var(--s21)}
+  @media(max-width:860px){.personas{grid-template-columns:1fr}}
+  .persona{background:var(--greige); border-radius:18px; box-shadow:var(--raise); padding:var(--s21); display:flex; flex-direction:column; gap:var(--s13)}
+  .persona .avatar{width:52px; height:52px; border-radius:50%; box-shadow:var(--press); display:grid; place-items:center; font-family:var(--grotesk); font-weight:700; color:var(--bronze)}
+  .persona h3{font-size:var(--t-body); font-weight:600}
+  .persona p{font-size:14px; margin:0}
+
+  /* PB&J signature sequence */
+  .pbj{background:var(--greige); border-radius:24px; box-shadow:var(--raise); padding:clamp(var(--s21),3vw,var(--s55)); margin-top:var(--s21)}
+  .pbj .lead{display:flex; gap:var(--s13); align-items:baseline; flex-wrap:wrap; margin-bottom:var(--s34)}
+  .pbj .lead .badge{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--bronze); padding:var(--s5) var(--s13); border-radius:999px; box-shadow:var(--press)}
+  .pbj-steps{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s21)}
+  @media(max-width:860px){.pbj-steps{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.pbj-steps{grid-template-columns:1fr}}
+  .pbj-step{display:flex; flex-direction:column; gap:var(--s8)}
+  .pbj-step .num{font-family:var(--grotesk); font-weight:700; font-size:34px; color:var(--champagne); line-height:1}
+  .pbj-step p{font-size:14px; margin:0}
+
+  /* youth solutions */
+  .solutions{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s21); margin-top:var(--s21)}
+  @media(max-width:860px){.solutions{grid-template-columns:1fr}}
+  .sol{border-radius:18px; padding:var(--s21); position:relative; overflow:hidden;
+    background:linear-gradient(135deg, rgba(200,170,230,.42), rgba(150,210,190,.38) 55%, rgba(245,200,180,.42))}
+  .sol .glass{background:var(--glass); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-edge); border-radius:12px; padding:var(--s21); min-height:120px}
+  .sol h3{font-size:var(--t-body); font-weight:700; color:#2a261d}
+  .sol p{font-size:14px; color:#3a342a; margin:var(--s8) 0 0}
+
+  /* research stat + insights */
+  .research{display:grid; grid-template-columns:.7fr 1.3fr; gap:var(--s34); align-items:start; margin-top:var(--s21)}
+  @media(max-width:860px){.research{grid-template-columns:1fr}}
+  .statbig{background:var(--greige); border-radius:24px; box-shadow:var(--raise); padding:var(--s34); text-align:center}
+  .statbig .num{font-family:var(--grotesk); font-weight:700; font-size:clamp(64px,10vw,89px); color:var(--ink); line-height:.9; letter-spacing:-.03em}
+  .statbig .lbl{font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--bronze); margin-top:var(--s13)}
+  .insights{display:grid; grid-template-columns:1fr 1fr; gap:var(--s21)}
+  @media(max-width:560px){.insights{grid-template-columns:1fr}}
+  .insight{display:flex; flex-direction:column; gap:var(--s5)}
+  .insight .cap{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--bronze); display:flex; align-items:center; gap:var(--s8)}
+  .insight p{font-size:14px; margin:0}
+
+  /* objectives */
+  .objs{display:grid; grid-template-columns:1fr 1fr; gap:var(--s21); margin-top:var(--s21)}
+  @media(max-width:640px){.objs{grid-template-columns:1fr}}
+  .obj{display:flex; gap:var(--s13); align-items:flex-start; background:var(--greige); border-radius:16px; box-shadow:var(--raise-sm); padding:var(--s21)}
+  .obj .dot{width:9px; height:9px; border-radius:50%; background:var(--champagne); box-shadow:0 0 8px var(--champagne); margin-top:8px; flex:none}
+  .obj p{margin:0; font-size:15px; color:var(--ink)}
+
+  /* app screens */
+  .screens{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s21); margin-top:var(--s21)}
+  @media(max-width:860px){.screens{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.screens{grid-template-columns:1fr 1fr}}
+
+  /* next / cta */
+  .cta{background:var(--greige); border-radius:28px; box-shadow:var(--raise); padding:clamp(var(--s34),4vw,var(--s55)); text-align:center; display:flex; flex-direction:column; align-items:center; gap:var(--s21)}
+  .btn{display:inline-flex; align-items:center; gap:var(--s8); font-family:var(--grotesk); font-weight:600; padding:var(--s13) var(--s21); border-radius:14px; background:var(--greige); color:var(--ink); box-shadow:var(--raise-sm); cursor:pointer; border:0}
+  .btn.primary{box-shadow:var(--raise-sm), inset 0 0 0 1.5px var(--champagne)}
+  .btn.primary .dotled{width:8px; height:8px; border-radius:50%; background:var(--champagne); box-shadow:0 0 8px var(--champagne)}
+  .btn:hover{transform:translateY(-1px)}
+
+  footer{padding:var(--s34) 0 var(--s89)}
+  footer .row{display:flex; flex-wrap:wrap; gap:var(--s21); justify-content:space-between; font-family:var(--mono); font-size:12px; color:var(--graphite)}
+
+  /* four-persona variant */
+  .personas.four{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:860px){.personas.four{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.personas.four{grid-template-columns:1fr}}
+  .persona .meta{font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--bronze); margin:0}
+
+  /* products */
+  .product{display:grid; grid-template-columns:1fr 1.1fr; gap:var(--s34); align-items:center; margin-top:var(--s34)}
+  @media(max-width:860px){.product{grid-template-columns:1fr}}
+  .product-copy .tag{display:inline-block; margin-bottom:var(--s13)}
+  .product-copy h3{font-size:var(--t-h3); font-weight:600; margin-bottom:var(--s13)}
+  .product-copy p{max-width:52ch}
+  .feats{list-style:none; padding:0; margin:var(--s21) 0 0; display:grid; gap:var(--s8)}
+  .feats li{position:relative; padding-left:var(--s21); font-size:15px; color:var(--ink)}
+  .feats li::before{content:""; position:absolute; left:0; top:9px; width:8px; height:8px; border-radius:50%; background:var(--champagne); box-shadow:0 0 6px var(--champagne)}
+  .demo{display:flex; gap:var(--s21); flex-wrap:wrap; justify-content:center; margin-top:var(--s21)}
+  .demo .d{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--graphite)}
+  .demo .d b{font-family:var(--grotesk); color:var(--ink); font-size:16px; letter-spacing:-.01em}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .55s var(--ease), transform .55s var(--ease)}
+  .reveal.in{opacity:1; transform:none}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}.led.live{animation:none}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap row">
+    <a class="back" href="/">&larr; Jason Penrod</a>
+    <a class="pill" href="/#contact"><span class="led live" aria-hidden="true"></span> Available</a>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="chero" aria-labelledby="h">
+    <div class="kicker">
+      <span class="tag">Case study</span>
+      <span class="tag">Product &amp; UX</span>
+      <span class="tag">Mobile</span>
+    </div>
+    <h1 id="h">Step Up Your Game</h1>
+    <p class="sub">A one-stop platform to give young athletes a high athletic IQ. Curated, expert content from physical therapists, dietitians, and coaches, in one place, tuned to how a teenager actually trains.</p>
+    <div class="metarow">
+      <div class="m"><div class="k">My role</div><div class="v">Head of UX strategy</div></div>
+      <div class="m"><div class="k">With</div><div class="v">FIVE, LLC</div></div>
+      <div class="m"><div class="k">Year</div><div class="v">2019 to 2020</div></div>
+      <div class="m"><div class="k">Deliverable</div><div class="v">Wireframes &amp; product flow</div></div>
+    </div>
+    <figure class="frame wide hero-figure reveal">
+      <div class="inner"><span class="ph">[ Hero: major screens &middot; Figma 368:16674 ]</span></div>
+      <figcaption class="cap">Figure 01 &middot; major screens</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="p1">
+    <div class="headblock reveal">
+      <p class="eyebrow">The idea</p>
+      <h2 id="p1">Holistic development, in a young athlete's pocket</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Young athletes get told to work hard and pushed toward one specialty. They rarely get the whole picture: how the body recovers, what to eat, how to train around a sport instead of into an injury. Step Up Your Game brings a virtual sports-medicine doctor, physical therapists, dietitians, and coaches into one guided experience, so the expertise that usually costs a private team is available to any kid with a phone.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p2">
+    <div class="headblock reveal">
+      <p class="eyebrow">The flow</p>
+      <h2 id="p2">Sign up, build a profile, find the next event</h2>
+      <p>The wireframes map the whole path, from the welcome screen and its virtual sports-medicine doctor through profile, feed, and the details of a single event.</p>
+    </div>
+    <div class="rail reveal">
+      <div class="step"><span class="i">01</span><span class="name">Welcome</span><p class="d">Meet the virtual sports-medicine doctor.</p></div>
+      <div class="step"><span class="i">02</span><span class="name">Sign up</span><p class="d">Quick, low-friction onboarding.</p></div>
+      <div class="step"><span class="i">03</span><span class="name">Profile</span><p class="d">Interests, totals, personal goals.</p></div>
+      <div class="step"><span class="i">04</span><span class="name">Feed</span><p class="d">Curated content and events.</p></div>
+      <div class="step"><span class="i">05</span><span class="name">Event</span><p class="d">Details, location, and route.</p></div>
+      <div class="step"><span class="i">06</span><span class="name">Badges</span><p class="d">Progress worth coming back for.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="p3">
+    <div class="headblock reveal">
+      <p class="eyebrow">Key screens</p>
+      <h2 id="p3">The interface, screen by screen</h2>
+    </div>
+    <div class="screens">
+      <figure class="frame phone reveal"><div class="inner"><span class="ph">Home</span></div><figcaption class="cap">Feed &amp; today</figcaption></figure>
+      <figure class="frame phone reveal"><div class="inner"><span class="ph">Custom Profile</span></div><figcaption class="cap">Interests &amp; account totals</figcaption></figure>
+      <figure class="frame phone reveal"><div class="inner"><span class="ph">Event Details</span></div><figcaption class="cap">Quick details &amp; location</figcaption></figure>
+      <figure class="frame phone reveal"><div class="inner"><span class="ph">Map / Route</span></div><figcaption class="cap">Getting there</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta reveal">
+      <span class="pill"><span class="led live" aria-hidden="true"></span> Taking on work</span>
+      <h2>Have a vision that needs its first real screens?</h2>
+      <p style="max-width:52ch">This is scoping and wireframing a product from a founder's idea. Tell me what you are building.</p>
+      <a class="btn primary" href="/#contact"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="row">
+    <span><a href="/">&larr; Back to Jason Penrod</a></span>
+    <span>Step Up Your Game &middot; case study</span>
+  </div>
+</footer>
+<script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = [].slice.call(document.querySelectorAll('.reveal'));
+    if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>

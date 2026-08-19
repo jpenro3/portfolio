@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jason Penrod</title>
+<meta name="description" content="Jason Penrod. I help founders figure out what to build first, then I build it. Twenty-plus years designing for the same human while the medium kept reinventing itself.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --greige:#E7E4DC; --greige-hi:#FBF9F3; --greige-lo:#C9C4B8; --paper:#EFECE4;
+    --ink:#211E18; --graphite:#6B6557;
+    --champagne:#C2A06B; --bronze:#A77F4A;
+    --led-green:#7FD7A0; --led-amber:#E6B45C; --led-cyan:#79C9D6; --led-magenta:#D88FC0;
+    --glass:rgba(255,255,255,.40); --glass-edge:rgba(255,255,255,.65);
+    --phi:1.618;
+    --t-micro:13px; --t-body:16px; --t-lead:21px; --t-h3:34px; --t-h2:55px; --t-h1:89px;
+    --s3:3px; --s5:5px; --s8:8px; --s13:13px; --s21:21px; --s34:34px; --s55:55px; --s89:89px; --s144:144px;
+    --grotesk:'Space Grotesk',system-ui,sans-serif;
+    --sans:'Inter',system-ui,sans-serif;
+    --mono:'Space Mono',ui-monospace,monospace;
+    --raise:-8px -8px 18px var(--greige-hi), 8px 8px 18px var(--greige-lo);
+    --raise-sm:-4px -4px 9px var(--greige-hi), 4px 4px 9px var(--greige-lo);
+    --press:inset -4px -4px 9px var(--greige-hi), inset 4px 4px 9px var(--greige-lo);
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--ink); font-family:var(--sans); font-size:var(--t-body); line-height:var(--phi);
+    background:var(--greige);
+    background-image:
+      radial-gradient(40% 30% at 88% 4%, rgba(200,170,230,.22), transparent 70%),
+      radial-gradient(36% 26% at 4% 62%, rgba(150,210,190,.18), transparent 70%),
+      radial-gradient(30% 24% at 96% 96%, rgba(245,200,180,.20), transparent 70%);
+    background-attachment:fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:0 var(--s34)}
+  @media(max-width:640px){.wrap{padding:0 var(--s21)}}
+  section{padding:var(--s89) 0}
+  .eyebrow{font-family:var(--mono); font-size:var(--t-micro); letter-spacing:.18em; text-transform:uppercase; color:var(--bronze); margin:0 0 var(--s21)}
+  .mono{font-family:var(--mono); font-size:var(--t-micro); letter-spacing:.04em; color:var(--graphite); text-transform:uppercase}
+  h1,h2,h3{font-family:var(--grotesk); font-weight:700; line-height:1.04; letter-spacing:-.02em; margin:0; text-wrap:balance}
+  h2{font-size:clamp(34px,5vw,var(--t-h2))}
+  h3{font-size:var(--t-h3); font-weight:600}
+  p{max-width:62ch; color:var(--graphite)}
+  a{color:var(--bronze); text-decoration:none}
+  a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--champagne); outline-offset:3px; border-radius:4px}
+
+  /* ---- Top bar ---- */
+  .topbar{position:sticky; top:0; z-index:20; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    background:linear-gradient(to bottom, rgba(231,228,220,.86), rgba(231,228,220,.55)); }
+  .topbar .row{display:flex; align-items:center; justify-content:space-between; gap:var(--s21); padding:var(--s13) 0}
+  .brand{font-family:var(--grotesk); font-weight:700; letter-spacing:-.02em; font-size:var(--t-lead); color:var(--ink)}
+  .nav{display:flex; gap:var(--s8); align-items:center}
+  .nav a{font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--graphite); padding:var(--s8) var(--s13); border-radius:999px}
+  .nav a:hover{color:var(--ink)}
+  @media(max-width:640px){.nav a.hide-sm{display:none}}
+  .pill{display:inline-flex; gap:var(--s8); align-items:center; padding:var(--s8) var(--s21); border-radius:999px; box-shadow:var(--raise-sm); font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--graphite); background:var(--greige)}
+  .led{width:9px; height:9px; border-radius:50%; background:var(--led-green); box-shadow:0 0 8px var(--led-green); flex:none}
+  @keyframes breathe{0%,100%{opacity:1}50%{opacity:.45}}
+  .led.live{animation:breathe 2.6s var(--ease) infinite}
+
+  /* ---- Hero ---- */
+  .hero{padding-top:var(--s55); padding-bottom:var(--s89)}
+  .hero-grid{display:grid; grid-template-columns:1.618fr 1fr; gap:var(--s55); align-items:center}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr; gap:var(--s34)}}
+  .display{font-family:var(--grotesk); font-weight:700; font-size:clamp(44px,7.2vw,84px); line-height:.98; letter-spacing:-.035em; color:var(--ink); text-wrap:balance}
+  .display .soft{color:var(--graphite)}
+  .lede{font-size:var(--t-lead); color:var(--graphite); margin-top:var(--s34); max-width:54ch}
+  .hero-cta{display:flex; gap:var(--s13); flex-wrap:wrap; margin-top:var(--s34); align-items:center}
+
+  .btn{display:inline-flex; align-items:center; gap:var(--s8); font-family:var(--grotesk); font-weight:600; font-size:var(--t-body);
+    padding:var(--s13) var(--s21); border-radius:14px; background:var(--greige); color:var(--ink); box-shadow:var(--raise-sm); cursor:pointer; border:0;
+    transition:box-shadow var(--ease) .144s, transform var(--ease) .144s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:active{box-shadow:var(--press); transform:translateY(0)}
+  .btn.primary{color:#2a2416; box-shadow:var(--raise-sm), inset 0 0 0 1.5px var(--champagne)}
+  .btn.primary .dotled{width:8px; height:8px; border-radius:50%; background:var(--champagne); box-shadow:0 0 8px var(--champagne)}
+  .btn.ghost{box-shadow:none; color:var(--graphite); padding-left:var(--s8)}
+  .btn.ghost:hover{color:var(--ink)}
+
+  /* ---- The medium console (hero instrument) ---- */
+  .console{background:var(--greige); border-radius:34px; box-shadow:var(--raise); padding:var(--s34); position:relative}
+  .console .facehead{display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--s21)}
+  .console .screen{border-radius:16px; box-shadow:var(--press); padding:var(--s21); min-height:132px; display:flex; flex-direction:column; justify-content:center; gap:var(--s8);
+    background:linear-gradient(160deg, rgba(255,255,255,.35), rgba(201,196,184,.25));}
+  .screen .read-era{font-family:var(--grotesk); font-weight:700; font-size:32px; letter-spacing:-.02em; color:var(--ink); line-height:1}
+  .screen .read-years{font-family:var(--mono); font-size:12px; color:var(--bronze); letter-spacing:.08em}
+  .screen .read-cap{font-size:14px; color:var(--graphite); line-height:1.45; margin:0; max-width:none; min-height:2.9em}
+  .console .knobrow{display:flex; align-items:center; gap:var(--s21); margin-top:var(--s21)}
+  .knob{width:104px; height:104px; border-radius:50%; position:relative; background:var(--greige); box-shadow:var(--raise); cursor:grab; flex:none; border:0; padding:0; touch-action:none}
+  .knob:active,.knob.dragging{cursor:grabbing}
+  .knob::after{content:""; position:absolute; inset:18px; border-radius:50%; box-shadow:var(--press)}
+  .knob .grip{position:absolute; inset:26px; border-radius:50%; background:linear-gradient(145deg,var(--greige-hi),var(--greige-lo)); box-shadow:var(--raise-sm); pointer-events:none}
+  .knob .ind{position:absolute; left:50%; top:11px; width:4px; height:28px; margin-left:-2px; border-radius:2px; background:var(--champagne); box-shadow:0 0 6px rgba(194,160,107,.6); transform-origin:50% 41px; transition:transform var(--ease) .377s; pointer-events:none}
+  .knob.dragging .ind{transition:none}
+  .knob .ticks{position:absolute; inset:0}
+  .knob .ticks i{position:absolute; left:50%; top:3px; width:2px; height:6px; background:var(--graphite); opacity:.45; transform-origin:50% 49px}
+  .knob .ticks i.det{opacity:.9; height:9px; background:var(--bronze)}
+  .knoblabels{display:flex; flex-direction:column; gap:var(--s8); flex:1}
+  .knoblabels .kl{display:flex; align-items:center; gap:var(--s8); font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite); cursor:pointer; background:none; border:0; padding:2px 0; text-align:left}
+  .knoblabels .kl .dot{width:7px; height:7px; border-radius:50%; background:var(--greige-lo); box-shadow:var(--press); flex:none; transition:background var(--ease) .2s, box-shadow var(--ease) .2s}
+  .knoblabels .kl[aria-selected="true"]{color:var(--ink)}
+  .knoblabels .kl[aria-selected="true"] .dot{background:var(--champagne); box-shadow:0 0 8px var(--champagne)}
+  .console .hint{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); opacity:.7; margin-top:var(--s21); text-align:right}
+
+  /* ---- Section heading block ---- */
+  .headblock{max-width:60ch; margin-bottom:var(--s55)}
+  .headblock p{margin-top:var(--s21)}
+
+  /* ---- What I do ---- */
+  .lanes{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s34)}
+  @media(max-width:860px){.lanes{grid-template-columns:1fr}}
+  .lane{background:var(--greige); border-radius:24px; box-shadow:var(--raise); padding:var(--s34); display:flex; flex-direction:column; gap:var(--s13)}
+  .lane .num{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--bronze)}
+  .lane h3{font-size:var(--t-lead); font-weight:600}
+  .lane p{font-size:15px; margin:0}
+
+  /* ---- Selected work ---- */
+  .work{display:grid; grid-template-columns:1fr 1fr; gap:var(--s34)}
+  @media(max-width:860px){.work{grid-template-columns:1fr}}
+  .card{background:var(--greige); border-radius:24px; box-shadow:var(--raise); padding:var(--s34); display:flex; flex-direction:column; gap:var(--s13); position:relative}
+  .card .role{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite); display:flex; align-items:center; gap:var(--s8)}
+  .card h3{font-size:var(--t-h3); font-weight:600}
+  .card p{font-size:15px; margin:0}
+  .card .spec{margin-top:auto; padding-top:var(--s13); font-family:var(--mono); font-size:12px; color:var(--bronze); letter-spacing:.03em; display:flex; flex-wrap:wrap; gap:var(--s13); border-top:1px solid rgba(33,30,24,.08)}
+  a.card.link{text-decoration:none; color:inherit; transition:transform var(--ease) .144s, box-shadow var(--ease) .144s}
+  a.card.link:hover{transform:translateY(-2px); box-shadow:var(--raise), inset 0 0 0 1.5px rgba(194,160,107,.35)}
+  .card .go{margin-top:auto; padding-top:var(--s13); font-family:var(--mono); font-size:12px; letter-spacing:.06em; color:var(--bronze); border-top:1px solid rgba(33,30,24,.08)}
+  a.card.link:hover .go{color:var(--ink)}
+  .card .spec a{color:var(--bronze); border-bottom:1px solid rgba(167,127,74,.35)}
+  .card.feature{grid-column:1 / -1}
+  .card.feature .inner{display:grid; grid-template-columns:1.4fr 1fr; gap:var(--s34); align-items:center}
+  @media(max-width:860px){.card.feature .inner{grid-template-columns:1fr}}
+  .faceplate{border-radius:18px; padding:var(--s34); color:#3a352b; align-self:stretch; display:flex; flex-direction:column; justify-content:center; gap:var(--s13);
+    background:linear-gradient(135deg,#D8D3C6,#F2EEE4 38%,#CFC9BB 64%,#E6E1D5); box-shadow:var(--raise-sm)}
+  .faceplate .big{font-family:var(--grotesk); font-weight:700; font-size:40px; letter-spacing:-.02em; color:#2a2416; line-height:1}
+  .faceplate .mono{color:#5b5446}
+
+  /* ---- The arc (real sequence) ---- */
+  .arc{position:relative}
+  .arc .spine{position:absolute; left:19px; top:8px; bottom:8px; width:2px; background:linear-gradient(to bottom, transparent, rgba(167,127,74,.4) 8%, rgba(167,127,74,.4) 92%, transparent)}
+  @media(max-width:640px){.arc .spine{left:13px}}
+  .act{position:relative; padding-left:var(--s55); padding-bottom:var(--s55)}
+  @media(max-width:640px){.act{padding-left:var(--s34)}}
+  .act:last-child{padding-bottom:0}
+  .act .node{position:absolute; left:8px; top:5px; width:24px; height:24px; border-radius:50%; background:var(--greige); box-shadow:var(--raise-sm); display:grid; place-items:center}
+  @media(max-width:640px){.act .node{left:2px; width:22px; height:22px}}
+  .act .node i{width:9px; height:9px; border-radius:50%; background:var(--led-cyan); box-shadow:0 0 8px var(--led-cyan)}
+  .act.a2 .node i{background:var(--led-amber); box-shadow:0 0 8px var(--led-amber)}
+  .act.a3 .node i{background:var(--led-green); box-shadow:0 0 8px var(--led-green)}
+  .act .years{font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--bronze)}
+  .act h3{font-size:var(--t-h3); font-weight:600; margin:var(--s5) 0 var(--s13)}
+  .act p{font-size:16px; margin:0}
+
+  /* ---- The rest of it ---- */
+  .beats{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s34)}
+  @media(max-width:860px){.beats{grid-template-columns:1fr}}
+  .beat{display:flex; flex-direction:column; gap:var(--s13)}
+  .beat .cap{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--bronze); display:flex; align-items:center; gap:var(--s8)}
+  .beat h3{font-size:var(--t-lead); font-weight:600}
+  .beat p{font-size:15px; margin:0}
+
+  /* ---- The ask ---- */
+  .ask{background:var(--greige); border-radius:34px; box-shadow:var(--raise); padding:clamp(var(--s34),5vw,var(--s89)); text-align:center; display:flex; flex-direction:column; align-items:center; gap:var(--s21)}
+  .ask h2{max-width:18ch}
+  .ask p{max-width:52ch; margin:0 auto}
+  .ask .btn{margin-top:var(--s13)}
+
+  footer{padding:var(--s55) 0 var(--s89)}
+  footer .row{display:flex; flex-wrap:wrap; gap:var(--s21); justify-content:space-between; align-items:center; font-family:var(--mono); font-size:12px; color:var(--graphite)}
+  footer .row span{letter-spacing:.05em}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .55s var(--ease), transform .55s var(--ease)}
+  .reveal.in{opacity:1; transform:none}
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto !important}
+    .reveal{opacity:1; transform:none; transition:none}
+    .knob .ind{transition:none}
+    .led.live{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap row">
+    <span class="brand">Jason Penrod</span>
+    <nav class="nav" aria-label="Primary">
+      <a href="#work" class="hide-sm">Work</a>
+      <a href="#arc" class="hide-sm">Arc</a>
+      <a class="pill" href="#contact"><span class="led live" aria-hidden="true"></span> Available</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Product designer &amp; builder</p>
+        <h1 id="hero-h" class="display">The medium keeps changing.<br><span class="soft">The human does not.</span></h1>
+        <p class="lede">I have spent my whole career designing for the person on the other end while the medium reinvented itself under me. Paper and plastic. Then pixels. Now whatever we are calling intelligence this year. Today I help founders figure out what to build first, and then I build it.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#contact"><span class="dotled" aria-hidden="true"></span> Tell me what you are building</a>
+          <a class="btn ghost" href="#work">See the work &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Medium console: the thesis you can turn -->
+      <div class="console" aria-hidden="false">
+        <div class="facehead">
+          <span class="mono">Medium</span>
+          <span class="mono" style="color:var(--bronze)">1 : 1.618</span>
+        </div>
+        <div class="screen" role="status" aria-live="polite">
+          <span class="read-era" id="readEra">Atoms</span>
+          <span class="read-years" id="readYears">1995 &rarr; 2002</span>
+          <p class="read-cap" id="readCap">Physical products at Hallmark. Real light, real objects, the shape of a thing in a real hand.</p>
+        </div>
+        <div class="knobrow">
+          <button class="knob" id="knob" role="slider" aria-label="Turn the medium dial" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" aria-valuetext="Atoms" title="Drag to turn, or tap to advance">
+            <span class="ticks" id="ticks" aria-hidden="true"></span>
+            <span class="grip" aria-hidden="true"></span>
+            <span class="ind" id="ind" aria-hidden="true"></span>
+          </button>
+          <div class="knoblabels" role="tablist" aria-label="Medium eras">
+            <button class="kl" role="tab" aria-selected="true"  data-era="0"><span class="dot" aria-hidden="true"></span> Atoms</button>
+            <button class="kl" role="tab" aria-selected="false" data-era="1"><span class="dot" aria-hidden="true"></span> Pixels</button>
+            <button class="kl" role="tab" aria-selected="false" data-era="2"><span class="dot" aria-hidden="true"></span> Intelligence</button>
+          </div>
+        </div>
+        <div class="hint">Turn the dial &middot; the human stays put</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT I DO -->
+  <section id="do" aria-labelledby="do-h">
+    <div class="headblock reveal">
+      <p class="eyebrow">What I do</p>
+      <h2 id="do-h">Judgment and a fast build, in the same person</h2>
+      <p>Most people hiring for this are picking between a strategist who cannot build and a builder with no taste. I am both, and that is the whole advantage.</p>
+    </div>
+    <div class="lanes">
+      <div class="lane reveal">
+        <span class="num">01</span>
+        <h3>Figure out what to build first</h3>
+        <p>Most projects do not fail on execution. They fail because everything looked equally important on day one. I sit with the vision, find the one thing that has to be true, and tell you what to cut. You get a scope you can actually start.</p>
+      </div>
+      <div class="lane reveal">
+        <span class="num">02</span>
+        <h3>Build it</h3>
+        <p>Not a deck about the thing. The thing. Working software, in front of real users, in weeks. Twenty years of product judgment plus AI-augmented build speed is a strange combination, and it is the point.</p>
+      </div>
+      <div class="lane reveal">
+        <span class="num">03</span>
+        <h3>Make the complicated thing clear</h3>
+        <p>Data products, decision tools, anything where someone has to understand something hard and then act on it. I invented a chart type once because the existing ones were not telling the truth. That is the instinct.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED WORK -->
+  <section id="work" aria-labelledby="work-h">
+    <div class="headblock reveal">
+      <p class="eyebrow">Selected work</p>
+      <h2 id="work-h">A claim, and the proof of the claim</h2>
+    </div>
+    <div class="work">
+      <div class="card feature reveal">
+        <div class="inner">
+          <div>
+            <span class="role"><span class="led" aria-hidden="true"></span> Co-founder &amp; CTO &middot; 2020 to now</span>
+            <h3 style="margin:var(--s13) 0">inFormed Consent</h3>
+            <p>A patented platform that turns informed consent from a signature into something a patient actually understands. I built the technology from nothing: personalized AI avatars, video-tracked comprehension, live with clinicians.</p>
+          </div>
+          <div class="faceplate">
+            <span class="mono">US Patent</span>
+            <span class="big">11,501,875</span>
+            <span class="mono">Informed patient consent<br>through video tracking</span>
+          </div>
+        </div>
+        <div class="spec">
+          <span>Next.js</span><span>AI avatars</span><span>Healthtech</span>
+          <span><a href="https://patents.google.com/patent/US11501875B2" target="_blank" rel="noopener">View the patent &rarr;</a></span>
+        </div>
+      </div>
+
+      <a class="card link reveal" href="/work/youth-as-experts.html">
+        <span class="role">UX &middot; facilitation</span>
+        <h3>Youth as Experts</h3>
+        <p>Design-thinking workshops where the teenagers were the experts and I was the facilitator, then the two-product prototype their own ideas asked for. The clearest proof of how I run discovery.</p>
+        <div class="go">Read the case study &rarr;</div>
+      </a>
+
+      <a class="card link reveal" href="/work/data-and-design.html">
+        <span class="role">Data storytelling</span>
+        <h3>Data + Design</h3>
+        <p>Dashboards leaders actually use, the invented Leapfrog Chart for a Fortune 10 client, and the Coral Resilience Data Platform. Turning complex data into a decision someone can make.</p>
+        <div class="go">Read the case study &rarr;</div>
+      </a>
+
+      <a class="card link reveal" href="/work/step-up-your-game.html">
+        <span class="role">Product &amp; UX</span>
+        <h3>Step Up Your Game</h3>
+        <p>Wireframing a one-stop platform that gives young athletes a high athletic IQ, combining physical therapists, dietitians, and coaches into one guided experience.</p>
+        <div class="go">Read the case study &rarr;</div>
+      </a>
+
+      <div class="card reveal">
+        <span class="role">Hallmark</span>
+        <h3>Six patents</h3>
+        <p>Light and shadow projection. Real-time sound. A fill-in-the-blank audio story engine. A holiday toy microphone. This is where I learned that an idea can become a product, a patent, and a line of revenue, and that the distance between those three is mostly nerve.</p>
+        <div class="spec">
+          <span><a href="https://patents.google.com/patent/US8961183B2" target="_blank" rel="noopener">US 8,961,183</a></span>
+          <span><a href="https://patents.google.com/patent/US8819169B2" target="_blank" rel="noopener">US 8,819,169</a></span>
+        </div>
+      </div>
+
+      <a class="card link reveal" href="/work/tarot-copilot.html">
+        <span class="role">AI experiment</span>
+        <h3>Tarot CoPilot</h3>
+        <p>A CustomGPT that encodes the seventy-eight-card Rider-Waite deck for a personalized reading. Proof I keep my hands in the current medium, not just talk about it.</p>
+        <div class="go">Read the case study &rarr;</div>
+      </a>
+
+      <div class="card reveal">
+        <span class="role">Live tool</span>
+        <h3>MVP Scoper</h3>
+        <p>You describe what you want to build. It tells you what to build first and what to cut. Built on my own design system, running live against the Claude API. The scoping conversation I have with clients, turned into a thing you can use.</p>
+        <div class="spec"><span>Live app</span><span><a href="#contact">Ask me for a link &rarr;</a></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE ARC -->
+  <section id="arc" aria-labelledby="arc-h">
+    <div class="headblock reveal">
+      <p class="eyebrow">The arc</p>
+      <h2 id="arc-h">Same job. Three materials.</h2>
+      <p>The medium did not change on a clean date. It changed under me while I was mid-project. That overlap is the interesting part.</p>
+    </div>
+    <div class="arc">
+      <div class="spine" aria-hidden="true"></div>
+      <div class="act a1 reveal">
+        <span class="node" aria-hidden="true"><i></i></span>
+        <span class="years">Atoms &middot; from 1995</span>
+        <h3>Photography and physical product</h3>
+        <p>I started at Hallmark in the photo studio, a designer who shot the photographs and built them into greeting cards. Physical products, real light, the shape of a thing in a real hand. Later I led product and design across the physical lines, standing on factory floors watching a drawing turn into an object.</p>
+      </div>
+      <div class="act a2 reveal">
+        <span class="node" aria-hidden="true"><i></i></span>
+        <span class="years">Pixels &middot; around 2000</span>
+        <h3>The medium changed under me</h3>
+        <p>Around 2000, at a dot-com startup called eScout, I taught myself to hand-code the web before the tools existed and learned to ssh into production. They offered me a developer's chair. I turned it down to stay the designer who builds. Back at Hallmark I moved into innovation, treating anything digital as a new material, and the patents followed. A couple of my interns dreamed up an iPhone app and we built it, a beta, a proof of concept, and pitched it to Apple in Cupertino. Then came Playfair, where the work bent hard toward data. Same job, different material.</p>
+      </div>
+      <div class="act a3 reveal">
+        <span class="node" aria-hidden="true"><i></i></span>
+        <span class="years">Intelligence &middot; 2020 to now</span>
+        <h3>Building with agents</h3>
+        <p>Now I build with agents. Multi-agent systems, custom models, AI avatars a patient will actually sit through. The tools are unrecognizable next to a photo studio. The person on the other end is not. Same fear, same hope, same small brave decision.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE REST OF IT -->
+  <section id="rest" aria-labelledby="rest-h">
+    <div class="headblock reveal">
+      <p class="eyebrow">The rest of it</p>
+      <h2 id="rest-h">A few things that are also true</h2>
+    </div>
+    <div class="beats">
+      <div class="beat reveal">
+        <span class="cap"><span class="led" style="background:var(--led-cyan); box-shadow:0 0 8px var(--led-cyan)" aria-hidden="true"></span> Practice</span>
+        <h3>I teach</h3>
+        <p>At Guang Ming Temple in Orlando I taught Buddhist philosophy, including a class called Visualizing Buddhism that merged data visualization with the Dharma. Take something complex, make it clear enough to hold. Same instinct as the day job. RYT 200, so the line about flexibility of body and mind is a practice, not a metaphor.</p>
+      </div>
+      <div class="beat reveal">
+        <span class="cap"><span class="led" style="background:var(--led-amber); box-shadow:0 0 8px var(--led-amber)" aria-hidden="true"></span> Workbench</span>
+        <h3>I make things with my hands</h3>
+        <p>3D printers and scanners, a laser cutter, a CNC mill, Arduino, soldering, vacuum forming, sculpting, sewing. Solidworks and Rhino. I am suspicious of anyone who designs objects and has never ruined one.</p>
+      </div>
+      <div class="beat reveal">
+        <span class="cap"><span class="led" style="background:var(--led-magenta); box-shadow:0 0 8px var(--led-magenta)" aria-hidden="true"></span> The turn</span>
+        <h3>I started over</h3>
+        <p>Four years ago I walked away from most of it. A marriage of twenty-five years. A career. A whole identity. I became a startup CTO on the other side of it. It cost me things I am not getting back, and I would still do it. I do not say that to be inspiring. I say it because most of the people I work with are sitting on something they are scared to start.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE ASK -->
+  <section id="contact" aria-labelledby="ask-h">
+    <div class="ask reveal">
+      <span class="pill"><span class="led live" aria-hidden="true"></span> Taking on work</span>
+      <h2 id="ask-h">Tell me what you are building</h2>
+      <p>I read every one of these. If it is a fit I will tell you what I would build first, before you have paid me anything. If it is not, I will tell you that too.</p>
+      <a class="btn primary" href="mailto:hello@example.com?subject=What%20I%27m%20building"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="row">
+    <span>Jason Penrod &middot; Orlando</span>
+    <span>&phi; 1.618 &middot; Fib 3 5 8 13 21 34 55 89</span>
+    <span>Designed for the human. Built like an instrument.</span>
+  </div>
+</footer>
+
+<script>
+  // ---- Medium dial: the thesis you can turn ----
+  (function(){
+    var eras = [
+      { name:'Atoms',        years:'1995 → 2002',   cap:'Physical products at Hallmark. Real light, real objects, the shape of a thing in a real hand.' },
+      { name:'Pixels',       years:'2000 → 2019',   cap:'A dot-com startup, hand-coded before the tools existed, then innovation, patents, and data at Playfair.' },
+      { name:'Intelligence', years:'2020 → now',    cap:'Agents and AI avatars a patient will actually sit through. New tools. The same human on the other end.' }
+    ];
+    var ticks = document.getElementById('ticks');
+    if(ticks){
+      // Fibonacci-feeling tick ring, three champagne detents at the era stops
+      var N = 21, span = 300, start = -150;
+      var detentIdx = [0, 10, 20];
+      for(var i=0;i<N;i++){
+        var t=document.createElement('i');
+        if(detentIdx.indexOf(i)>=0) t.className='det';
+        t.style.transform='rotate('+(start + i*(span/(N-1)))+'deg)';
+        ticks.appendChild(t);
+      }
+    }
+    var ind    = document.getElementById('ind');
+    var readE  = document.getElementById('readEra');
+    var readY  = document.getElementById('readYears');
+    var readC  = document.getElementById('readCap');
+    var knob   = document.getElementById('knob');
+    var labels = Array.prototype.slice.call(document.querySelectorAll('.kl'));
+    var stops  = [-150, 0, 150];  // three detents across the 300deg sweep
+    var cur = 0;
+
+    function paint(i){
+      cur = (i + eras.length) % eras.length;
+      if(readE) readE.textContent = eras[cur].name;
+      if(readY) readY.textContent = eras[cur].years;
+      if(readC) readC.textContent = eras[cur].cap;
+      labels.forEach(function(l,idx){ l.setAttribute('aria-selected', idx===cur ? 'true':'false'); });
+      if(knob){ knob.setAttribute('aria-valuenow', cur); knob.setAttribute('aria-valuetext', eras[cur].name); }
+    }
+    // Snap the indicator to a detent (animates with the hardware settle)
+    function render(i){ paint(i); if(ind) ind.style.transform = 'rotate('+stops[cur]+'deg)'; }
+    // Free-turn the indicator to an arbitrary angle; readout tracks the nearest detent
+    function nearest(deg){ var b=0,bd=1e9; for(var i=0;i<stops.length;i++){var d=Math.abs(deg-stops[i]); if(d<bd){bd=d;b=i;}} return b; }
+    function turnTo(deg){
+      deg = Math.max(-150, Math.min(150, deg));
+      if(ind) ind.style.transform = 'rotate('+deg+'deg)';
+      var i = nearest(deg);
+      if(i !== cur) paint(i);
+    }
+
+    labels.forEach(function(l){
+      l.addEventListener('click', function(){ render(parseInt(l.getAttribute('data-era'),10)); });
+    });
+
+    // Keyboard: arrows turn the dial, Enter/Space advances
+    if(knob) knob.addEventListener('keydown', function(e){
+      if(e.key==='ArrowRight'||e.key==='ArrowUp'){ e.preventDefault(); render(cur+1); }
+      else if(e.key==='ArrowLeft'||e.key==='ArrowDown'){ e.preventDefault(); render(cur-1); }
+      else if(e.key==='Enter'||e.key===' '){ e.preventDefault(); render(cur+1); }
+    });
+
+    // Pointer: drag to turn like a real knob, tap to advance
+    if(knob){
+      var dragging=false, moved=false, sx=0, sy=0;
+      function angleAt(e){
+        var r=knob.getBoundingClientRect();
+        var dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2);
+        return Math.atan2(dx, -dy)*180/Math.PI; // 0deg points up, clockwise positive
+      }
+      knob.addEventListener('pointerdown', function(e){
+        dragging=true; moved=false; sx=e.clientX; sy=e.clientY;
+        knob.classList.add('dragging');
+        if(knob.setPointerCapture){ try{ knob.setPointerCapture(e.pointerId); }catch(_){} }
+        e.preventDefault();
+      });
+      knob.addEventListener('pointermove', function(e){
+        if(!dragging) return;
+        if(!moved && Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy) > 4) moved=true;
+        if(moved){ turnTo(angleAt(e)); e.preventDefault(); }
+      });
+      function end(){
+        if(!dragging) return;
+        dragging=false; knob.classList.remove('dragging');
+        if(moved) render(cur);      // settle to the detent we landed nearest
+        else      render(cur+1);    // a tap advances to the next era
+      }
+      knob.addEventListener('pointerup', end);
+      knob.addEventListener('pointercancel', end);
+      knob.addEventListener('lostpointercapture', end);
+    }
+
+    render(0);
+  })();
+
+  // ---- Scroll reveal ----
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold:0.14, rootMargin:'0px 0px -8% 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>

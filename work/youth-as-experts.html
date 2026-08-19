@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Youth as Experts</title>
+<meta name="description" content="A design-thinking case study: co-creating youth programs with young people in Kansas City, where the teenagers were the experts and we were the facilitators.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --greige:#E7E4DC; --greige-hi:#FBF9F3; --greige-lo:#C9C4B8; --paper:#EFECE4;
+    --ink:#211E18; --graphite:#6B6557;
+    --champagne:#C2A06B; --bronze:#A77F4A;
+    --led-green:#7FD7A0; --led-amber:#E6B45C; --led-cyan:#79C9D6; --led-magenta:#D88FC0;
+    --glass:rgba(255,255,255,.40); --glass-edge:rgba(255,255,255,.65);
+    --phi:1.618;
+    --t-micro:13px; --t-body:16px; --t-lead:21px; --t-h3:34px; --t-h2:55px; --t-h1:89px;
+    --s3:3px; --s5:5px; --s8:8px; --s13:13px; --s21:21px; --s34:34px; --s55:55px; --s89:89px; --s144:144px;
+    --grotesk:'Space Grotesk',system-ui,sans-serif;
+    --sans:'Inter',system-ui,sans-serif;
+    --mono:'Space Mono',ui-monospace,monospace;
+    --raise:-8px -8px 18px var(--greige-hi), 8px 8px 18px var(--greige-lo);
+    --raise-sm:-4px -4px 9px var(--greige-hi), 4px 4px 9px var(--greige-lo);
+    --press:inset -4px -4px 9px var(--greige-hi), inset 4px 4px 9px var(--greige-lo);
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--ink); font-family:var(--sans); font-size:var(--t-body); line-height:var(--phi);
+    background:var(--greige);
+    background-image:
+      radial-gradient(40% 30% at 88% 4%, rgba(200,170,230,.20), transparent 70%),
+      radial-gradient(36% 26% at 4% 40%, rgba(150,210,190,.16), transparent 70%),
+      radial-gradient(30% 24% at 96% 92%, rgba(245,200,180,.18), transparent 70%);
+    background-attachment:fixed; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:0 var(--s34)}
+  .narrow{max-width:760px}
+  @media(max-width:640px){.wrap{padding:0 var(--s21)}}
+  section{padding:var(--s55) 0}
+  .eyebrow{font-family:var(--mono); font-size:var(--t-micro); letter-spacing:.18em; text-transform:uppercase; color:var(--bronze); margin:0 0 var(--s21)}
+  .mono{font-family:var(--mono); font-size:var(--t-micro); letter-spacing:.04em; color:var(--graphite); text-transform:uppercase}
+  h1,h2,h3{font-family:var(--grotesk); font-weight:700; line-height:1.05; letter-spacing:-.02em; margin:0; text-wrap:balance}
+  h2{font-size:clamp(30px,4.4vw,44px)}
+  h3{font-size:var(--t-lead); font-weight:600}
+  p{color:var(--graphite)}
+  .lead-p{font-size:var(--t-lead); color:var(--ink); max-width:60ch}
+  a{color:var(--bronze); text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--champagne); outline-offset:3px; border-radius:4px}
+
+  /* top bar */
+  .topbar{position:sticky; top:0; z-index:20; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    background:linear-gradient(to bottom, rgba(231,228,220,.86), rgba(231,228,220,.5))}
+  .topbar .row{display:flex; align-items:center; justify-content:space-between; gap:var(--s21); padding:var(--s13) 0}
+  .back{display:inline-flex; align-items:center; gap:var(--s8); font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--graphite)}
+  .back:hover{color:var(--ink)}
+  .pill{display:inline-flex; gap:var(--s8); align-items:center; padding:var(--s8) var(--s21); border-radius:999px; box-shadow:var(--raise-sm); font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--graphite); background:var(--greige)}
+  .led{width:9px; height:9px; border-radius:50%; background:var(--led-green); box-shadow:0 0 8px var(--led-green); flex:none}
+  @keyframes breathe{0%,100%{opacity:1}50%{opacity:.45}}
+  .led.live{animation:breathe 2.6s var(--ease) infinite}
+
+  /* hero */
+  .chero{padding:var(--s55) 0 var(--s34)}
+  .kicker{display:flex; gap:var(--s13); flex-wrap:wrap; align-items:center; margin-bottom:var(--s21)}
+  .tag{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); padding:var(--s5) var(--s13); border-radius:999px; box-shadow:var(--raise-sm)}
+  .chero h1{font-size:clamp(38px,6vw,72px); letter-spacing:-.035em; line-height:1; margin-bottom:var(--s21)}
+  .chero .sub{font-size:var(--t-lead); color:var(--graphite); max-width:64ch}
+  .metarow{display:grid; grid-template-columns:repeat(4,auto); gap:var(--s34); margin-top:var(--s34); padding-top:var(--s21); border-top:1px solid rgba(33,30,24,.1)}
+  @media(max-width:640px){.metarow{grid-template-columns:1fr 1fr; gap:var(--s21)}}
+  .metarow .m .k{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--bronze)}
+  .metarow .m .v{font-family:var(--grotesk); font-weight:600; color:var(--ink); font-size:15px; margin-top:2px}
+
+  /* framed image slot (placeholder until real assets are pulled) */
+  .frame{border-radius:20px; box-shadow:var(--raise); background:var(--greige); padding:var(--s13)}
+  .frame .inner{border-radius:12px; box-shadow:var(--press); background:linear-gradient(150deg, rgba(255,255,255,.30), rgba(201,196,184,.22)); position:relative; overflow:hidden; display:grid; place-items:center; min-height:200px}
+  .frame .inner .ph{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); text-align:center; padding:var(--s21); opacity:.75}
+  .frame .cap{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--bronze); padding:var(--s13) var(--s8) var(--s5)}
+  .frame.wide .inner{aspect-ratio:16/9}
+  .frame.phone .inner{aspect-ratio:9/17}
+
+  .hero-figure{margin-top:var(--s34)}
+  .hero-figure .inner{min-height:340px; aspect-ratio:16/7}
+
+  /* quote */
+  .pullquote{margin:var(--s21) 0; padding:var(--s34); border-radius:20px; box-shadow:var(--raise); background:var(--greige)}
+  .pullquote p{font-family:var(--grotesk); font-weight:600; font-size:clamp(21px,2.6vw,30px); color:var(--ink); letter-spacing:-.01em; line-height:1.2; margin:0; max-width:30ch}
+  .pullquote .who{margin-top:var(--s13); font-family:var(--mono); font-size:12px; color:var(--bronze); letter-spacing:.06em}
+
+  /* screen readout (question) */
+  .readout{border-radius:18px; box-shadow:var(--press); padding:var(--s34); background:linear-gradient(160deg, rgba(255,255,255,.32), rgba(201,196,184,.22)); margin-top:var(--s21)}
+  .readout .k{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--bronze); margin-bottom:var(--s13)}
+  .readout p{font-family:var(--grotesk); font-weight:600; font-size:clamp(20px,2.4vw,28px); color:var(--ink); margin:0; line-height:1.25; max-width:34ch}
+
+  /* generic blocks */
+  .headblock{max-width:62ch}
+  .headblock p{margin-top:var(--s13)}
+  .body-col{max-width:66ch; display:flex; flex-direction:column; gap:var(--s21)}
+  .body-col p{margin:0; font-size:16px}
+
+  /* challenge cards */
+  .three{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s21); margin-top:var(--s34)}
+  @media(max-width:860px){.three{grid-template-columns:1fr}}
+  .qcard{background:var(--greige); border-radius:18px; box-shadow:var(--raise); padding:var(--s34); display:flex; flex-direction:column; gap:var(--s13)}
+  .qcard .n{width:26px; height:26px; border-radius:50%; box-shadow:var(--raise-sm); display:grid; place-items:center; font-family:var(--mono); font-size:12px; color:var(--bronze)}
+  .qcard p{margin:0; font-size:15px; color:var(--ink)}
+
+  /* process rail (real sequence) */
+  .rail{display:grid; grid-template-columns:repeat(6,1fr); gap:var(--s13); margin-top:var(--s34)}
+  @media(max-width:900px){
+    .rail{grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:minmax(160px,1fr);
+      overflow-x:auto; padding:var(--s13) var(--s21) var(--s21); margin-inline:calc(var(--s21) * -1); scroll-padding-inline:var(--s21)}
+  }
+  .step{background:var(--greige); border-radius:16px; box-shadow:var(--raise); padding:var(--s21); display:flex; flex-direction:column; gap:var(--s8)}
+  .step .i{font-family:var(--mono); font-size:11px; color:var(--bronze)}
+  .step .name{font-family:var(--grotesk); font-weight:600; font-size:var(--t-lead)}
+  .step .d{font-size:13px; margin:0}
+
+  /* personas */
+  .personas{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s21); margin-top:var(--s21)}
+  @media(max-width:860px){.personas{grid-template-columns:1fr}}
+  .persona{background:var(--greige); border-radius:18px; box-shadow:var(--raise); padding:var(--s21); display:flex; flex-direction:column; gap:var(--s13)}
+  .persona .avatar{width:52px; height:52px; border-radius:50%; box-shadow:var(--press); display:grid; place-items:center; font-family:var(--grotesk); font-weight:700; color:var(--bronze)}
+  .persona h3{font-size:var(--t-body); font-weight:600}
+  .persona p{font-size:14px; margin:0}
+
+  /* PB&J signature sequence */
+  .pbj{background:var(--greige); border-radius:24px; box-shadow:var(--raise); padding:clamp(var(--s21),3vw,var(--s55)); margin-top:var(--s21)}
+  .pbj .lead{display:flex; gap:var(--s13); align-items:baseline; flex-wrap:wrap; margin-bottom:var(--s34)}
+  .pbj .lead .badge{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--bronze); padding:var(--s5) var(--s13); border-radius:999px; box-shadow:var(--press)}
+  .pbj-steps{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s21)}
+  @media(max-width:860px){.pbj-steps{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.pbj-steps{grid-template-columns:1fr}}
+  .pbj-step{display:flex; flex-direction:column; gap:var(--s8)}
+  .pbj-step .num{font-family:var(--grotesk); font-weight:700; font-size:34px; color:var(--champagne); line-height:1}
+  .pbj-step p{font-size:14px; margin:0}
+
+  /* youth solutions */
+  .solutions{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s21); margin-top:var(--s21)}
+  @media(max-width:860px){.solutions{grid-template-columns:1fr}}
+  .sol{border-radius:18px; padding:var(--s21); position:relative; overflow:hidden;
+    background:linear-gradient(135deg, rgba(200,170,230,.42), rgba(150,210,190,.38) 55%, rgba(245,200,180,.42))}
+  .sol .glass{background:var(--glass); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-edge); border-radius:12px; padding:var(--s21); min-height:120px}
+  .sol h3{font-size:var(--t-body); font-weight:700; color:#2a261d}
+  .sol p{font-size:14px; color:#3a342a; margin:var(--s8) 0 0}
+
+  /* research stat + insights */
+  .research{display:grid; grid-template-columns:.7fr 1.3fr; gap:var(--s34); align-items:start; margin-top:var(--s21)}
+  @media(max-width:860px){.research{grid-template-columns:1fr}}
+  .statbig{background:var(--greige); border-radius:24px; box-shadow:var(--raise); padding:var(--s34); text-align:center}
+  .statbig .num{font-family:var(--grotesk); font-weight:700; font-size:clamp(64px,10vw,89px); color:var(--ink); line-height:.9; letter-spacing:-.03em}
+  .statbig .lbl{font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--bronze); margin-top:var(--s13)}
+  .insights{display:grid; grid-template-columns:1fr 1fr; gap:var(--s21)}
+  @media(max-width:560px){.insights{grid-template-columns:1fr}}
+  .insight{display:flex; flex-direction:column; gap:var(--s5)}
+  .insight .cap{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--bronze); display:flex; align-items:center; gap:var(--s8)}
+  .insight p{font-size:14px; margin:0}
+
+  /* objectives */
+  .objs{display:grid; grid-template-columns:1fr 1fr; gap:var(--s21); margin-top:var(--s21)}
+  @media(max-width:640px){.objs{grid-template-columns:1fr}}
+  .obj{display:flex; gap:var(--s13); align-items:flex-start; background:var(--greige); border-radius:16px; box-shadow:var(--raise-sm); padding:var(--s21)}
+  .obj .dot{width:9px; height:9px; border-radius:50%; background:var(--champagne); box-shadow:0 0 8px var(--champagne); margin-top:8px; flex:none}
+  .obj p{margin:0; font-size:15px; color:var(--ink)}
+
+  /* app screens */
+  .screens{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s21); margin-top:var(--s21)}
+  @media(max-width:860px){.screens{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.screens{grid-template-columns:1fr 1fr}}
+
+  /* next / cta */
+  .cta{background:var(--greige); border-radius:28px; box-shadow:var(--raise); padding:clamp(var(--s34),4vw,var(--s55)); text-align:center; display:flex; flex-direction:column; align-items:center; gap:var(--s21)}
+  .btn{display:inline-flex; align-items:center; gap:var(--s8); font-family:var(--grotesk); font-weight:600; padding:var(--s13) var(--s21); border-radius:14px; background:var(--greige); color:var(--ink); box-shadow:var(--raise-sm); cursor:pointer; border:0}
+  .btn.primary{box-shadow:var(--raise-sm), inset 0 0 0 1.5px var(--champagne)}
+  .btn.primary .dotled{width:8px; height:8px; border-radius:50%; background:var(--champagne); box-shadow:0 0 8px var(--champagne)}
+  .btn:hover{transform:translateY(-1px)}
+
+  footer{padding:var(--s34) 0 var(--s89)}
+  footer .row{display:flex; flex-wrap:wrap; gap:var(--s21); justify-content:space-between; font-family:var(--mono); font-size:12px; color:var(--graphite)}
+
+  /* four-persona variant */
+  .personas.four{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:860px){.personas.four{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.personas.four{grid-template-columns:1fr}}
+  .persona .meta{font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--bronze); margin:0}
+
+  /* products */
+  .product{display:grid; grid-template-columns:1fr 1.1fr; gap:var(--s34); align-items:center; margin-top:var(--s34)}
+  @media(max-width:860px){.product{grid-template-columns:1fr}}
+  .product-copy .tag{display:inline-block; margin-bottom:var(--s13)}
+  .product-copy h3{font-size:var(--t-h3); font-weight:600; margin-bottom:var(--s13)}
+  .product-copy p{max-width:52ch}
+  .feats{list-style:none; padding:0; margin:var(--s21) 0 0; display:grid; gap:var(--s8)}
+  .feats li{position:relative; padding-left:var(--s21); font-size:15px; color:var(--ink)}
+  .feats li::before{content:""; position:absolute; left:0; top:9px; width:8px; height:8px; border-radius:50%; background:var(--champagne); box-shadow:0 0 6px var(--champagne)}
+  .demo{display:flex; gap:var(--s21); flex-wrap:wrap; justify-content:center; margin-top:var(--s21)}
+  .demo .d{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--graphite)}
+  .demo .d b{font-family:var(--grotesk); color:var(--ink); font-size:16px; letter-spacing:-.01em}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .55s var(--ease), transform .55s var(--ease)}
+  .reveal.in{opacity:1; transform:none}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}.led.live{animation:none}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap row">
+    <a class="back" href="/">&larr; Jason Penrod</a>
+    <a class="pill" href="/#contact"><span class="led live" aria-hidden="true"></span> Available</a>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="chero" aria-labelledby="h">
+    <div class="kicker">
+      <span class="tag">UX case study</span>
+      <span class="tag">Design-thinking facilitation</span>
+      <span class="tag">Kansas City</span>
+    </div>
+    <h1 id="h">Youth as Experts</h1>
+    <p class="sub">Co-creating innovative youth programs. We ran design-thinking workshops where the teenagers were the experts and we were the facilitators, then built the prototype their own ideas asked for.</p>
+
+    <div class="metarow">
+      <div class="m"><div class="k">My role</div><div class="v">Facilitator &amp; product lead</div></div>
+      <div class="m"><div class="k">With</div><div class="v">Kansas City Public Library</div></div>
+      <div class="m"><div class="k">Year</div><div class="v">2018</div></div>
+      <div class="m"><div class="k">Methods</div><div class="v">Design thinking, research, UX</div></div>
+    </div>
+
+    <figure class="frame wide hero-figure reveal">
+      <div class="inner"><span class="ph">[ Hero: a youth design-thinking workshop in progress ]</span></div>
+      <figcaption class="cap">Figure 01 &middot; workshop, Kansas City Public Library</figcaption>
+    </figure>
+  </section>
+
+  <!-- PROBLEM -->
+  <section aria-labelledby="p1">
+    <div class="headblock reveal">
+      <p class="eyebrow">The problem</p>
+      <h2 id="p1">A widening gap, and no one asking the kids</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Over the last sixty years, the gap in educational achievement between youth from poor families and youth from wealthy families has grown sharply, showing up in test scores, college admissions, and the opportunities a young person even hears about. The learning ecosystem outside school is fragmented, and the people it is built for are rarely in the room when it gets designed.</p>
+    </div>
+    <div class="readout reveal">
+      <div class="k">The guiding question</div>
+      <p>What needs to happen to increase young people's awareness of and access to learning and cultural opportunities across the Kansas City metro area?</p>
+    </div>
+  </section>
+
+  <!-- CHALLENGE -->
+  <section aria-labelledby="p2">
+    <div class="headblock reveal">
+      <p class="eyebrow">The challenge</p>
+      <h2 id="p2">You cannot hand teenagers a solution</h2>
+      <p>Few people like having a solution imposed on them, and teens least of all. Any project meant to engage youth has to invite the youth to say what actually matters to them. That put three hard questions in front of us before we could start.</p>
+    </div>
+    <div class="three">
+      <div class="qcard reveal"><span class="n">01</span><p>How do we ask questions of youth without imposing our own bias?</p></div>
+      <div class="qcard reveal"><span class="n">02</span><p>How do we recruit young people from a community where trust of outsiders is a real barrier?</p></div>
+      <div class="qcard reveal"><span class="n">03</span><p>Will our recruits actually be able to produce the prototype we need to test?</p></div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section aria-labelledby="p3">
+    <div class="headblock reveal">
+      <p class="eyebrow">Our process</p>
+      <h2 id="p3">Design thinking, done with people and not at them</h2>
+      <p>We stayed grounded in human-centered design, the Stanford d.school model, and kept young people in Kansas City at the center of every step.</p>
+    </div>
+    <div class="rail reveal">
+      <div class="step"><span class="i">01</span><span class="name">Empathize</span><p class="d">Meet youth where they are, listen before assuming.</p></div>
+      <div class="step"><span class="i">02</span><span class="name">Discover</span><p class="d">Surface the real barriers to access and awareness.</p></div>
+      <div class="step"><span class="i">03</span><span class="name">Define</span><p class="d">Frame the problem in the youths' own words.</p></div>
+      <div class="step"><span class="i">04</span><span class="name">Ideate</span><p class="d">Run workshops where teens generate the ideas.</p></div>
+      <div class="step"><span class="i">05</span><span class="name">Prototype</span><p class="d">Build what their ideas actually asked for.</p></div>
+      <div class="step"><span class="i">06</span><span class="name">Test</span><p class="d">Put it back in front of the youth who made it.</p></div>
+    </div>
+  </section>
+
+  <!-- PERSONAS -->
+  <section aria-labelledby="p4">
+    <div class="headblock reveal">
+      <p class="eyebrow">Who we designed with</p>
+      <h2 id="p4">Four teenagers, four relationships with opportunity</h2>
+      <p>Our team, researchers, library staff, and summer high-school interns, built personas across the whole spectrum: from the kid who has checked out to the one already making the most of everything on offer.</p>
+    </div>
+    <div class="personas four">
+      <div class="persona reveal"><span class="avatar">DD</span><h3>Disconnected Doug</h3><p class="meta">15 &middot; identifies as white</p><p>Barely aware of what is out there, and not yet looking for it.</p></div>
+      <div class="persona reveal"><span class="avatar">UM</span><h3>Unmotivated Malik</h3><p class="meta">17 &middot; identifies as black</p><p>Knows opportunities exist, but has no reason yet to act on them.</p></div>
+      <div class="persona reveal"><span class="avatar">Ch</span><h3>Connected Chloe</h3><p class="meta">17 &middot; identifies as black</p><p>Plugged in and active, and a bridge to the friends who are not.</p></div>
+      <div class="persona reveal"><span class="avatar">Cl</span><h3>Capitalized Clara</h3><p class="meta">16 &middot; identifies as white</p><p>Already making the most of every program she can find.</p></div>
+    </div>
+    <div class="pullquote reveal" style="margin-top:var(--s21)">
+      <p>Emerald, 16, wanted a way into film and journalism. She could not find one.</p>
+      <div class="who">Youth voice &middot; from the interviews</div>
+    </div>
+  </section>
+
+  <!-- PB&J SIGNATURE -->
+  <section aria-labelledby="p5">
+    <div class="headblock reveal">
+      <p class="eyebrow">The workshops &middot; phase one</p>
+      <h2 id="p5">We taught design thinking with a peanut butter sandwich</h2>
+      <p>Before anyone designed a program, they learned the method by building the perfect PB&amp;J. It is disarming, it is funny, and it teaches the whole loop in twenty minutes.</p>
+    </div>
+    <div class="pbj reveal">
+      <div class="lead"><span class="badge">The perfect PB&amp;J challenge</span></div>
+      <div class="pbj-steps">
+        <div class="pbj-step"><span class="num">1</span><p>Draw the "perfect" peanut butter and jelly sandwich, with no inspiration and no help.</p></div>
+        <div class="pbj-step"><span class="num">2</span><p>Facilitators reveal a table full of amazing ingredients nobody knew was there.</p></div>
+        <div class="pbj-step"><span class="num">3</span><p>Interview a partner about the new ingredients they would actually want.</p></div>
+        <div class="pbj-step"><span class="num">4</span><p>Build sandwiches for each other, then leave feedback for the designer. Iteration encouraged.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 2 SOLUTIONS -->
+  <section aria-labelledby="p6">
+    <div class="headblock reveal">
+      <p class="eyebrow">The workshops &middot; phase two</p>
+      <h2 id="p6">Then the youth designed for real</h2>
+      <p>With the method in hand, teens designed the spaces and programs they actually wanted. Three of their ideas stuck.</p>
+    </div>
+    <div class="solutions">
+      <div class="sol reveal"><div class="glass"><h3>The Ultimate Hangout</h3><p>Quiet spaces and group spaces in one place, so every kind of activity has a home.</p></div></div>
+      <div class="sol reveal"><div class="glass"><h3>Gamer Space</h3><p>"We don't just want to play games, we want to make games."</p></div></div>
+      <div class="sol reveal"><div class="glass"><h3>Binge Watch</h3><p>A comfortable place to connect with friends while catching up on the current series.</p></div></div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section aria-labelledby="p7">
+    <div class="headblock reveal">
+      <p class="eyebrow">What we heard</p>
+      <h2 id="p7">Thirty-two conversations, four clear patterns</h2>
+    </div>
+    <div class="research">
+      <div class="statbig reveal">
+        <div class="num">32</div>
+        <div class="lbl">young people interviewed<br>KC metro &middot; 2018</div>
+        <div class="demo">
+          <span class="d"><b>50%</b> male</span>
+          <span class="d"><b>34%</b> female</span>
+          <span class="d"><b>16%</b> genderqueer</span>
+        </div>
+        <div class="lbl" style="margin-top:var(--s13)">a racially diverse sample, ages 12 to 18</div>
+      </div>
+      <div>
+        <div class="insights reveal">
+          <div class="insight"><span class="cap"><span class="led" style="background:var(--led-cyan);box-shadow:0 0 8px var(--led-cyan)"></span> Transportation</span><p>Mobility was the constant barrier. Few had a car, parents were busy, and the bus felt neither safe nor reliable to most.</p></div>
+          <div class="insight"><span class="cap"><span class="led" style="background:var(--led-amber);box-shadow:0 0 8px var(--led-amber)"></span> Awareness</span><p>Teens were eager to chase their passions but simply did not know the opportunities that already existed.</p></div>
+          <div class="insight"><span class="cap"><span class="led" style="background:var(--led-green);box-shadow:0 0 8px var(--led-green)"></span> Friends</span><p>Doing something with friends made a teen far more willing to try a new learning opportunity.</p></div>
+          <div class="insight"><span class="cap"><span class="led" style="background:var(--led-magenta);box-shadow:0 0 8px var(--led-magenta)"></span> Trusted adults</span><p>Teens were most comfortable trying new things that a trusted adult had recommended to them.</p></div>
+        </div>
+        <div class="pullquote reveal" style="margin-top:var(--s21)">
+          <p>Telemetry tells you where people drop. Talking to people tells you why.</p>
+          <div class="who">The reason we did the interviews</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section aria-labelledby="p8">
+    <div class="headblock reveal">
+      <p class="eyebrow">The solution</p>
+      <h2 id="p8">Two products, one loop: educators publish, youth discover</h2>
+      <p>The prototype split into two connected products, so the people who run programs and the young people who need them were finally on the same system.</p>
+    </div>
+
+    <div class="objs reveal">
+      <div class="obj"><span class="dot"></span><p>Use the design-thinking method inside the communities actually affected.</p></div>
+      <div class="obj"><span class="dot"></span><p>Let the community youth voice guide and build the prototype.</p></div>
+      <div class="obj"><span class="dot"></span><p>Lean on behavioral-economics best practices to make good use a habit.</p></div>
+      <div class="obj"><span class="dot"></span><p>Make it personal: a custom profile, favorites, and points worth collecting.</p></div>
+    </div>
+
+    <!-- Product 1: educator web app -->
+    <div class="product reveal">
+      <div class="product-copy">
+        <span class="tag">Web app &middot; for educators</span>
+        <h3>Author an event once, share it everywhere</h3>
+        <p>A guided authoring tool for community and traditional educators, with expert advice built in and a shared community calendar. Write an event once and publish it out to every channel the youth actually watch.</p>
+        <ul class="feats">
+          <li>Guided new-event authoring</li>
+          <li>Expert advice, inline</li>
+          <li>Shared community calendar</li>
+          <li>Publish once to many social networks</li>
+        </ul>
+      </div>
+      <figure class="frame wide reveal">
+        <div class="inner"><span class="ph">[ Web app: event authoring + community feed &middot; Figma 429:13485 ]</span></div>
+        <figcaption class="cap">Figure &middot; educator web application</figcaption>
+      </figure>
+    </div>
+
+    <!-- Product 2: youth phone app -->
+    <div class="reveal" style="margin-top:var(--s55)">
+      <div class="product-copy" style="max-width:60ch">
+        <span class="tag">Phone app &middot; for youth</span>
+        <h3>Find it, get there, keep track</h3>
+        <p>A phone app for young people to discover, share, and track local learning events: a social profile with community badges and a points system, personal stats, and the feature the research demanded most.</p>
+      </div>
+      <div class="screens" style="margin-top:var(--s21)">
+        <figure class="frame phone reveal"><div class="inner"><span class="ph">Social Profile</span></div><figcaption class="cap">Badges, points, rideshare balance</figcaption></figure>
+        <figure class="frame phone reveal"><div class="inner"><span class="ph">Community feed</span></div><figcaption class="cap">Events sorted by time</figcaption></figure>
+        <figure class="frame phone reveal"><div class="inner"><span class="ph">Map &amp; route</span></div><figcaption class="cap">Transit options &middot; 7.8 mi, 15 min</figcaption></figure>
+        <figure class="frame phone reveal"><div class="inner"><span class="ph">Event details</span></div><figcaption class="cap">One tap to sign up</figcaption></figure>
+      </div>
+    </div>
+
+    <!-- research to feature -->
+    <div class="readout reveal" style="margin-top:var(--s34)">
+      <div class="k">Research into product</div>
+      <p>Transportation was the number-one barrier we heard. So the app carries a rideshare balance and shows transit options and distance on every event. The insight became a feature.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="cta reveal">
+      <span class="pill"><span class="led live" aria-hidden="true"></span> Taking on work</span>
+      <h2>This is how I run discovery</h2>
+      <p style="max-width:52ch">If you have a problem where the people it is for are not yet in the room, this is the work. Tell me what you are building.</p>
+      <a class="btn primary" href="/#contact"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="row">
+    <span><a href="/">&larr; Back to Jason Penrod</a></span>
+    <span>Youth as Experts &middot; UX case study</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = [].slice.call(document.querySelectorAll('.reveal'));
+    if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>
