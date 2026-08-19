@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #F0EFEB; text-decoration: none; }
+    a:hover { color: #FF2D1A; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; background: #0B0B0B; color: #F0EFEB; font-family: 'Space Grotesk', system-ui, sans-serif; padding: 0 0 72px 0;">
+
+  <!-- perforated top rail -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 48px; border-bottom: 1px solid #262626; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;">
+    <span>JP&nbsp;/&nbsp;PORTFOLIO</span>
+    <div style="display: flex; gap: 34px; align-items: center; color: #7A7A75;">
+      <span>WORK</span>
+      <span>ARC</span>
+      <span style="display: flex; align-items: center; gap: 8px; color: #F0EFEB;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: {{accent}};"></span>AVAILABLE
+      </span>
+    </div>
+  </div>
+
+  <div style="padding: 72px 48px 0 48px;">
+
+    <!-- dot-matrix plate carrying the statement -->
+    <div style="border: 1px solid #262626; padding: 55px 48px; background-image: radial-gradient(#1E1E1E 1px, transparent 1px); background-size: 10px 10px; background-position: 0 0;">
+      <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: {{accent}}; margin-bottom: 34px;">
+        01&nbsp;&mdash;&nbsp;THE PREMISE
+      </div>
+      <h1 style="margin: 0; font-size: 92px; line-height: 0.98; letter-spacing: -0.04em; font-weight: 500; max-width: 940px;">
+        The medium keeps changing.<br>
+        <span style="color: #7A7A75;">The human does not.</span>
+      </h1>
+      <div style="display: flex; gap: 21px; margin-top: 48px; align-items: center;">
+        <a href="#" style="background: {{accent}}; color: #0B0B0B; font-family: 'Space Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 16px 28px; font-weight: 700;">TELL ME WHAT YOU ARE BUILDING</a>
+        <a href="#" style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #7A7A75; border: 1px solid #262626; padding: 16px 28px;">SEE THE WORK</a>
+      </div>
+    </div>
+
+    <!-- three-up module row: what I do -->
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 21px; margin-top: 21px;">
+      <sc-for list="{{services}}" as="s" hint-placeholder-count="3">
+        <div style="border: 1px solid #262626; padding: 34px 28px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 34px; font-weight: 700; color: {{accent}}; line-height: 1;">{{s.num}}</span>
+            <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #7A7A75;">{{s.tag}}</span>
+          </div>
+          <div style="font-size: 21px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.2;">{{s.title}}</div>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #9A9A94;">{{s.body}}</p>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- the arc, as a horizontal readout strip -->
+    <div style="border: 1px solid #262626; margin-top: 21px; padding: 34px 28px;">
+      <div style="display: flex; justify-content: space-between; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #7A7A75; margin-bottom: 28px;">
+        <span>THE ARC</span><span>SAME JOB &middot; THREE MATERIALS</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0;">
+        <sc-for list="{{arc}}" as="a" hint-placeholder-count="3">
+          <div style="border-left: 1px solid {{a.rule}}; padding: 0 21px;">
+            <div style="font-size: 44px; font-weight: 700; letter-spacing: -0.03em; color: {{a.ink}}; line-height: 1;">{{a.name}}</div>
+            <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; color: #7A7A75; margin-top: 8px;">{{a.years}}</div>
+            <p style="margin: 13px 0 0 0; font-size: 13px; line-height: 1.6; color: #9A9A94;">{{a.body}}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- selected work as device tiles -->
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 21px; margin-top: 21px;">
+      <sc-for list="{{projects}}" as="p" hint-placeholder-count="2">
+        <div style="border: 1px solid #262626; padding: 34px 28px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="height: 180px; border: 1px solid #262626; background-image: radial-gradient(#1E1E1E 1px, transparent 1px); background-size: 8px 8px; display: flex; align-items: flex-end; padding: 16px;">
+            <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #7A7A75;">{{p.shot}}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em;">{{p.title}}</span>
+            <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: {{accent}};">{{p.meta}}</span>
+          </div>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #9A9A94;">{{p.body}}</p>
+        </div>
+      </sc-for>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#FF2D1A","options":["#FF2D1A","#FF4D00","#F0EFEB","#3DDC84"],"section":"Theme"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#FF2D1A';
+    return {
+      accent,
+      services: [
+        { num: '01', tag: 'DISCOVERY', title: 'Figure out what to build first',
+          body: 'Most projects do not fail on execution. They fail because everything looked equally important on day one. I find the one thing that has to be true and tell you what to cut.' },
+        { num: '02', tag: 'BUILD', title: 'Build it',
+          body: 'Not a deck about the thing. The thing. Working software, in front of real users, in weeks.' },
+        { num: '03', tag: 'CLARITY', title: 'Make the complicated thing clear',
+          body: 'Data products and decision tools. I invented a chart type once because the existing ones were not telling the truth.' }
+      ],
+      arc: [
+        { name: 'ATOMS', years: '1995 → 2002', ink: accent, rule: accent,
+          body: 'Physical products at Hallmark. Real light, real objects, the shape of a thing in a real hand.' },
+        { name: 'PIXELS', years: '2002 → 2020', ink: '#F0EFEB', rule: '#262626',
+          body: 'Screens, data products, and the long argument about what a person can actually understand.' },
+        { name: 'INTELLIGENCE', years: '2020 →', ink: '#F0EFEB', rule: '#262626',
+          body: 'Whatever we are calling intelligence this year, pointed at the same human.' }
+      ],
+      projects: [
+        { title: 'inFormed Consent', meta: 'US 11,501,875', shot: 'FIG. 01 / PLATFORM',
+          body: 'A patented platform that turns informed consent from a signature into something a patient actually understands.' },
+        { title: 'Youth as Experts', meta: '2018 / KCPL', shot: 'FIG. 02 / WORKSHOP',
+          body: 'Design-thinking workshops where the teenagers were the experts and I was the facilitator.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

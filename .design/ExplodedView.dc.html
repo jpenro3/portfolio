@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #1B1F24; text-decoration: none; }
+    a:hover { color: #2F6FED; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; background: #E4E8EC; color: #1B1F24; font-family: 'Space Grotesk', system-ui, sans-serif; padding: 0 0 72px 0;">
+
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #A8B2BC; padding: 13px 48px; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6570;">
+    <span style="color: #1B1F24;">JASON PENROD</span>
+    <span>TRANSPARENT&nbsp;/&nbsp;EXPLODED VIEW</span>
+    <span style="display: flex; align-items: center; gap: 8px; color: #1B1F24;"><span style="width: 6px; height: 6px; background: {{accent}}; border-radius: 50%;"></span>AVAILABLE</span>
+  </div>
+
+  <!-- the exploded diagram: he is the assembly -->
+  <div style="padding: 48px 48px 0 48px;">
+    <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 21px; align-items: start;">
+
+      <div style="grid-column: span 4; padding-top: 34px;">
+        <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #5A6570; margin-bottom: 21px;">ASSEMBLY&nbsp;/&nbsp;01</div>
+        <h1 style="margin: 0; font-size: 58px; line-height: 1.02; letter-spacing: -0.035em; font-weight: 500;">
+          The medium keeps changing.<br><span style="color: #5A6570;">The human does not.</span>
+        </h1>
+        <p style="margin: 28px 0 0 0; font-size: 15px; line-height: 1.618; color: #3D4650;">
+          Three materials, one job. Paper and plastic, then pixels, now whatever we are calling intelligence this year. I help founders figure out what to build first, and then I build it.
+        </p>
+      </div>
+
+      <!-- diagram column with leader lines -->
+      <div style="grid-column: span 8;">
+        <svg viewBox="0 0 760 520" width="100%" height="520" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+          <!-- ghost frame -->
+          <rect x="250" y="30" width="260" height="460" stroke="#A8B2BC" stroke-width="1" stroke-dasharray="4 4"></rect>
+
+          <!-- layer 3: intelligence -->
+          <rect x="270" y="60" width="220" height="96" stroke="#1B1F24" stroke-width="1.5" fill="#EFF2F5"></rect>
+          <circle cx="300" cy="108" r="12" stroke="#1B1F24" stroke-width="1.5"></circle>
+          <line x1="330" y1="96" x2="460" y2="96" stroke="#A8B2BC" stroke-width="1"></line>
+          <line x1="330" y1="112" x2="420" y2="112" stroke="#A8B2BC" stroke-width="1"></line>
+          <line x1="330" y1="126" x2="440" y2="126" stroke="#A8B2BC" stroke-width="1"></line>
+          <line x1="270" y1="108" x2="120" y2="108" stroke="#1B1F24" stroke-width="1"></line>
+          <circle cx="120" cy="108" r="3" fill="{{accent}}"></circle>
+
+          <!-- layer 2: pixels -->
+          <rect x="270" y="196" width="220" height="128" stroke="#1B1F24" stroke-width="1.5" fill="#EFF2F5"></rect>
+          <rect x="290" y="216" width="80" height="52" stroke="#A8B2BC" stroke-width="1"></rect>
+          <rect x="382" y="216" width="88" height="24" stroke="#A8B2BC" stroke-width="1"></rect>
+          <rect x="382" y="250" width="88" height="18" stroke="#A8B2BC" stroke-width="1"></rect>
+          <rect x="290" y="282" width="180" height="24" fill="{{accent}}"></rect>
+          <line x1="490" y1="260" x2="640" y2="260" stroke="#1B1F24" stroke-width="1"></line>
+          <circle cx="640" cy="260" r="3" fill="{{accent}}"></circle>
+
+          <!-- layer 1: atoms -->
+          <rect x="270" y="364" width="220" height="106" stroke="#1B1F24" stroke-width="1.5" fill="#EFF2F5"></rect>
+          <circle cx="380" cy="417" r="34" stroke="#1B1F24" stroke-width="1.5"></circle>
+          <circle cx="380" cy="417" r="8" stroke="#1B1F24" stroke-width="1.5"></circle>
+          <line x1="380" y1="383" x2="380" y2="372" stroke="{{accent}}" stroke-width="3"></line>
+          <line x1="270" y1="417" x2="120" y2="417" stroke="#1B1F24" stroke-width="1"></line>
+          <circle cx="120" cy="417" r="3" fill="{{accent}}"></circle>
+
+          <!-- assembly axis -->
+          <line x1="380" y1="30" x2="380" y2="490" stroke="#A8B2BC" stroke-width="1" stroke-dasharray="2 6"></line>
+        </svg>
+      </div>
+    </div>
+
+    <!-- callout legend, keyed to the diagram -->
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 21px; margin-top: 34px; border-top: 1px solid #A8B2BC; padding-top: 21px;">
+      <sc-for list="{{layers}}" as="l" hint-placeholder-count="3">
+        <div style="display: flex; gap: 13px; align-items: flex-start;">
+          <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; font-weight: 700; color: {{accent}}; flex: none;">{{l.ref}}</span>
+          <div>
+            <div style="font-size: 17px; font-weight: 700; letter-spacing: -0.01em;">{{l.name}}</div>
+            <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; color: #5A6570; margin: 4px 0 8px 0;">{{l.years}}</div>
+            <p style="margin: 0; font-size: 13px; line-height: 1.6; color: #3D4650;">{{l.body}}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- work, as further parts in the same drawing -->
+    <div style="margin-top: 55px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #A8B2BC; padding-bottom: 10px; margin-bottom: 21px;">
+        <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;">PARTS LIST &mdash; SELECTED WORK</span>
+        <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6570;">A CLAIM, AND THE PROOF</span>
+      </div>
+      <sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+        <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 21px; padding: 16px 0; border-bottom: 1px dashed #A8B2BC; align-items: center;">
+          <span style="grid-column: span 1; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; font-weight: 700; color: {{accent}};">{{p.ref}}</span>
+          <span style="grid-column: span 3; font-size: 19px; font-weight: 700; letter-spacing: -0.015em;">{{p.title}}</span>
+          <p style="grid-column: span 6; margin: 0; font-size: 13px; line-height: 1.6; color: #3D4650;">{{p.body}}</p>
+          <span style="grid-column: span 2; text-align: right; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #5A6570;">{{p.meta}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#2F6FED","options":["#2F6FED","#FF4D00","#1B1F24","#00A47C"],"section":"Theme"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#2F6FED';
+    return {
+      accent,
+      layers: [
+        { ref: 'A1', name: 'Atoms', years: '1995 → 2002',
+          body: 'Physical products at Hallmark. Real light, real objects, the shape of a thing in a real hand. Two patents.' },
+        { ref: 'A2', name: 'Pixels', years: '2002 → 2020',
+          body: 'Screens, data products, and the long argument about what a person can actually understand and act on.' },
+        { ref: 'A3', name: 'Intelligence', years: '2020 →',
+          body: 'Co-founder and CTO of a healthtech platform. Same human on the other end, new material in my hands.' }
+      ],
+      projects: [
+        { ref: 'P1', title: 'inFormed Consent', meta: 'US 11,501,875',
+          body: 'A patented platform that turns informed consent from a signature into something a patient actually understands.' },
+        { ref: 'P2', title: 'Youth as Experts', meta: '2018 / KCPL',
+          body: 'Design-thinking workshops where the teenagers were the experts and I was the facilitator.' },
+        { ref: 'P3', title: 'Data + Design', meta: 'Tableau / Fortune 10',
+          body: 'Decision tools for people who have to understand something hard and then act on it.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

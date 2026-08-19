@@ -1,0 +1,178 @@
+/* =========================================================================
+   Dot Matrix Light — the site's design language, in one file.
+   Adopted 2026-08-19, replacing the soft-neumorphic system.
+
+   Every page was already written against custom properties, so the whole
+   restyle happens by redefining tokens rather than rewriting markup. The
+   one trick worth knowing: the old neumorphic shadow tokens are redefined
+   as hairline rings, so every `box-shadow: var(--raise)` in the existing
+   pages becomes a 1px border with no markup change at all.
+
+   Light only, on purpose. Every case-study image on this site is a light
+   Figma export; on a dark ground they read as pasted-on rectangles.
+   The content chose the ground.
+
+   Load this AFTER each page's inline <style> so it wins.
+   ========================================================================= */
+
+:root{
+  /* ---- ground and ink ---- */
+  --greige:#F2F1ED;        /* page */
+  --paper:#F7F6F2;         /* raised surface */
+  --greige-hi:#FFFFFF;
+  --greige-lo:#E4E3DC;
+  --ink:#0F0F0E;
+  --graphite:#4A4A45;
+  --muted:#77776F;
+  --rule:#D5D4CD;          /* the hairline that replaced every shadow */
+  --rule-strong:#0F0F0E;
+  --dot:#DAD9D1;           /* the matrix */
+
+  /* ---- one signal colour ---- */
+  --signal:#FF2D1A;
+  --champagne:#FF2D1A;     /* was the metallic accent; now the signal */
+  --bronze:#C4210F;        /* accent text on light, contrast-safe */
+
+  /* ---- status ---- */
+  --led-green:#1E9E5A;
+  --led-amber:#C4210F;
+  --led-cyan:#77776F;
+  --led-magenta:#FF2D1A;
+
+  /* ---- surfaces: shadows become rings ---- */
+  --raise:0 0 0 1px var(--rule);
+  --raise-sm:0 0 0 1px var(--rule);
+  --press:inset 0 0 0 1px var(--rule);
+  --glass:var(--paper);
+  --glass-edge:var(--rule);
+
+  /* ---- type ---- */
+  --sans:'Space Grotesk',system-ui,sans-serif;
+}
+
+/* ---- ground: flat, with the matrix printed on it ---- */
+body{
+  background:var(--greige);
+  background-image:radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size:10px 10px;
+  background-position:0 0;
+  background-attachment:fixed;
+  font-family:var(--sans);
+  letter-spacing:-0.005em;
+}
+
+/* ---- nothing is soft any more ---- */
+.card,.lane,.frame,.frame .inner,.console,.screen,.ask,.pill,.btn,.nav a,
+.spec,.faceplate,.readout,.beat,.act .node,.qcard,.persona,.chero,.tag,
+.knob,.grip,.kl,.headblock,.topbar,.step,.insight,.pullquote{
+  border-radius:0 !important;
+}
+
+/* the dial stays round: it is a dial */
+.knob,.knob .grip,.knob .ticks,.act .node,.led,.dot,.dotled,.knob .ind{
+  border-radius:50% !important;
+}
+.knob .ind{border-radius:0 !important}
+
+/* ---- hairlines instead of extrusion ---- */
+.card,.lane,.console,.ask,.frame,.beat,.qcard,.persona{
+  background:var(--paper);
+  box-shadow:none;
+  border:1px solid var(--rule);
+}
+.frame .inner,.screen{
+  background:var(--greige);
+  box-shadow:none;
+  border:1px solid var(--rule);
+}
+.frame .inner.shot{background:transparent}
+
+/* ---- the top rail reads as a rail, not a floating bar ---- */
+.topbar{
+  background:var(--greige);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  border-bottom:1px solid var(--rule-strong);
+}
+.brand{font-weight:700; letter-spacing:-0.02em}
+
+/* ---- chips, buttons, tags: bordered cells ---- */
+.pill,.nav a,.tag,.spec span{
+  background:transparent;
+  box-shadow:none;
+  border:1px solid var(--rule);
+  font-family:var(--mono);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+.btn{
+  box-shadow:none;
+  border:1px solid var(--rule-strong);
+  background:transparent;
+  color:var(--ink);
+  font-family:var(--mono);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+.btn.primary{
+  background:var(--signal);
+  border-color:var(--signal);
+  color:var(--greige);
+}
+.btn.primary:hover{background:var(--ink); border-color:var(--ink)}
+.btn.ghost:hover{background:var(--ink); color:var(--greige)}
+
+/* ---- links ---- */
+a{color:var(--ink)}
+a:hover{color:var(--signal)}
+.go,.back{font-family:var(--mono); text-transform:uppercase; letter-spacing:.12em; font-size:11px}
+.card.link:hover{border-color:var(--rule-strong)}
+
+/* ---- type: the instrument layer does more of the work ---- */
+.eyebrow,.mono,.cap,.k,.role,.kicker,.years{
+  font-family:var(--mono);
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--muted);
+}
+.eyebrow{color:var(--bronze)}
+h1,h2,h3{letter-spacing:-0.035em}
+.display{letter-spacing:-0.045em}
+.soft{color:var(--muted)}
+.num{font-family:var(--mono); color:var(--signal); font-weight:700}
+.big{font-family:var(--mono); font-weight:700; letter-spacing:-0.02em}
+
+/* ---- status lights: indicators, not decoration ---- */
+.led,.dot,.dotled{box-shadow:none !important}
+.led.live{animation:none}
+
+/* ---- the console, flattened into a panel ---- */
+.console{background:var(--paper)}
+.facehead{border-bottom:1px solid var(--rule); padding-bottom:var(--s8)}
+.knob{background:var(--greige); box-shadow:none; border:1px solid var(--rule-strong)}
+.knob .grip{background:var(--paper); box-shadow:none; border:1px solid var(--rule)}
+.knob .ind{background:var(--signal)}
+/* era buttons: bordered cells, the live one inverted.
+   These need the .knoblabels prefix to out-rank the page's own rules. */
+.knoblabels .kl{background:transparent; box-shadow:none; border:1px solid var(--rule); padding:6px 10px; font-size:10px; letter-spacing:.14em}
+.knoblabels .kl:hover{border-color:var(--rule-strong)}
+.knoblabels .kl[aria-selected="true"]{background:var(--ink); border-color:var(--ink); color:var(--greige)}
+.knoblabels .kl[aria-selected="true"] .dot{background:var(--signal); box-shadow:none}
+/* the indicator kept a champagne glow baked into the page */
+.knob .ind{box-shadow:none !important; background:var(--signal)}
+.knob::after{box-shadow:inset 0 0 0 1px var(--rule)}
+
+/* ---- section rhythm: rules do the separating ---- */
+.headblock{border-bottom:1px solid var(--rule-strong); padding-bottom:var(--s21)}
+
+/* ---- focus stays obvious ---- */
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--signal);
+  outline-offset:2px;
+  border-radius:0;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1; transform:none; transition:none}
+}

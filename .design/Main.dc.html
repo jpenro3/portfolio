@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #FF4D00; text-decoration: none; }
+    a:hover { color: #111111; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; background: #EDEDEA; color: #111111; font-family: 'Space Grotesk', system-ui, sans-serif; padding: 0 0 72px 0;">
+
+  <!-- rail: publication code strip -->
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #111111; padding: 13px 48px; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">
+    <div style="display: flex; gap: 34px;">
+      <span>JASON PENROD</span>
+      <span style="color: #6B6B66;">PRODUCT DESIGNER &amp; BUILDER</span>
+    </div>
+    <div style="display: flex; gap: 34px; align-items: center;">
+      <span style="color: #6B6B66;">28&deg;35'N 81&deg;20'W &middot; ORLANDO</span>
+      <span style="background: {{accent}}; color: #EDEDEA; padding: 3px 10px;">AVAILABLE</span>
+    </div>
+  </div>
+
+  <!-- hero -->
+  <div style="padding: 55px 48px 0 48px;">
+
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 34px;">
+      <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B66;">
+        STEP N&deg;01<br>THE PREMISE
+      </div>
+      <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B66; text-align: right;">
+        2026&reg;PORTFOLIO 001<br>RATIO 1 : 1.618
+      </div>
+    </div>
+
+    <!-- the big statement, with the orange block cutting through it -->
+    <div style="position: relative; margin: 34px 0 0 0;">
+      <div style="position: absolute; left: 0; top: 96px; width: 420px; height: 72px; background: {{accent}};"></div>
+      <h1 style="position: relative; margin: 0; font-size: 104px; line-height: 0.94; letter-spacing: -0.045em; font-weight: 700; max-width: 1000px;">
+        The medium keeps<br>changing. The human<br>does not.
+      </h1>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 21px; margin-top: 55px; align-items: start;">
+      <p style="grid-column: span 5; margin: 0; font-size: 16px; line-height: 1.618; color: #3A3A36;">
+        I have spent my whole career designing for the person on the other end while the medium reinvented itself under me. Paper and plastic. Then pixels. Now whatever we are calling intelligence this year. Today I help founders figure out what to build first, and then I build it.
+      </p>
+      <div style="grid-column: span 3;"></div>
+      <!-- the dial, redrawn as a technical readout -->
+      <div style="grid-column: span 4; border: 1px solid #111111; padding: 21px;">
+        <div style="display: flex; justify-content: space-between; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B66;">
+          <span>MEDIUM</span><span>1 : 1.618</span>
+        </div>
+        <div style="font-size: 55px; line-height: 1; font-weight: 700; margin: 13px 0 3px 0;">ATOMS</div>
+        <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; color: #6B6B66; margin-bottom: 21px;">1995 &rarr; 2002</div>
+        <sc-for list="{{ticks}}" as="t" hint-placeholder-count="3">
+          <div style="display: flex; align-items: center; gap: 13px; padding: 8px 0; border-top: 1px solid #D6D6D1;">
+            <span style="width: 8px; height: 8px; background: {{t.fill}}; border: 1px solid #111111; flex: none;"></span>
+            <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">{{t.label}}</span>
+            <span style="margin-left: auto; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; color: #6B6B66;">{{t.code}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- rule + actions -->
+    <div style="display: flex; align-items: center; gap: 21px; margin-top: 55px;">
+      <a href="#" style="background: #111111; color: #EDEDEA; font-family: 'Space Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 16px 28px;">TELL ME WHAT YOU ARE BUILDING</a>
+      <a href="#" style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; border-bottom: 1px solid #111111; padding-bottom: 3px; color: #111111;">SEE THE WORK &rarr;</a>
+      <div style="flex-grow: 1; height: 1px; background: #111111;"></div>
+      <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; color: #6B6B66;">FIG. 01</span>
+    </div>
+  </div>
+
+  <!-- selected work, as numbered spec entries -->
+  <div style="padding: 89px 48px 0 48px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #111111; padding-bottom: 13px;">
+      <h2 style="margin: 0; font-size: 34px; letter-spacing: -0.03em; font-weight: 700;">Selected work</h2>
+      <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B66;">A CLAIM, AND THE PROOF OF THE CLAIM</span>
+    </div>
+
+    <sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+      <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 21px; padding: 34px 0; border-bottom: 1px solid #D6D6D1; align-items: start;">
+        <div style="grid-column: span 1; font-size: 55px; line-height: 0.85; font-weight: 700; color: {{p.num_color}};">{{p.num}}</div>
+        <div style="grid-column: span 4;">
+          <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B66; margin-bottom: 8px;">{{p.kicker}}</div>
+          <div style="font-size: 28px; font-weight: 700; letter-spacing: -0.02em;">{{p.title}}</div>
+        </div>
+        <p style="grid-column: span 5; margin: 0; font-size: 15px; line-height: 1.6; color: #3A3A36;">{{p.body}}</p>
+        <div style="grid-column: span 2; text-align: right; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6B66;">{{p.meta}}</div>
+      </div>
+    </sc-for>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#FF4D00","options":["#FF4D00","#E8442B","#111111","#0057FF"],"section":"Theme"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#FF4D00';
+    return {
+      accent,
+      ticks: [
+        { label: 'Atoms',        code: '95-02', fill: accent },
+        { label: 'Pixels',       code: '02-20', fill: 'transparent' },
+        { label: 'Intelligence', code: '20-',   fill: 'transparent' }
+      ],
+      projects: [
+        { num: '01', num_color: accent, kicker: 'Co-founder & CTO · 2020 to now', title: 'inFormed Consent',
+          body: 'A patented platform that turns informed consent from a signature into something a patient actually understands. I built the technology from nothing: personalized AI avatars, video-tracked comprehension, live with clinicians.',
+          meta: 'US 11,501,875 / Next.js / Healthtech' },
+        { num: '02', num_color: '#111111', kicker: 'UX · facilitation · 2018', title: 'Youth as Experts',
+          body: 'Design-thinking workshops where the teenagers were the experts and I was the facilitator, then the prototype their own ideas asked for.',
+          meta: 'Kansas City Public Library' },
+        { num: '03', num_color: '#111111', kicker: 'Data · design · 2015 to 2020', title: 'Data + Design',
+          body: 'Dashboards and decision tools for people who have to understand something hard and then act on it. I invented a chart type once because the existing ones were not telling the truth.',
+          meta: 'Tableau / Fortune 10' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

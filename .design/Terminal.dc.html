@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400;700;900&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #141414; text-decoration: none; }
+    a:hover { color: #FF4D00; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; background: #EFEFEC; padding: 34px; font-family: 'Space Grotesk', system-ui, sans-serif; color: #141414; background-image: linear-gradient(#E1E1DC 1px, transparent 1px), linear-gradient(90deg, #E1E1DC 1px, transparent 1px); background-size: 68px 68px;">
+
+  <!-- the sheet, floated on the visible grid -->
+  <div style="border: 2px solid #141414; background: #FBFBF9;">
+
+    <!-- top rail -->
+    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #141414; padding: 13px 21px; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="width: 16px; height: 16px; border: 1px solid #141414; display: flex; align-items: center; justify-content: center;">
+          <span style="width: 6px; height: 6px; background: {{accent}};"></span>
+        </span>
+        <span>JP&nbsp;/&nbsp;ORLANDO</span>
+      </div>
+      <div style="display: flex; gap: 21px; color: #77776F;">
+        <span>WORK</span><span>ARC</span><span>ABOUT</span>
+      </div>
+      <span style="border: 1px solid #141414; padding: 5px 12px; background: {{accent}}; color: #FBFBF9;">AVAILABLE</span>
+    </div>
+
+    <!-- masthead: the name as a display readout, with the cursor -->
+    <div style="padding: 34px 21px 21px 21px; border-bottom: 1px solid #141414;">
+      <div style="font-family: 'Doto', 'Space Mono', ui-monospace, monospace; font-weight: 900; font-size: 96px; line-height: 0.9; letter-spacing: 0.02em; display: flex; align-items: baseline; gap: 21px;">
+        <span>JASON_</span><span style="color: #77776F;">PENROD</span>
+      </div>
+    </div>
+
+    <!-- deck: the real statement, in the readable face -->
+    <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 21px; padding: 21px; border-bottom: 1px solid #141414; align-items: end;">
+      <h1 style="grid-column: span 7; margin: 0; font-size: 40px; line-height: 1.06; letter-spacing: -0.03em; font-weight: 700;">
+        The medium keeps changing.<br>The human does not.
+      </h1>
+      <p style="grid-column: span 5; margin: 0; font-size: 13px; line-height: 1.7; color: #4A4A44;">
+        I help founders figure out what to build first, and then I build it. Thirty-one years designing for the person on the other end while the medium reinvented itself under me.
+      </p>
+    </div>
+
+    <!-- featured: the flagship, with the object cell on the left -->
+    <div style="display: grid; grid-template-columns: 260px 1fr; gap: 0; border-bottom: 1px solid #141414;">
+      <div style="border-right: 1px solid #141414; padding: 21px; display: flex; align-items: center; justify-content: center;">
+        <svg viewBox="0 0 120 120" width="120" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M60 18 L102 42 L102 78 L60 102 L18 78 L18 42 Z" stroke="#141414" stroke-width="1.5"></path>
+          <path d="M60 18 L60 60 L18 42" stroke="#141414" stroke-width="1"></path>
+          <path d="M60 60 L102 42" stroke="#141414" stroke-width="1"></path>
+          <path d="M60 60 L60 102" stroke="#141414" stroke-width="1"></path>
+          <circle cx="60" cy="60" r="7" fill="{{accent}}"></circle>
+        </svg>
+      </div>
+      <div style="padding: 21px;">
+        <div style="display: flex; gap: 8px; margin-bottom: 13px;">
+          <span style="border: 1px solid #141414; background: {{accent}}; color: #FBFBF9; font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 8px;">FLAGSHIP</span>
+          <span style="border: 1px solid #141414; font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 8px;">CO-FOUNDER &amp; CTO</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 34px;">
+          <div>
+            <div style="font-size: 32px; font-weight: 700; letter-spacing: -0.025em;">inFormed Consent</div>
+            <p style="margin: 8px 0 0 0; font-size: 13px; line-height: 1.65; color: #4A4A44; max-width: 56ch;">
+              A patented platform that turns informed consent from a signature into something a patient actually understands. I built the technology from nothing: personalized AI avatars, video-tracked comprehension, live with clinicians.
+            </p>
+          </div>
+        </div>
+        <!-- the stats strip, the best idea in the reference -->
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid #141414; margin-top: 21px;">
+          <sc-for list="{{flagshipStats}}" as="s" hint-placeholder-count="4">
+            <div style="border-right: 1px solid {{s.rule}}; padding: 13px 16px 0 0;">
+              <div style="font-family: 'Doto', 'Space Mono', ui-monospace, monospace; font-weight: 700; font-size: 26px; line-height: 1; color: {{s.ink}};">{{s.value}}</div>
+              <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #77776F; margin-top: 6px;">{{s.label}}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- count + filters -->
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 21px; padding: 21px; border-bottom: 1px solid #141414;">
+      <div style="display: flex; align-items: baseline; gap: 13px;">
+        <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #77776F;">CASE STUDIES</span>
+        <span style="font-family: 'Doto', 'Space Mono', ui-monospace, monospace; font-weight: 900; font-size: 40px; line-height: 1;">04</span>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
+          <span style="border: 1px solid #141414; background: {{f.bg}}; color: {{f.ink}}; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 7px 14px;">{{f.label}}</span>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- card grid -->
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0;">
+      <sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+        <div style="border-right: 1px solid {{p.rule}}; border-bottom: 1px solid #141414; padding: 16px; display: flex; flex-direction: column; gap: 13px;">
+          <span style="align-self: flex-start; border: 1px solid #141414; font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 8px;">{{p.tag}}</span>
+          <div style="height: 132px; border: 1px solid #141414; background: #EFEFEC; display: flex; align-items: flex-end; padding: 10px;">
+            <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #77776F;">{{p.shot}}</span>
+          </div>
+          <div style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em;">{{p.title}}</div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid #141414;">
+            <sc-for list="{{p.stats}}" as="s" hint-placeholder-count="2">
+              <div style="padding: 10px 10px 0 0;">
+                <div style="font-family: 'Doto', 'Space Mono', ui-monospace, monospace; font-weight: 700; font-size: 19px; line-height: 1; color: {{s.ink}};">{{s.value}}</div>
+                <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: #77776F; margin-top: 5px;">{{s.label}}</div>
+              </div>
+            </sc-for>
+          </div>
+          <a href="#" style="align-self: flex-end; width: 34px; height: 34px; border: 1px solid #141414; display: flex; align-items: center; justify-content: center; margin-top: auto;">
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="2" y1="8" x2="13" y2="8" stroke="#141414" stroke-width="1.5"></line>
+              <path d="M9 4 L13 8 L9 12" stroke="#141414" stroke-width="1.5"></path>
+            </svg>
+          </a>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- bottom CTA -->
+    <div style="display: grid; grid-template-columns: 1fr 200px 320px; gap: 0; align-items: center;">
+      <div style="padding: 28px 21px;">
+        <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #77776F; margin-bottom: 8px;">&#9656; TAKING ON WORK</div>
+        <div style="font-family: 'Doto', 'Space Mono', ui-monospace, monospace; font-weight: 900; font-size: 34px; line-height: 1.05;">TELL ME WHAT<br>YOU ARE BUILDING</div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center; padding: 21px;">
+        <svg viewBox="0 0 90 90" width="90" height="90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M36 6 H54 V36 H84 V54 H54 V84 H36 V54 H6 V36 H36 Z" stroke="#141414" stroke-width="1.5"></path>
+        </svg>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 21px;">
+        <a href="#" style="border: 1px solid #141414; background: {{accent}}; color: #FBFBF9; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px; text-align: center;">START THE CONVERSATION</a>
+        <a href="#" style="border: 1px solid #141414; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px; text-align: center;">SEE THE WORK</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#FF4D00","options":["#FF4D00","#E8442B","#141414","#0057FF"],"section":"Theme"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#FF4D00';
+    const K = '#141414';
+    return {
+      accent,
+      flagshipStats: [
+        { value: '2020',       label: 'Founded',            ink: K,      rule: K },
+        { value: '11,501,875', label: 'US Patent',          ink: accent, rule: K },
+        { value: '156',        label: 'Procedures modelled', ink: K,     rule: K },
+        { value: '[ METRIC ]', label: 'Pilot result',       ink: '#B9B9B1', rule: 'transparent' }
+      ],
+      filters: [
+        { label: 'ALL',     bg: K,           ink: '#FBFBF9' },
+        { label: 'PRODUCT', bg: 'transparent', ink: K },
+        { label: 'UX',      bg: 'transparent', ink: K },
+        { label: 'DATA',    bg: 'transparent', ink: K }
+      ],
+      projects: [
+        { tag: 'UX · FACILITATION', rule: K, title: 'Youth as Experts', shot: 'FIG. 01 / WORKSHOP',
+          stats: [ { value: '2018', label: 'Year', ink: K }, { value: 'KCPL', label: 'Partner', ink: accent } ] },
+        { tag: 'DATA · DESIGN', rule: K, title: 'Data + Design', shot: 'FIG. 02 / DASHBOARDS',
+          stats: [ { value: '07', label: 'Dashboards', ink: K }, { value: 'F10', label: 'Client tier', ink: accent } ] },
+        { tag: 'PRODUCT · WIREFRAMES', rule: 'transparent', title: 'Step Up Your Game', shot: 'FIG. 03 / MOBILE',
+          stats: [ { value: '2019', label: 'Year', ink: K }, { value: 'FIVE', label: 'Studio', ink: accent } ] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400;700;900&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #141414; text-decoration: none; }
+    a:hover { color: #FF4D00; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; background: #EFEFEC; padding: 34px; font-family: 'Space Grotesk', system-ui, sans-serif; color: #141414; background-image: linear-gradient(#E1E1DC 1px, transparent 1px), linear-gradient(90deg, #E1E1DC 1px, transparent 1px); background-size: 68px 68px;">
+
+  <div style="border: 2px solid #141414; background: #FBFBF9;">
+
+    <!-- rail: the name lives HERE, at masthead scale, not hero scale -->
+    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #141414; padding: 13px 21px; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="width: 16px; height: 16px; border: 1px solid #141414; display: flex; align-items: center; justify-content: center;">
+          <span style="width: 6px; height: 6px; background: {{accent}};"></span>
+        </span>
+        <span style="font-weight: 700;">JASON PENROD</span>
+        <span style="color: #77776F;">PRODUCT DESIGNER &amp; BUILDER</span>
+      </div>
+      <div style="display: flex; gap: 21px; color: #77776F;">
+        <span>WORK</span><span>ARC</span><span>ABOUT</span>
+      </div>
+      <span style="border: 1px solid #141414; padding: 5px 12px; background: {{accent}}; color: #FBFBF9;">AVAILABLE</span>
+    </div>
+
+    <!-- HERO: 1.618 : 1, the claim carries the display face -->
+    <div style="display: grid; grid-template-columns: 1.618fr 1fr; gap: 0; border-bottom: 1px solid #141414;">
+
+      <div style="padding: 34px 21px 28px 21px; border-right: 1px solid #141414;">
+        <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #77776F; margin-bottom: 21px;">[ 00.00 ] THE PREMISE</div>
+
+        <!-- setup in the readable face -->
+        <div style="font-size: 38px; line-height: 1.08; letter-spacing: -0.03em; font-weight: 500; color: #4A4A44;">
+          The medium keeps changing.
+        </div>
+        <!-- the claim, displayed -->
+        <div style="font-family: 'Doto', 'Space Mono', ui-monospace, monospace; font-weight: 900; font-size: 66px; line-height: 0.98; letter-spacing: 0.01em; margin-top: 10px;">
+          THE HUMAN<br>DOES NOT<span style="color: {{accent}};">_</span>
+        </div>
+
+        <p style="margin: 28px 0 0 0; font-size: 14px; line-height: 1.7; color: #4A4A44; max-width: 58ch;">
+          I have spent my whole career designing for the person on the other end while the medium reinvented itself under me. Paper and plastic. Then pixels. Now whatever we are calling intelligence this year. Today I help founders figure out what to build first, and then I build it.
+        </p>
+
+        <div style="display: flex; gap: 10px; margin-top: 28px;">
+          <a href="#" style="border: 1px solid #141414; background: {{accent}}; color: #FBFBF9; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 24px;">TELL ME WHAT YOU ARE BUILDING</a>
+          <a href="#" style="border: 1px solid #141414; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 24px;">SEE THE WORK</a>
+        </div>
+      </div>
+
+      <!-- the dial, kept from C, dressed as a panel instrument -->
+      <div style="padding: 34px 21px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; justify-content: space-between; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #77776F;">
+          <span>MEDIUM</span><span>1 : 1.618</span>
+        </div>
+        <div style="display: flex; justify-content: center;">
+          <svg viewBox="0 0 200 200" width="180" height="180" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="78" stroke="#141414" stroke-width="1"></circle>
+            <circle cx="100" cy="100" r="54" stroke="#141414" stroke-width="1"></circle>
+            <line x1="100" y1="22" x2="100" y2="34" stroke="#141414" stroke-width="1"></line>
+            <line x1="32" y1="139" x2="43" y2="133" stroke="#141414" stroke-width="1"></line>
+            <line x1="168" y1="139" x2="157" y2="133" stroke="#141414" stroke-width="1"></line>
+            <line x1="100" y1="100" x2="100" y2="46" stroke="{{accent}}" stroke-width="4"></line>
+            <circle cx="100" cy="100" r="5" fill="#141414"></circle>
+          </svg>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #77776F;">
+          <span>PIXELS</span><span style="color: {{accent}}; font-weight: 700;">ATOMS</span><span>INTEL</span>
+        </div>
+        <div style="border-top: 1px solid #141414; padding-top: 13px;">
+          <div style="font-family: 'Doto', 'Space Mono', ui-monospace, monospace; font-weight: 900; font-size: 30px; line-height: 1;">1995<span style="color: #77776F;">&rarr;</span>2026</div>
+          <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #77776F; margin-top: 6px;">THIRTY-ONE YEARS, ONE JOB</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- flagship strip -->
+    <div style="display: grid; grid-template-columns: 200px 1fr; gap: 0; border-bottom: 1px solid #141414;">
+      <div style="border-right: 1px solid #141414; padding: 21px; display: flex; align-items: center; justify-content: center;">
+        <svg viewBox="0 0 120 120" width="96" height="96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M60 18 L102 42 L102 78 L60 102 L18 78 L18 42 Z" stroke="#141414" stroke-width="1.5"></path>
+          <path d="M60 18 L60 60 L18 42" stroke="#141414" stroke-width="1"></path>
+          <path d="M60 60 L102 42" stroke="#141414" stroke-width="1"></path>
+          <path d="M60 60 L60 102" stroke="#141414" stroke-width="1"></path>
+          <circle cx="60" cy="60" r="7" fill="{{accent}}"></circle>
+        </svg>
+      </div>
+      <div style="padding: 21px;">
+        <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+          <span style="border: 1px solid #141414; background: {{accent}}; color: #FBFBF9; font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 8px;">FLAGSHIP</span>
+          <span style="border: 1px solid #141414; font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 8px;">CO-FOUNDER &amp; CTO</span>
+        </div>
+        <div style="font-size: 28px; font-weight: 700; letter-spacing: -0.025em;">inFormed Consent</div>
+        <p style="margin: 6px 0 0 0; font-size: 13px; line-height: 1.65; color: #4A4A44; max-width: 62ch;">
+          A patented platform that turns informed consent from a signature into something a patient actually understands. I built the technology from nothing.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid #141414; margin-top: 16px;">
+          <sc-for list="{{flagshipStats}}" as="s" hint-placeholder-count="4">
+            <div style="border-right: 1px solid {{s.rule}}; padding: 12px 16px 0 0;">
+              <div style="font-family: 'Doto', 'Space Mono', ui-monospace, monospace; font-weight: 700; font-size: 24px; line-height: 1; color: {{s.ink}};">{{s.value}}</div>
+              <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #77776F; margin-top: 6px;">{{s.label}}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- count + filters -->
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 21px; padding: 16px 21px; border-bottom: 1px solid #141414;">
+      <div style="display: flex; align-items: baseline; gap: 13px;">
+        <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #77776F;">CASE STUDIES</span>
+        <span style="font-family: 'Doto', 'Space Mono', ui-monospace, monospace; font-weight: 900; font-size: 36px; line-height: 1;">04</span>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
+          <span style="border: 1px solid #141414; background: {{f.bg}}; color: {{f.ink}}; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 7px 14px;">{{f.label}}</span>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- work grid -->
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0;">
+      <sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+        <div style="border-right: 1px solid {{p.rule}}; border-bottom: 1px solid #141414; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+          <span style="align-self: flex-start; border: 1px solid #141414; font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 8px;">{{p.tag}}</span>
+          <div style="height: 128px; border: 1px solid #141414; background: #EFEFEC; display: flex; align-items: flex-end; padding: 10px;">
+            <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #77776F;">{{p.shot}}</span>
+          </div>
+          <div style="font-size: 19px; font-weight: 700; letter-spacing: -0.02em;">{{p.title}}</div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid #141414;">
+            <sc-for list="{{p.stats}}" as="s" hint-placeholder-count="2">
+              <div style="padding: 10px 10px 0 0;">
+                <div style="font-family: 'Doto', 'Space Mono', ui-monospace, monospace; font-weight: 700; font-size: 18px; line-height: 1; color: {{s.ink}};">{{s.value}}</div>
+                <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: #77776F; margin-top: 5px;">{{s.label}}</div>
+              </div>
+            </sc-for>
+          </div>
+          <a href="#" style="align-self: flex-end; width: 34px; height: 34px; border: 1px solid #141414; display: flex; align-items: center; justify-content: center; margin-top: auto;">
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="2" y1="8" x2="13" y2="8" stroke="#141414" stroke-width="1.5"></line>
+              <path d="M9 4 L13 8 L9 12" stroke="#141414" stroke-width="1.5"></path>
+            </svg>
+          </a>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- CTA -->
+    <div style="display: grid; grid-template-columns: 1fr 320px; gap: 0; align-items: center;">
+      <div style="padding: 24px 21px;">
+        <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #77776F; margin-bottom: 8px;">&#9656; TAKING ON WORK</div>
+        <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1;">Have a vision that needs its first real screens?</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 21px;">
+        <a href="#" style="border: 1px solid #141414; background: {{accent}}; color: #FBFBF9; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px; text-align: center;">START THE CONVERSATION</a>
+        <a href="#" style="border: 1px solid #141414; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px; text-align: center;">SEE THE WORK</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#FF4D00","options":["#FF4D00","#E8442B","#141414","#0057FF"],"section":"Theme"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#FF4D00';
+    const K = '#141414';
+    return {
+      accent,
+      flagshipStats: [
+        { value: '2020',       label: 'Founded',             ink: K,         rule: K },
+        { value: '11,501,875', label: 'US Patent',           ink: accent,    rule: K },
+        { value: '156',        label: 'Procedures modelled', ink: K,         rule: K },
+        { value: '[ METRIC ]', label: 'Pilot result',        ink: '#B9B9B1', rule: 'transparent' }
+      ],
+      filters: [
+        { label: 'ALL',     bg: K,             ink: '#FBFBF9' },
+        { label: 'PRODUCT', bg: 'transparent', ink: K },
+        { label: 'UX',      bg: 'transparent', ink: K },
+        { label: 'DATA',    bg: 'transparent', ink: K }
+      ],
+      projects: [
+        { tag: 'UX · FACILITATION', rule: K, title: 'Youth as Experts', shot: 'FIG. 01 / WORKSHOP',
+          stats: [ { value: '2018', label: 'Year', ink: K }, { value: 'KCPL', label: 'Partner', ink: accent } ] },
+        { tag: 'DATA · DESIGN', rule: K, title: 'Data + Design', shot: 'FIG. 02 / DASHBOARDS',
+          stats: [ { value: '07', label: 'Dashboards', ink: K }, { value: 'F10', label: 'Client tier', ink: accent } ] },
+        { tag: 'PRODUCT · WIREFRAMES', rule: 'transparent', title: 'Step Up Your Game', shot: 'FIG. 03 / MOBILE',
+          stats: [ { value: '2019', label: 'Year', ink: K }, { value: 'FIVE', label: 'Studio', ink: accent } ] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

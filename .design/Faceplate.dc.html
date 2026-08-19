@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #141414; text-decoration: none; }
+    a:hover { color: #FF4D00; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; background: #DEDEDA; color: #141414; font-family: 'Space Grotesk', system-ui, sans-serif; padding: 34px;">
+
+  <!-- the panel -->
+  <div style="border: 1px solid #141414; background: #E9E9E5;">
+
+    <!-- silkscreen header row -->
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #141414; padding: 13px 21px; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;">
+      <span>JASON PENROD &middot; MODEL JP&mdash;01</span>
+      <div style="display: flex; gap: 21px; align-items: center; color: #6B6B66;">
+        <span>SER. 2026/001</span>
+        <span style="display: flex; align-items: center; gap: 6px; color: #141414;">
+          <span style="width: 6px; height: 6px; background: {{accent}}; border-radius: 50%;"></span>AVAILABLE
+        </span>
+      </div>
+    </div>
+
+    <!-- main split: statement | rotary -->
+    <div style="display: grid; grid-template-columns: 1.618fr 1fr; gap: 0;">
+
+      <div style="padding: 48px 34px; border-right: 1px solid #141414;">
+        <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B6B66; margin-bottom: 21px;">IN&nbsp;&mdash;&nbsp;THE PREMISE</div>
+        <h1 style="margin: 0; font-size: 68px; line-height: 1.0; letter-spacing: -0.04em; font-weight: 700;">
+          The medium keeps changing.<br>The human does not.
+        </h1>
+        <p style="margin: 28px 0 0 0; font-size: 15px; line-height: 1.618; color: #3A3A36; max-width: 54ch;">
+          I have spent my whole career designing for the person on the other end while the medium reinvented itself under me. Paper and plastic. Then pixels. Now whatever we are calling intelligence this year. Today I help founders figure out what to build first, and then I build it.
+        </p>
+        <div style="display: flex; gap: 13px; margin-top: 34px;">
+          <a href="#" style="background: {{accent}}; color: #E9E9E5; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 24px; font-weight: 700;">START THE CONVERSATION</a>
+          <a href="#" style="border: 1px solid #141414; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 24px;">SEE THE WORK</a>
+        </div>
+      </div>
+
+      <!-- flat rotary control, drawn with ticks -->
+      <div style="padding: 48px 34px; display: flex; flex-direction: column; align-items: center; gap: 21px;">
+        <div style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B6B66; align-self: flex-start;">MEDIUM SELECT</div>
+        <svg viewBox="0 0 200 200" width="200" height="200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="76" stroke="#141414" stroke-width="1"></circle>
+          <circle cx="100" cy="100" r="52" stroke="#141414" stroke-width="1"></circle>
+          <line x1="100" y1="48" x2="100" y2="24" stroke="{{accent}}" stroke-width="4"></line>
+          <line x1="46" y1="140" x2="26" y2="152" stroke="#141414" stroke-width="1"></line>
+          <line x1="154" y1="140" x2="174" y2="152" stroke="#141414" stroke-width="1"></line>
+          <line x1="100" y1="100" x2="100" y2="52" stroke="#141414" stroke-width="2"></line>
+          <circle cx="100" cy="100" r="4" fill="#141414"></circle>
+        </svg>
+        <div style="display: flex; justify-content: space-between; width: 100%; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6B66;">
+          <span>PIXELS</span>
+          <span style="color: {{accent}}; font-weight: 700;">ATOMS</span>
+          <span>INTEL</span>
+        </div>
+        <div style="width: 100%; border-top: 1px solid #141414; padding-top: 13px; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; color: #6B6B66; text-align: center;">
+          1995 &rarr; 2002 &middot; HALLMARK
+        </div>
+      </div>
+    </div>
+
+    <!-- port row: what I do, as labelled jacks -->
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid #141414;">
+      <sc-for list="{{services}}" as="s" hint-placeholder-count="3">
+        <div style="padding: 28px 21px; border-right: 1px solid {{s.rule}};">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 13px;">
+            <span style="width: 14px; height: 14px; border: 2px solid #141414; border-radius: 50%;"></span>
+            <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B6B66;">{{s.num}} &middot; {{s.tag}}</span>
+          </div>
+          <div style="font-size: 19px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.25; margin-bottom: 10px;">{{s.title}}</div>
+          <p style="margin: 0; font-size: 13px; line-height: 1.65; color: #3A3A36;">{{s.body}}</p>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- work modules -->
+    <div style="border-top: 1px solid #141414; padding: 21px; background: #DEDEDA;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
+        <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;">OUT &mdash; SELECTED WORK</span>
+        <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B66;">A CLAIM, AND THE PROOF</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px;">
+        <sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+          <div style="border: 1px solid #141414; background: #E9E9E5; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; font-family: 'Space Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: #6B6B66;">
+              <span>{{p.part}}</span><span>{{p.year}}</span>
+            </div>
+            <div style="height: 96px; border: 1px solid #C4C4BE;"></div>
+            <div style="font-size: 17px; font-weight: 700; letter-spacing: -0.015em;">{{p.title}}</div>
+            <p style="margin: 0; font-size: 12px; line-height: 1.6; color: #3A3A36;">{{p.body}}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#FF4D00","options":["#FF4D00","#E8442B","#141414","#0057FF"],"section":"Theme"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#FF4D00';
+    return {
+      accent,
+      services: [
+        { num: '01', tag: 'DISCOVERY', rule: '#141414', title: 'Figure out what to build first',
+          body: 'Most projects do not fail on execution. They fail because everything looked equally important on day one. I find the one thing that has to be true and tell you what to cut.' },
+        { num: '02', tag: 'BUILD', rule: '#141414', title: 'Build it',
+          body: 'Not a deck about the thing. The thing. Working software, in front of real users, in weeks.' },
+        { num: '03', tag: 'CLARITY', rule: 'transparent', title: 'Make the complicated thing clear',
+          body: 'Data products and decision tools. I invented a chart type once because the existing ones were not telling the truth.' }
+      ],
+      projects: [
+        { part: 'PT. 001', year: '2020 →', title: 'inFormed Consent',
+          body: 'A patented platform that turns consent from a signature into something a patient actually understands.' },
+        { part: 'PT. 002', year: '2018', title: 'Youth as Experts',
+          body: 'Workshops where the teenagers were the experts and I was the facilitator.' },
+        { part: 'PT. 003', year: '2015 →', title: 'Data + Design',
+          body: 'Dashboards for people who have to understand something hard and then act on it.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

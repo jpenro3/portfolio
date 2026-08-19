@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #22221E; text-decoration: none; }
+    a:hover { color: #C2410C; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; background: #F4F3EE; color: #22221E; font-family: 'Space Mono', ui-monospace, monospace; background-image: linear-gradient(#DEDCD3 1px, transparent 1px), linear-gradient(90deg, #DEDCD3 1px, transparent 1px); background-size: 34px 34px; padding: 0 0 68px 0;">
+
+  <!-- coordinate header -->
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #22221E; padding: 16px 34px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; background: #F4F3EE;">
+    <span>JASON PENROD</span>
+    <span style="color: #7C786C;">SHEET 01 OF 04 &middot; SCALE 1:1.618</span>
+    <span style="display: flex; align-items: center; gap: 8px;"><span style="width: 6px; height: 6px; background: {{accent}};"></span>AVAILABLE</span>
+  </div>
+
+  <div style="padding: 68px 34px 0 34px;">
+
+    <!-- the statement, quiet, set on the grid -->
+    <div style="background: #F4F3EE; border: 1px solid #22221E; padding: 34px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 34px; align-items: start;">
+      <div style="grid-column: span 7;">
+        <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #7C786C; margin-bottom: 21px;">[ 00.00 ] PREMISE</div>
+        <h1 style="margin: 0; font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 46px; line-height: 1.1; letter-spacing: -0.03em; font-weight: 500;">
+          The medium keeps changing.<br>The human does not.
+        </h1>
+      </div>
+      <div style="grid-column: span 5;">
+        <p style="margin: 0; font-size: 12px; line-height: 1.75; color: #4A4740;">
+          I have spent my whole career designing for the person on the other end while the medium reinvented itself under me. Paper and plastic. Then pixels. Now whatever we are calling intelligence this year.
+        </p>
+        <p style="margin: 13px 0 0 0; font-size: 12px; line-height: 1.75; color: #4A4740;">
+          Today I help founders figure out what to build first, and then I build it.
+        </p>
+      </div>
+    </div>
+
+    <!-- measured readout row -->
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 21px; margin-top: 21px;">
+      <sc-for list="{{arc}}" as="a" hint-placeholder-count="3">
+        <div style="background: #F4F3EE; border: 1px solid #22221E; padding: 21px;">
+          <div style="display: flex; justify-content: space-between; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #7C786C;">
+            <span>{{a.ref}}</span><span>{{a.years}}</span>
+          </div>
+          <div style="font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -0.03em; margin: 13px 0 8px 0; color: {{a.ink}};">{{a.name}}</div>
+          <!-- fibonacci tick strip -->
+          <div style="display: flex; align-items: flex-end; gap: 3px; height: 21px; margin-bottom: 13px;">
+            <sc-for list="{{a.ticks}}" as="t" hint-placeholder-count="6">
+              <span style="width: 3px; height: {{t.h}}; background: {{t.c}};"></span>
+            </sc-for>
+          </div>
+          <p style="margin: 0; font-size: 11px; line-height: 1.7; color: #4A4740;">{{a.body}}</p>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- actions on the grid -->
+    <div style="display: flex; align-items: center; gap: 13px; margin-top: 21px;">
+      <a href="#" style="background: #22221E; color: #F4F3EE; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 15px 24px;">TELL ME WHAT YOU ARE BUILDING</a>
+      <a href="#" style="background: #F4F3EE; border: 1px solid #22221E; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 15px 24px;">SEE THE WORK</a>
+      <span style="margin-left: auto; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #7C786C;">[ 00.03 ]</span>
+    </div>
+
+    <!-- work: plotted entries -->
+    <div style="margin-top: 55px; background: #F4F3EE; border: 1px solid #22221E;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #22221E; padding: 13px 21px; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;">
+        <span>SELECTED WORK</span><span style="color: #7C786C;">A CLAIM, AND THE PROOF OF THE CLAIM</span>
+      </div>
+      <sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+        <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 21px; padding: 21px; border-bottom: 1px solid #DEDCD3; align-items: start;">
+          <span style="grid-column: span 1; font-size: 10px; letter-spacing: 0.12em; color: {{accent}};">{{p.coord}}</span>
+          <div style="grid-column: span 4;">
+            <div style="font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 21px; font-weight: 700; letter-spacing: -0.02em;">{{p.title}}</div>
+            <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #7C786C; margin-top: 5px;">{{p.meta}}</div>
+          </div>
+          <p style="grid-column: span 7; margin: 0; font-size: 12px; line-height: 1.7; color: #4A4740;">{{p.body}}</p>
+        </div>
+      </sc-for>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#C2410C","options":["#C2410C","#FF4D00","#22221E","#1D6E5F"],"section":"Theme"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#C2410C';
+    const fib = [3, 5, 8, 13, 21, 13];
+    const ticks = (litCount) => fib.map((h, i) => ({ h: h + 'px', c: i < litCount ? accent : '#C4C1B6' }));
+    return {
+      accent,
+      arc: [
+        { ref: '[ 01.00 ]', name: 'ATOMS', years: '1995 → 2002', ink: '#22221E', ticks: ticks(2),
+          body: 'Physical products at Hallmark. Real light, real objects, the shape of a thing in a real hand.' },
+        { ref: '[ 02.00 ]', name: 'PIXELS', years: '2002 → 2020', ink: '#22221E', ticks: ticks(4),
+          body: 'Screens, data products, and the long argument about what a person can actually understand.' },
+        { ref: '[ 03.00 ]', name: 'INTELLIGENCE', years: '2020 →', ink: accent, ticks: ticks(6),
+          body: 'Co-founder and CTO of a healthtech platform. Same human, new material in my hands.' }
+      ],
+      projects: [
+        { coord: '01.1', title: 'inFormed Consent', meta: 'US 11,501,875 · Next.js',
+          body: 'A patented platform that turns informed consent from a signature into something a patient actually understands. I built the technology from nothing: personalized AI avatars, video-tracked comprehension, live with clinicians.' },
+        { coord: '01.2', title: 'Youth as Experts', meta: '2018 · Kansas City Public Library',
+          body: 'Design-thinking workshops where the teenagers were the experts and I was the facilitator, then the prototype their own ideas asked for.' },
+        { coord: '01.3', title: 'Data + Design', meta: '2015 → · Tableau, Fortune 10',
+          body: 'Dashboards and decision tools for people who have to understand something hard and then act on it.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

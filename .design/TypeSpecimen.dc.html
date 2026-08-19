@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #0A0A0A; text-decoration: none; }
+    a:hover { color: #FF4D00; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; background: #FFFFFF; color: #0A0A0A; font-family: 'Space Grotesk', system-ui, sans-serif; padding: 34px 48px 72px 48px;">
+
+  <!-- masthead strip -->
+  <div style="display: flex; justify-content: space-between; align-items: baseline; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; padding-bottom: 10px; border-bottom: 3px solid #0A0A0A;">
+    <span>JASON PENROD</span>
+    <span style="color: #7A7A75;">PRODUCT DESIGNER &amp; BUILDER</span>
+    <span style="color: #7A7A75;">ORLANDO, FL</span>
+    <span style="background: {{accent}}; color: #FFFFFF; padding: 3px 10px;">AVAILABLE</span>
+  </div>
+
+  <!-- the span: 1995 to 2026, set enormous -->
+  <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-top: 21px;">
+    <div style="display: flex; align-items: baseline; gap: 13px;">
+      <span style="font-size: 190px; line-height: 0.76; font-weight: 700; letter-spacing: -0.06em;">19</span>
+      <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #7A7A75;">ninety&mdash;five</span>
+    </div>
+    <div style="flex-grow: 1; height: 190px; display: flex; flex-direction: column; justify-content: center; padding: 0 34px;">
+      <div style="height: 10px; background: #0A0A0A;"></div>
+      <div style="display: flex; justify-content: space-between; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #7A7A75; margin-top: 10px;">
+        <span>ATOMS</span><span>PIXELS</span><span>INTELLIGENCE</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: baseline; gap: 13px;">
+      <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #7A7A75;">twenty&mdash;six</span>
+      <span style="font-size: 190px; line-height: 0.76; font-weight: 700; letter-spacing: -0.06em; color: {{accent}};">26</span>
+    </div>
+  </div>
+
+  <!-- the statement, set as the deck -->
+  <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 21px; margin-top: 34px; border-top: 1px solid #0A0A0A; padding-top: 21px;">
+    <h1 style="grid-column: span 7; margin: 0; font-size: 62px; line-height: 0.98; letter-spacing: -0.04em; font-weight: 700;">
+      The medium keeps changing.<br>The human does not.
+    </h1>
+    <div style="grid-column: span 5;">
+      <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #3A3A36;">
+        Thirty-one years designing for the person on the other end while the medium reinvented itself under me. Paper and plastic. Then pixels. Now whatever we are calling intelligence this year. Today I help founders figure out what to build first, and then I build it.
+      </p>
+      <div style="display: flex; gap: 13px; margin-top: 21px;">
+        <a href="#" style="background: #0A0A0A; color: #FFFFFF; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 13px 21px;">TELL ME WHAT YOU ARE BUILDING</a>
+        <a href="#" style="border-bottom: 2px solid {{accent}}; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding-bottom: 2px;">SEE THE WORK</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- dense micro-type grid: what I do -->
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 48px; border-top: 3px solid #0A0A0A;">
+    <sc-for list="{{services}}" as="s" hint-placeholder-count="3">
+      <div style="padding: 21px 21px 21px 0; border-right: 1px solid {{s.rule}};">
+        <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px;">
+          <span style="font-size: 40px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: {{s.numColor}};">{{s.num}}</span>
+          <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #7A7A75;">{{s.tag}}</span>
+        </div>
+        <div style="font-size: 18px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.25; margin-bottom: 8px;">{{s.title}}</div>
+        <p style="margin: 0; font-size: 12px; line-height: 1.6; color: #3A3A36; max-width: 34ch;">{{s.body}}</p>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- work as a typographic index -->
+  <div style="margin-top: 48px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 3px solid #0A0A0A; padding-bottom: 8px;">
+      <span style="font-size: 28px; font-weight: 700; letter-spacing: -0.03em;">Selected work</span>
+      <span style="font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #7A7A75;">INDEX &middot; 001&ndash;003</span>
+    </div>
+    <sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+      <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 21px; padding: 21px 0; border-bottom: 1px solid #D8D8D2; align-items: baseline;">
+        <span style="grid-column: span 1; font-family: 'Space Mono', ui-monospace, monospace; font-size: 11px; color: {{accent}}; font-weight: 700;">{{p.idx}}</span>
+        <span style="grid-column: span 4; font-size: 34px; font-weight: 700; letter-spacing: -0.03em; line-height: 1;">{{p.title}}</span>
+        <p style="grid-column: span 5; margin: 0; font-size: 13px; line-height: 1.6; color: #3A3A36;">{{p.body}}</p>
+        <span style="grid-column: span 2; text-align: right; font-family: 'Space Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #7A7A75;">{{p.meta}}</span>
+      </div>
+    </sc-for>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#FF4D00","options":["#FF4D00","#E8442B","#0A0A0A","#0057FF"],"section":"Theme"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#FF4D00';
+    return {
+      accent,
+      services: [
+        { num: '01', numColor: accent, rule: '#D8D8D2', tag: 'DISCOVERY', title: 'Figure out what to build first',
+          body: 'Most projects do not fail on execution. They fail because everything looked equally important on day one. I find the one thing that has to be true and tell you what to cut.' },
+        { num: '02', numColor: '#0A0A0A', rule: '#D8D8D2', tag: 'BUILD', title: 'Build it',
+          body: 'Not a deck about the thing. The thing. Working software, in front of real users, in weeks.' },
+        { num: '03', numColor: '#0A0A0A', rule: 'transparent', tag: 'CLARITY', title: 'Make the complicated thing clear',
+          body: 'I invented a chart type once because the existing ones were not telling the truth. That is the instinct.' }
+      ],
+      projects: [
+        { idx: '001', title: 'inFormed Consent', meta: 'US 11,501,875',
+          body: 'A patented platform that turns informed consent from a signature into something a patient actually understands. Built the technology from nothing.' },
+        { idx: '002', title: 'Youth as Experts', meta: '2018 / KCPL',
+          body: 'Design-thinking workshops where the teenagers were the experts and I was the facilitator, then the prototype their own ideas asked for.' },
+        { idx: '003', title: 'Data + Design', meta: 'Tableau / Fortune 10',
+          body: 'Dashboards and decision tools for people who have to understand something hard and then act on it.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
