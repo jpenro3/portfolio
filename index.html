@@ -105,6 +105,20 @@
   .screen .read-era{font-family:var(--grotesk); font-weight:700; font-size:32px; letter-spacing:-.02em; color:var(--ink); line-height:1}
   .screen .read-years{font-family:var(--mono); font-size:12px; color:var(--bronze); letter-spacing:.08em}
   .screen .read-cap{font-size:14px; color:var(--graphite); line-height:1.45; margin:0; max-width:none; min-height:2.9em}
+  /* the readout must not change height as the dial turns, or the whole console
+     jumps under the cursor. Pinned to the tallest of the three positions. */
+  .console .screen{min-height:252px; justify-content:flex-start; gap:var(--s13)}
+  @media(max-width:900px){.console .screen{min-height:0}}
+  /* the proof shot: the claim on the screen, and the thing that backs it up */
+  .proofshot{display:block; margin-top:var(--s13); border-radius:16px; overflow:hidden;
+    box-shadow:var(--press); background:var(--greige); color:inherit;
+    transition:box-shadow var(--ease) .144s}
+  .proofshot img{display:block; width:100%; height:auto}
+  .proofshot .pmeta{display:flex; align-items:baseline; gap:var(--s8); flex-wrap:wrap; padding:var(--s13) var(--s13) var(--s8)}
+  .proofshot .pk{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--bronze)}
+  .proofshot .pn{font-family:var(--grotesk); font-weight:600; font-size:15px; color:var(--ink); letter-spacing:-.01em}
+  .proofshot .pgo{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite); margin-left:auto}
+  .proofshot:hover .pgo{color:var(--ink)}
   .console .knobrow{display:flex; align-items:center; gap:var(--s21); margin-top:var(--s21)}
   .knob{width:104px; height:104px; border-radius:50%; position:relative; background:var(--greige); box-shadow:var(--raise); cursor:grab; flex:none; border:0; padding:0; touch-action:none}
   .knob:active,.knob.dragging{cursor:grabbing}
@@ -261,30 +275,37 @@
         </div>
       </div>
 
-      <!-- Medium console: the thesis you can turn -->
+      <!-- Practice console: three claims, each with the proof attached -->
       <div class="console" aria-hidden="false">
         <div class="facehead">
-          <span class="mono">Medium</span>
-          <span class="mono" style="color:var(--bronze)">1 : 1.618</span>
+          <span class="mono">What I do</span>
+          <span class="mono" style="color:var(--bronze)" id="readIdx">01 / 03</span>
         </div>
         <div class="screen" role="status" aria-live="polite">
-          <span class="read-era" id="readEra">Atoms</span>
-          <span class="read-years" id="readYears">1995 &rarr; 2002</span>
-          <p class="read-cap" id="readCap">Physical products at Hallmark. Real light, real objects, the shape of a thing in a real hand.</p>
+          <span class="read-era" id="readEra">Figure out what to build first</span>
+          <p class="read-cap" id="readCap">Most projects do not fail on execution. They fail because everything looked equally important on day one. I find the one thing that has to be true, and tell you what to cut.</p>
         </div>
+        <a class="proofshot" id="proofLink" href="/work/youth-as-experts.html">
+          <img id="proofImg" src="/images/thumbs/scope.png" alt="" width="700" height="394" decoding="async">
+          <span class="pmeta">
+            <span class="pk">Proof</span>
+            <span class="pn" id="proofName">Youth as Experts</span>
+            <span class="pgo">Read the case study &rarr;</span>
+          </span>
+        </a>
         <div class="knobrow">
-          <button class="knob" id="knob" role="slider" aria-label="Turn the medium dial" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" aria-valuetext="Atoms" title="Drag to turn, or tap to advance">
+          <button class="knob" id="knob" role="slider" aria-label="Turn to change what I do" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" aria-valuetext="Figure out what to build first" title="Drag to turn, or tap to advance">
             <span class="ticks" id="ticks" aria-hidden="true"></span>
             <span class="grip" aria-hidden="true"></span>
             <span class="ind" id="ind" aria-hidden="true"></span>
           </button>
-          <div class="knoblabels" role="tablist" aria-label="Medium eras">
-            <button class="kl" role="tab" aria-selected="true"  data-era="0"><span class="dot" aria-hidden="true"></span> Atoms</button>
-            <button class="kl" role="tab" aria-selected="false" data-era="1"><span class="dot" aria-hidden="true"></span> Pixels</button>
-            <button class="kl" role="tab" aria-selected="false" data-era="2"><span class="dot" aria-hidden="true"></span> Intelligence</button>
+          <div class="knoblabels" role="tablist" aria-label="What I do">
+            <button class="kl" role="tab" aria-selected="true"  data-era="0"><span class="dot" aria-hidden="true"></span> Scope</button>
+            <button class="kl" role="tab" aria-selected="false" data-era="1"><span class="dot" aria-hidden="true"></span> Build</button>
+            <button class="kl" role="tab" aria-selected="false" data-era="2"><span class="dot" aria-hidden="true"></span> Clarify</button>
           </div>
         </div>
-        <div class="hint">Turn the dial &middot; the human stays put</div>
+        <div class="hint">Turn the dial &middot; every claim has a receipt</div>
       </div>
     </div>
   </section>
@@ -524,9 +545,18 @@
   // ---- Medium dial: the thesis you can turn ----
   (function(){
     var eras = [
-      { name:'Atoms',        years:'1995 → 2002',   cap:'Physical products at Hallmark. Real light, real objects, the shape of a thing in a real hand.' },
-      { name:'Pixels',       years:'2000 → 2019',   cap:'A dot-com startup, hand-coded before the tools existed, then innovation, patents, and data at Playfair.' },
-      { name:'Intelligence', years:'2020 → now',    cap:'Agents and AI avatars a patient will actually sit through. New tools. The same human on the other end.' }
+      { name:'Figure out what to build first',
+        cap:'Most projects do not fail on execution. They fail because everything looked equally important on day one. I find the one thing that has to be true, and tell you what to cut.',
+        proof:'Youth as Experts', href:'/work/youth-as-experts.html', img:'/images/thumbs/scope.png',
+        alt:'Teenagers\u2019 prototype from a design-thinking workshop, built in paper and clay.' },
+      { name:'Build it',
+        cap:'Not a deck about the thing. The thing. Working software, in front of real users, in weeks. Twenty years of product judgment plus AI-augmented build speed.',
+        proof:'The consent session', href:'/work/informed-consent-session.html', img:'/images/thumbs/build.png',
+        alt:'A patient consent session mid-playback, the patient\u2019s own camera feed running beside the clinical video.' },
+      { name:'Make the complicated thing clear',
+        cap:'Data products, decision tools, anything where someone has to understand something hard and then act on it. I invented a chart type once because the existing ones were not telling the truth.',
+        proof:'Data + Design', href:'/work/data-and-design.html', img:'/images/thumbs/clarify.png',
+        alt:'A collection of dashboards grouped by the decision each one supports.' }
     ];
     var ticks = document.getElementById('ticks');
     if(ticks){
@@ -542,8 +572,11 @@
     }
     var ind    = document.getElementById('ind');
     var readE  = document.getElementById('readEra');
-    var readY  = document.getElementById('readYears');
+    var readI  = document.getElementById('readIdx');
     var readC  = document.getElementById('readCap');
+    var pLink  = document.getElementById('proofLink');
+    var pImg   = document.getElementById('proofImg');
+    var pName  = document.getElementById('proofName');
     var knob   = document.getElementById('knob');
     var labels = Array.prototype.slice.call(document.querySelectorAll('.kl'));
     var stops  = [-150, 0, 150];  // three detents across the 300deg sweep
@@ -552,8 +585,11 @@
     function paint(i){
       cur = (i + eras.length) % eras.length;
       if(readE) readE.textContent = eras[cur].name;
-      if(readY) readY.textContent = eras[cur].years;
+      if(readI) readI.textContent = '0' + (cur+1) + ' / 03';
       if(readC) readC.textContent = eras[cur].cap;
+      if(pLink) pLink.setAttribute('href', eras[cur].href);
+      if(pName) pName.textContent = eras[cur].proof;
+      if(pImg){ pImg.setAttribute('src', eras[cur].img); pImg.setAttribute('alt', eras[cur].alt); }
       labels.forEach(function(l,idx){ l.setAttribute('aria-selected', idx===cur ? 'true':'false'); });
       if(knob){ knob.setAttribute('aria-valuenow', cur); knob.setAttribute('aria-valuetext', eras[cur].name); }
     }
