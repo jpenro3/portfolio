@@ -107,7 +107,7 @@
   .screen .read-cap{font-size:14px; color:var(--graphite); line-height:1.45; margin:0; max-width:none; min-height:2.9em}
   /* the readout must not change height as the dial turns, or the whole console
      jumps under the cursor. Pinned to the tallest of the three positions. */
-  .console .screen{min-height:252px; justify-content:flex-start; gap:var(--s13)}
+  .console .screen{min-height:256px; justify-content:flex-start; gap:var(--s13)}
   @media(max-width:900px){.console .screen{min-height:0}}
   /* the proof shot: the claim on the screen, and the thing that backs it up */
   .proofshot{position:relative; margin-top:var(--s13); border-radius:16px; overflow:hidden;
@@ -117,9 +117,12 @@
   .proofshot .pmeta{display:flex; align-items:baseline; gap:var(--s8); flex-wrap:wrap; padding:var(--s13) var(--s13) 0}
   .proofshot .pk{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--bronze)}
   .proofshot .pn{font-family:var(--grotesk); font-weight:600; font-size:15px; color:var(--ink); letter-spacing:-.01em}
-  /* pinned to three lines so sliding through proofs does not resize the card */
-  .proofshot .pwhy{display:block; font-size:13px; line-height:1.4; color:var(--graphite); padding:var(--s5) var(--s13) 0; min-height:4.2em}
-  @media(max-width:900px){.proofshot .pwhy{min-height:0}}
+  /* hard-pinned to three lines: the card must not resize as you slide through it */
+  .proofshot .pwhy{display:block; font-size:13px; line-height:1.4; color:var(--graphite);
+    padding:var(--s5) var(--s13) 0; height:4.2em; overflow:hidden}
+  /* the title is one line, ellipsised, for the same reason */
+  .proofshot .pn{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%}
+  @media(max-width:900px){.proofshot .pwhy{height:auto; min-height:4.2em}}
   .proofshot .pgo{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite); padding:var(--s8) var(--s13) var(--s13)}
   .proofshot:hover .pgo{color:var(--ink)}
   /* slide control, sitting on the artwork so it never pushes the copy around */
@@ -301,7 +304,7 @@
               <span class="pk">Proof</span>
               <span class="pn" id="proofName">The consent that never recorded</span>
             </span>
-            <span class="pwhy" id="proofWhy">Two weeks of planned build, cut because the telemetry said the cheap fix was enough.</span>
+            <span class="pwhy" id="proofWhy">Two weeks of planned build, cut because the data said the cheap fix was enough.</span>
             <span class="pgo">Read the case study &rarr;</span>
           </a>
           <div class="pnav">
@@ -544,30 +547,30 @@
             why:'Two weeks of planned build, cut because the telemetry said the cheap fix was enough.',
             alt:'A diagnostics board listing stuck consent sessions, each with the reason it failed.' },
           { n:'Youth as Experts', href:'/work/youth-as-experts.html', img:'/images/thumbs/youth.png',
-            why:'A room of teenagers decided what the product should be. I facilitated, then built what they asked for.',
+            why:'The teenagers decided what to build. I facilitated, then built what they asked for.',
             alt:'A prototype built in paper and clay during a design-thinking workshop.' }
         ] },
       { name:'Build it',
         cap:'Not a deck about the thing. The thing. Working software, in front of real users, in weeks. Twenty years of product judgment plus AI-augmented build speed.',
         proofs:[
           { n:'The consent session', href:'/work/informed-consent-session.html', img:'/images/thumbs/session.png',
-            why:'Records the patient, tracks attention, enforces no-skip, and says so before it does. Live in clinics.',
+            why:'Records, tracks attention, enforces no-skip, and says so first. Live in clinics.',
             alt:'A patient consent session mid-playback, the patient\u2019s camera feed running beside the clinical video.' },
           { n:'Step Up Your Game', href:'/work/step-up-your-game.html', img:'/images/thumbs/stepup.png',
-            why:'Wireframes to a working product flow for a sports-medicine platform for young athletes.',
+            why:'Wireframes to a working product flow for a sports-medicine platform.',
             alt:'Major screens from a sports-medicine platform for young athletes.' },
           { n:'Tarot CoPilot', href:'/work/tarot-copilot.html', img:'/images/thumbs/tarot.png',
-            why:'Built for nobody but me, which is how you can tell I keep my hands in the current medium.',
+            why:'Built for nobody but me, which is how you can tell I keep my hands in it.',
             alt:'The Tarot CoPilot custom GPT landing screen.' }
         ] },
       { name:'Make the complicated thing clear',
         cap:'Data products, decision tools, anything where someone has to understand something hard and then act on it. I invented a chart type once because the existing ones were not telling the truth.',
         proofs:[
           { n:'What a doctor has to disclose', href:'/work/informed-consent-research.html', img:'/images/thumbs/research.png',
-            why:'A legal standard nobody can state precisely, made legible enough for a clinician to sign in eight minutes.',
+            why:'A legal standard nobody can state precisely, made signable in eight minutes.',
             alt:'The research cockpit: a readiness gauge, a review pipeline, and two flagged findings.' },
           { n:'Data + Design', href:'/work/data-and-design.html', img:'/images/thumbs/data.png',
-            why:'Dashboards leaders actually use, and a chart type invented because the existing ones were not telling the truth.',
+            why:'Dashboards leaders actually use, and a chart type invented because the others lied.',
             alt:'A collection of dashboards grouped by the decision each one supports.' }
         ] }
     ];    var ticks = document.getElementById('ticks');
