@@ -219,7 +219,7 @@
   .act p{font-size:16px; margin:0}
 
   /* ---- The rest of it ---- */
-  .beats{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s34)}
+  .beats{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--s55) var(--s55)}
   @media(max-width:860px){.beats{grid-template-columns:1fr}}
   .beat{display:flex; flex-direction:column; gap:var(--s13)}
   .beat .cap{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--bronze); display:flex; align-items:center; gap:var(--s8)}
@@ -254,7 +254,6 @@
     <span class="brand">Jason Penrod</span>
     <nav class="nav" aria-label="Primary">
       <a href="#work" class="hide-sm">Work</a>
-      <a href="#arc" class="hide-sm">Arc</a>
       <a class="pill" href="#contact"><span class="led live" aria-hidden="true"></span> Available</a>
     </nav>
   </div>
@@ -267,8 +266,8 @@
     <div class="hero-grid">
       <div>
         <p class="eyebrow">Product designer &amp; builder</p>
-        <h1 id="hero-h" class="display">The medium keeps changing.<br><span class="soft">The human does not.</span></h1>
-        <p class="lede">I have spent my whole career designing for the person on the other end while the medium reinvented itself under me. Paper and plastic. Then pixels. Now whatever we are calling intelligence this year. Today I help founders figure out what to build first, and then I build it.</p>
+        <h1 id="hero-h" class="display">I find the one thing worth building.<br><span class="soft">Then I build it.</span></h1>
+        <p class="lede">Most people hiring for this are picking between a strategist who cannot build and a builder with no taste. I am both. Twenty years of product judgment, and working software in front of real users in weeks.</p>
         <div class="hero-cta">
           <a class="btn primary" href="#contact"><span class="dotled" aria-hidden="true"></span> Tell me what you are building</a>
           <a class="btn ghost" href="#work">See the work &rarr;</a>
@@ -466,36 +465,6 @@
     </div>
   </section>
 
-  <!-- THE ARC -->
-  <section id="arc" aria-labelledby="arc-h">
-    <div class="headblock reveal">
-      <p class="eyebrow">The arc</p>
-      <h2 id="arc-h">Same job. Three materials.</h2>
-      <p>The medium did not change on a clean date. It changed under me while I was mid-project. That overlap is the interesting part.</p>
-    </div>
-    <div class="arc">
-      <div class="spine" aria-hidden="true"></div>
-      <div class="act a1 reveal">
-        <span class="node" aria-hidden="true"><i></i></span>
-        <span class="years">Atoms &middot; from 1995</span>
-        <h3>Photography and physical product</h3>
-        <p>I started at Hallmark in the photo studio, a designer who shot the photographs and built them into greeting cards. Physical products, real light, the shape of a thing in a real hand. Later I led product and design across the physical lines, standing on factory floors watching a drawing turn into an object.</p>
-      </div>
-      <div class="act a2 reveal">
-        <span class="node" aria-hidden="true"><i></i></span>
-        <span class="years">Pixels &middot; around 2000</span>
-        <h3>The medium changed under me</h3>
-        <p>Around 2000, at a dot-com startup called eScout, I taught myself to hand-code the web before the tools existed and learned to ssh into production. They offered me a developer's chair. I turned it down to stay the designer who builds. Back at Hallmark I moved into innovation, treating anything digital as a new material, and the patents followed. A couple of my interns dreamed up an iPhone app and we built it, a beta, a proof of concept, and pitched it to Apple in Cupertino. Then came Playfair, where the work bent hard toward data. Same job, different material.</p>
-      </div>
-      <div class="act a3 reveal">
-        <span class="node" aria-hidden="true"><i></i></span>
-        <span class="years">Intelligence &middot; 2020 to now</span>
-        <h3>Building with agents</h3>
-        <p>Now I build with agents. Multi-agent systems, custom models, AI avatars a patient will actually sit through. The tools are unrecognizable next to a photo studio. The person on the other end is not. Same fear, same hope, same small brave decision.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- THE REST OF IT -->
   <section id="rest" aria-labelledby="rest-h">
     <div class="headblock reveal">
@@ -514,6 +483,11 @@
         <p>3D printers and scanners, a laser cutter, a CNC mill, Arduino, soldering, vacuum forming, sculpting, sewing. Solidworks and Rhino. I am suspicious of anyone who designs objects and has never ruined one.</p>
       </div>
       <div class="beat reveal">
+        <span class="cap"><span class="led" style="background:var(--led-green); box-shadow:0 0 8px var(--led-green)" aria-hidden="true"></span> The fork</span>
+        <h3>I turned down the developer&rsquo;s chair</h3>
+        <p>Around 2000, at a dot-com called eScout, I taught myself to hand-code the web before the tools existed and learned to ssh into production. They offered me a job as a developer. I said no. I did not want to stop being the person who decides what gets built. Twenty-five years later that is still the whole job description.</p>
+      </div>
+      <div class="beat reveal">
         <span class="cap"><span class="led" style="background:var(--led-magenta); box-shadow:0 0 8px var(--led-magenta)" aria-hidden="true"></span> The turn</span>
         <h3>I started over</h3>
         <p>Four years ago I walked away from most of it. A marriage of twenty-five years. A career. A whole identity. I became a startup CTO on the other side of it. It cost me things I am not getting back, and I would still do it. I do not say that to be inspiring. I say it because most of the people I work with are sitting on something they are scared to start.</p>
@@ -527,7 +501,7 @@
       <span class="pill"><span class="led live" aria-hidden="true"></span> Taking on work</span>
       <h2 id="ask-h">Tell me what you are building</h2>
       <p>I read every one of these. If it is a fit I will tell you what I would build first, before you have paid me anything. If it is not, I will tell you that too.</p>
-      <a class="btn primary" href="mailto:hello@example.com?subject=What%20I%27m%20building"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
+      <a class="btn primary" href="mailto:jasonbpenrod@gmail.com?subject=What%20I%27m%20building"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
     </div>
   </section>
 
