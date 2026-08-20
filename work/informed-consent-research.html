@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Data + Design</title>
-<meta name="description" content="A data-storytelling case study: dashboards leaders actually use, the invented Leapfrog Chart, and the Coral Resilience Data Platform.">
+<title>Governed Consent Research</title>
+<meta name="description" content="Designing the system that decides what a patient must be told: an AI research pipeline, a core-and-tail disclosure model, and the clinician sign-off that makes it policy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -76,9 +76,7 @@
   /* framed image slot (placeholder until real assets are pulled) */
   .frame{border-radius:20px; box-shadow:var(--raise); background:var(--greige); padding:var(--s13)}
   .frame .inner{border-radius:12px; box-shadow:var(--press); background:linear-gradient(150deg, rgba(255,255,255,.30), rgba(201,196,184,.22)); position:relative; overflow:hidden; display:grid; place-items:center; min-height:200px}
-  .frame .inner .ph{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); text-align:center; padding:var(--s21); opacity:.75;
-    /* the placeholder label must never set the page's minimum width */
-    max-width:100%; overflow-wrap:anywhere}
+  .frame .inner .ph{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); text-align:center; padding:var(--s21); opacity:.75}
   .frame .cap{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--bronze); padding:var(--s13) var(--s8) var(--s5)}
   .frame.wide .inner{aspect-ratio:16/9}
   .frame.phone .inner{aspect-ratio:9/17}
@@ -178,11 +176,6 @@
 
   /* app screens */
   .screens{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s21); margin-top:var(--s21)}
-  /* fixed column counts live in a class: an inline style would out-rank the
-     media queries below and the grid would never collapse on a phone. */
-  .screens.three{grid-template-columns:repeat(3,1fr)}
-  @media(max-width:860px){.screens.three{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.screens.three{grid-template-columns:1fr}}
   @media(max-width:860px){.screens{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:520px){.screens{grid-template-columns:1fr 1fr}}
 
@@ -205,11 +198,6 @@
   /* products */
   .product{display:grid; grid-template-columns:1fr 1.1fr; gap:var(--s34); align-items:center; margin-top:var(--s34)}
   @media(max-width:860px){.product{grid-template-columns:1fr}}
-  /* a grid item's auto minimum is its min-content, which on a phone made this
-     column wider than the page. min-width:0 lets the text wrap instead. */
-  .product > *{min-width:0}
-  /* one-child product block: no figure to sit beside, so do not reserve a column */
-  .product.solo{grid-template-columns:1fr}
   .product-copy .tag{display:inline-block; margin-bottom:var(--s13)}
   .product-copy h3{font-size:var(--t-h3); font-weight:600; margin-bottom:var(--s13)}
   .product-copy p{max-width:52ch}
@@ -223,6 +211,17 @@
   .reveal{opacity:0; transform:translateY(16px); transition:opacity .55s var(--ease), transform .55s var(--ease)}
   .reveal.in{opacity:1; transform:none}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}.led.live{animation:none}}
+
+  /* page-specific: tall product screens get a height cap so a 2700px frame
+     does not eat the page. width:auto keeps the aspect honest. */
+  .screens.two{grid-template-columns:1fr 1fr; align-items:start}
+  @media(max-width:860px){.screens.two{grid-template-columns:1fr}}
+  /* a fixed-column rail must still collapse; an inline style would beat the
+     base .rail media query, so the count lives in a class instead. */
+  .rail.four{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.rail.four{grid-template-columns:1fr 1fr; grid-auto-flow:row;
+    overflow:visible; padding:0; margin-inline:0}}
+  @media(max-width:520px){.rail.four{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/style.css">
 </head>
@@ -239,102 +238,144 @@
   <section class="chero" aria-labelledby="h">
     <div class="kicker">
       <span class="tag">Case study</span>
-      <span class="tag">Data storytelling</span>
-      <span class="tag">Information design</span>
+      <span class="tag">AI system design</span>
+      <span class="tag">Healthcare</span>
     </div>
-    <h1 id="h">Data + Design</h1>
-    <p class="sub">Turning complex datasets into something a person can act on. Two decades of making data legible: dashboards leaders actually use, and a chart type invented because the existing ones were not telling the truth.</p>
+    <h1 id="h">Teaching a system what a doctor has to disclose</h1>
+    <p class="sub">A research agent reads the medical literature for a procedure. A clinician has to sign off on what a patient will actually hear. This is the thing in between. The hard part was never retrieval. It was deciding what a risk list even is.</p>
     <div class="metarow">
-      <div class="m"><div class="k">My role</div><div class="v">Information design &amp; UX lead</div></div>
-      <div class="m"><div class="k">Where</div><div class="v">Playfair Data + independent</div></div>
-      <div class="m"><div class="k">Span</div><div class="v">2020 to 2024</div></div>
-      <div class="m"><div class="k">Tools</div><div class="v">Tableau, Figma, React, Python</div></div>
+      <div class="m"><div class="k">My role</div><div class="v">Co-founder &amp; CTO</div></div>
+      <div class="m"><div class="k">Scope</div><div class="v">Model, interface, review workflow</div></div>
+      <div class="m"><div class="k">Year</div><div class="v">2026</div></div>
+      <div class="m"><div class="k">Context</div><div class="v">inFormed Consent</div></div>
     </div>
     <figure class="frame wide hero-figure reveal">
-      <div class="inner shot"><img src="../images/data-and-design/hero-dashboard-collection.png" alt="A collection of dashboards grouped by type: marketing analytics, media and content effectiveness, customer and sales analysis, and a financial overview." loading="lazy" decoding="async"></div>
-      <figcaption class="cap">Figure 01 &middot; selected dashboards</figcaption>
+      <div class="inner shot"><img src="../images/informed-consent-research/cockpit-hero.png" alt="The research cockpit for a procedure: a readiness gauge scoring 62 with gates for research, risks and blockers, a four-step pipeline from gather to approve, an evidence review holding one blocking and one advisory finding, and the linked sources." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 01 &middot; One procedure, what is known about it, and what is blocking sign-off</figcaption>
     </figure>
   </section>
 
   <section aria-labelledby="p1">
     <div class="headblock reveal">
-      <p class="eyebrow">The through-line</p>
-      <h2 id="p1">Clarity is the whole job</h2>
+      <p class="eyebrow">The problem</p>
+      <h2 id="p1">The operator had become a janitor for a bad search</h2>
     </div>
     <div class="body-col reveal" style="margin-top:var(--s21)">
-      <p>My design philosophy is clarity and function: users should navigate and interact with data without effort. I turn complex datasets into actionable insight, using charts, graphs, and custom dashboards to make a trend obvious in a glance. The work is not prettier dashboards. It is clearer, more usable, more scalable ones.</p>
+      <p>The flow was source-first. Search the literature for the procedure name, admit whatever came back, extract the risks and alternatives out of those sources, hand the pile to a person to clean up. The risk list was a byproduct of the search.</p>
+      <p>We audited the linked sources. Forty-four percent were off target. Not wrong exactly. Just about a different anatomy, a different approach, a different question entirely. A broad query for a spine injection comes back with telerehab reviews and nanocellulose scaffolds, because term-mapping relaxes a phrase into keyword soup and does it silently.</p>
+      <p>Then the trap. The operator removes an off-target source. The risks that were resting on it lose their grounding and start demanding a citation. Re-sourcing runs the same broad search and pulls back more of the same. Every cleanup made the next cleanup worse.</p>
+      <p>Everything we had built downstream of that, the adversarial review, the exclusion lists, the materiality prune, was apparatus compensating for one bad first step. I could have polished it forever. No amount of polish fixes a coupling.</p>
+    </div>
+    <div class="rail four reveal">
+      <div class="step"><span class="i">01</span><span class="name">Search broad</span><p class="d">The procedure name, plus risks or complications. Whatever the index ranks.</p></div>
+      <div class="step"><span class="i">02</span><span class="name">Admit everything</span><p class="d">No topicality check. Forty-four percent of it about something else.</p></div>
+      <div class="step"><span class="i">03</span><span class="name">Extract</span><p class="d">Pull the risk list out of the pile. The noise comes with it.</p></div>
+      <div class="step"><span class="i">04</span><span class="name">Curate forever</span><p class="d">Remove a source, orphan a risk, re-search, get more noise. The loop.</p></div>
     </div>
   </section>
 
   <section aria-labelledby="p2">
-    <div class="product solo reveal">
-      <div class="product-copy">
-        <span class="tag">Invented form</span>
-        <h3>The Leapfrog Chart</h3>
-        <p>A Fortune 10 automotive client needed dealerships to compete with each other. No existing chart type showed movement the way the story needed, so we made one. It became the company's strategic differentiator, and it is the clearest proof of the instinct: when the existing form lies, build a truer one.</p>
-        <ul class="feats">
-          <li>200+ interactive dashboards</li>
-          <li>First full-time hire at Playfair Data</li>
-          <li>Grew from 3 to about 20 people</li>
-          <li>2023 Inc. 5000</li>
-        </ul>
-      </div>
+    <div class="headblock reveal">
+      <p class="eyebrow">The reframe</p>
+      <h2 id="p2">The risk set is not knowable. The middle of it always was.</h2>
     </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Ask a surgeon for the definitive risk list for a procedure and they will tell you, correctly, that no such thing exists. The standard is what a reasonable provider discloses to a reasonable patient. It is fuzzy by design, and a system that pretends otherwise gets laughed out of the room.</p>
+      <p>That is true of the set as a whole. It is not true of the middle of it. No cardiac surgeon leaves death, stroke, heart attack, bleeding, infection, kidney injury, or arrhythmia off a bypass consent. Omitting one of those is not a judgment call. It is indefensible.</p>
+      <p>Disagreement lives at the edges. So we stopped trying to make the fuzzy sharp and started separating the part that was never fuzzy from the part that is.</p>
+      <p>Two tiers. <b>Core</b> is standard of care, curated once per procedure category, defensible without a fresh literature search. <b>Tail</b> is the variant-specific, patient-specific, less common material, which is where the research engine and the human editor actually earn their keep.</p>
+      <p>Then invert the flow. The disclosure set becomes the primary artifact and sources attach to it, rather than producing it. Retrieval answers a specific claim, operative mortality in bypass surgery, instead of a broad topic. A source that answers no required disclosure is never admitted. Removing a source now changes a claim's grounding and never its membership, which is the single change that ends the loop.</p>
+    </div>
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/informed-consent-research/cardiac-procedure-table.png" alt="A table of every cardiac procedure showing which module governs it, its split of core and tail disclosures, its grounding state, and whether it has been signed." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 02 &middot; Every cardiac procedure, what governs it, and how much of it is signed</figcaption>
+    </figure>
   </section>
 
   <section aria-labelledby="p3">
     <div class="headblock reveal">
-      <p class="eyebrow">Range</p>
-      <h2 id="p3">One system, many analytical needs</h2>
-      <p>A collection of dashboards across very different problems, each a distinct approach to the same goal: clear, intuitive, actionable presentation for people who have to decide something.</p>
+      <p class="eyebrow">The second wall</p>
+      <h2 id="p3">Not everything is a research problem</h2>
     </div>
-    <div class="screens three">
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/marketing-analytics.png" alt="Complex dashboards built in Figma and Tableau: a web analytics dashboard, a brand-fan lifetime value flow, a soybean-volume Sankey, and a mobile business health index." loading="lazy" decoding="async"></div><figcaption class="cap">Campaign reach &amp; engagement</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/financial-overview.png" alt="A business finance overview dashboard." loading="lazy" decoding="async"></div><figcaption class="cap">Business health at a glance</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/customer-and-sales.png" alt="A guided-interface dashboard that walks the viewer through the analysis." loading="lazy" decoding="async"></div><figcaption class="cap">Where the revenue moves</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/automotive-manufacturing.png" alt="A manufacturing cost dashboard for automotive plants." loading="lazy" decoding="async"></div><figcaption class="cap">Plant &amp; cost views</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/automotive-executive.png" alt="An automotive executive dashboard: the one-screen briefing." loading="lazy" decoding="async"></div><figcaption class="cap">The one-screen briefing</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/scenario-planning.png" alt="An automotive sales scenario-planning dashboard for testing what-ifs." loading="lazy" decoding="async"></div><figcaption class="cap">Sales what-ifs</figcaption></figure>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Once coverage was scored across the eight consent categories, three of them sat at or near zero for almost every procedure. Overview. Preparation. Recovery.</p>
+      <p>The scorer was right, and the fix was not more searching. Those three are not research findings. What the procedure is and why you would have it. When to stop your blood thinner. How long before you can pick up your kid. That knowledge lives in society guidelines, device instructions, institutional protocol, and the clinician's own head. Holding it to a peer-reviewed bar guarantees it never clears, and the interface was politely offering a button that could only dead-end.</p>
+      <p>So categories are typed by which standard they answer to. <b>Research-grade</b> for risks, benefits, alternatives, and outcomes, where being wrong is a safety and legal problem. <b>Reference-grade</b> for overview, steps, preparation, and recovery, where the bar is authoritative and appropriate to the institution rather than cited to a trial.</p>
+      <p>The two axes stay separate, and that separation is load bearing. Evidence standard picks which source counts. Severity picks how hard we gate. Preparation is reference-grade and high stakes at the same time, because a wrong anticoagulant hold can kill someone. Collapsing those into one dial would have made the model lie in the exact place it can least afford to.</p>
     </div>
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/informed-consent-research/coverage-by-category.png" alt="Coverage scored per consent category, with reference-grade categories badged so they are judged on approved content rather than on linked literature." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 03 &middot; A category that literature cannot answer is marked, not nagged</figcaption>
+    </figure>
   </section>
 
   <section aria-labelledby="p4">
-    <div class="product reverse reveal">
-      <div class="product-copy">
-        <span class="tag">Data for good</span>
-        <h3>Coral Resilience Data Platform</h3>
-        <p>A platform to collect, analyze, and visualize coral reef health and resilience. A global interactive map of community-shared coral datasets, with environmental and biological analysis, phylogenetic trees, and heat maps that help researchers, conservationists, and policymakers decide where to act.</p>
-        <ul class="feats">
-          <li>Global interactive coral map</li>
-          <li>Environmental &amp; biological analysis</li>
-          <li>Community-shared datasets</li>
-          <li>Built with AWS Amplify, React, Python</li>
-        </ul>
-      </div>
-      <figure class="frame wide reveal">
-        <div class="inner shot"><img src="../images/data-and-design/coral-resilience.png" alt="The Coral Resilience Data Platform: user research, the community coral dataset dashboard, and the main data-analysis dashboard." loading="lazy" decoding="async"></div>
-        <figcaption class="cap">Figure &middot; Coral Resilience dashboard</figcaption>
-      </figure>
+    <div class="headblock reveal">
+      <p class="eyebrow">Governance</p>
+      <h2 id="p4">The model proposes. A clinician makes it policy.</h2>
     </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Nothing here is allowed to be true because the system says so. The materiality model generates candidates, severity dominating frequency, so a catastrophic outcome stays in regardless of how rare it is. A qualified human turns a candidate into policy. That is the whole authority structure, and the interface has to make it visible rather than imply it.</p>
+      <p>So review is a queue, not a feature. Draft profiles sorted by how many procedures they touch, so the highest-leverage one is the one you see first. A reviewer claims it, walks each disclosure, approves or edits or rejects, and signs.</p>
+      <p>One signature governs every procedure in that category. Which is why the sign-off screen tells you that up front: you are reviewing seven procedures at once instead of one at a time, and it should take about eight minutes. It also says the quiet part. Nothing here is patient information. If something looks wrong and you are not sure how to fix it, reject it and leave a note. A person reads every one.</p>
+    </div>
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/informed-consent-research/review-pipeline.png" alt="The review pipeline: draft candidates awaiting review sorted by impact, profiles claimed and in review by named clinicians, and one signed profile governing live consent." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 04 &middot; Fourteen modules, thirteen awaiting a signature</figcaption>
+    </figure>
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/informed-consent-research/signoff-review.png" alt="The clinician sign-off workflow: the ask stated plainly at the top, the disclosures already covered by the parent profile shown for context, then each disclosure with its severity and frequency and approve, edit or reject controls." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 05 &middot; Seven procedures at once, about eight minutes</figcaption>
+    </figure>
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/informed-consent-research/signoff-attestation.png" alt="The attestation block: name, credential, and a checkbox attesting that these are the required standard-of-care disclosures for the category and that the severity and frequency shown are appropriate for patient consent." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 06 &middot; The signature binds this exact version</figcaption>
+    </figure>
   </section>
 
   <section aria-labelledby="p5">
     <div class="headblock reveal">
-      <p class="eyebrow">How I work</p>
-      <h2 id="p5">Design systems, real research, shipped</h2>
+      <p class="eyebrow">The mental model</p>
+      <h2 id="p5">Strata, not a tree</h2>
     </div>
-    <div class="beats">
-      <div class="beat reveal"><span class="cap"><span class="led" style="background:var(--led-cyan);box-shadow:0 0 8px var(--led-cyan)"></span> Systems</span><h3>Consistency by design</h3><p>Comprehensive design systems so usability and consistency hold across every screen and every product.</p></div>
-      <div class="beat reveal"><span class="cap"><span class="led" style="background:var(--led-amber);box-shadow:0 0 8px var(--led-amber)"></span> Research</span><h3>User-centered, tested</h3><p>Extensive research and testing so the final product meets and exceeds what the user actually needs.</p></div>
-      <div class="beat reveal"><span class="cap"><span class="led" style="background:var(--led-green);box-shadow:0 0 8px var(--led-green)"></span> Delivery</span><h3>Multidisciplinary teams</h3><p>Working with developers, data scientists, and stakeholders to ship, from concept through refinement.</p></div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>The last thing to get right was the picture in the reviewer's head.</p>
+      <p>A procedure does not inherit from one module. It inherits from several at once, layered broad to specific, and a tree or a breadcrumb trail would lie about that shape. So read a procedure as a core sample. A vertical cut that picks up every band it passes through, merged into one spine.</p>
+      <p>Six disclosures from one band plus five from another came to eleven on this one, and that will not always hold. When two bands name the same risk the merge absorbs one into the other. Any version of this diagram that implies addition would contradict the disclosure budget, which is the count of things a patient actually has to sit and listen to.</p>
+      <p>The edge into the category band turned out to be the load-bearing one. Keyword inference read this procedure as a percutaneous injection only. It reaches the neuraxial band because a human assigned that tag, and that human is the reason five of the eleven disclosures exist, including the epidural hematoma and the cord injury. So the diagram draws that edge dotted when it is inferred and solid when it is assigned. The difference is not cosmetic.</p>
+    </div>
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/informed-consent-research/strata-model.png" alt="A diagram of the binding model: scopes ordered broad to specific as horizontal bands, with one procedure drawn as a vertical core sample cutting through two of them and merging into a single spine of eleven disclosures." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 07 &middot; Read a procedure as a core sample</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="p6">
+    <div class="headblock reveal">
+      <p class="eyebrow">The interface</p>
+      <h2 id="p6">Make the honesty structural, not a disclaimer</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Every careful thing in the model had to survive contact with a screen, and a disclaimer at the bottom of a page is not survival. The components carry it instead.</p>
+      <p>Core and tail render as separate tiers with different words on them, standard of care against evidence-based, so a clinician sees at a glance what is policy and what is judgment.</p>
+      <p>Grounding is its own attribute rather than a verdict on membership. A core risk with no citation reads as standard of care and never quietly drops out. A tail risk with no citation and no cornerstone behind it reads as needs a source, because it might be a hallucination and it deserves eyes.</p>
+      <p>The profile badge says draft, unsigned, until a person signs it. The category binding says inferred until a person assigns it. And the disclosure count sits next to a target, because the failure mode nobody warns you about is a consent so thorough that no patient finishes it.</p>
+    </div>
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/informed-consent-research/cockpit-primitives.png" alt="The primitive layer of the cockpit design system: surface and accent tokens, status pills, role badges, coverage bars, buttons, source rows and the discovery panel, each drawn in every state it has to hold." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 08 &middot; Every state a piece has to tell the truth in</figcaption>
+    </figure>
+    <div class="pullquote reveal">
+      <p>We did not make the fuzzy sharp. We found the center that was never fuzzy and separated it from the edges that are.</p>
+      <div class="who">The claim that survives a skeptical clinician</div>
     </div>
   </section>
 
   <section>
     <div class="cta reveal">
       <span class="pill"><span class="led live" aria-hidden="true"></span> Taking on work</span>
-      <h2>Have a dataset nobody can read?</h2>
-      <p style="max-width:52ch">That is the work. Tell me what decision the data needs to support, and I will show you what to build.</p>
+      <h2>Got a hard system that has to earn an expert's trust?</h2>
+      <p style="max-width:52ch">Models are the easy part. The design problem is what the machine is allowed to decide and what a person has to sign. Tell me what you are building.</p>
       <a class="btn primary" href="/#contact"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
     </div>
   </section>
@@ -343,7 +384,7 @@
 <footer class="wrap">
   <div class="row">
     <span><a href="/">&larr; Back to Jason Penrod</a></span>
-    <span>Data + Design &middot; case study</span>
+    <span>Governed consent research &middot; case study</span>
   </div>
 </footer>
 <script>

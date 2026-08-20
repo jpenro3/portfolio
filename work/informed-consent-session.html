@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Data + Design</title>
-<meta name="description" content="A data-storytelling case study: dashboards leaders actually use, the invented Leapfrog Chart, and the Coral Resilience Data Platform.">
+<title>The Consent Session</title>
+<meta name="description" content="Designing a patient consent session that records you, tracks your attention, and will not let you skip, without ever feeling like surveillance.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -76,9 +76,7 @@
   /* framed image slot (placeholder until real assets are pulled) */
   .frame{border-radius:20px; box-shadow:var(--raise); background:var(--greige); padding:var(--s13)}
   .frame .inner{border-radius:12px; box-shadow:var(--press); background:linear-gradient(150deg, rgba(255,255,255,.30), rgba(201,196,184,.22)); position:relative; overflow:hidden; display:grid; place-items:center; min-height:200px}
-  .frame .inner .ph{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); text-align:center; padding:var(--s21); opacity:.75;
-    /* the placeholder label must never set the page's minimum width */
-    max-width:100%; overflow-wrap:anywhere}
+  .frame .inner .ph{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); text-align:center; padding:var(--s21); opacity:.75}
   .frame .cap{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--bronze); padding:var(--s13) var(--s8) var(--s5)}
   .frame.wide .inner{aspect-ratio:16/9}
   .frame.phone .inner{aspect-ratio:9/17}
@@ -178,11 +176,6 @@
 
   /* app screens */
   .screens{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s21); margin-top:var(--s21)}
-  /* fixed column counts live in a class: an inline style would out-rank the
-     media queries below and the grid would never collapse on a phone. */
-  .screens.three{grid-template-columns:repeat(3,1fr)}
-  @media(max-width:860px){.screens.three{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.screens.three{grid-template-columns:1fr}}
   @media(max-width:860px){.screens{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:520px){.screens{grid-template-columns:1fr 1fr}}
 
@@ -205,11 +198,6 @@
   /* products */
   .product{display:grid; grid-template-columns:1fr 1.1fr; gap:var(--s34); align-items:center; margin-top:var(--s34)}
   @media(max-width:860px){.product{grid-template-columns:1fr}}
-  /* a grid item's auto minimum is its min-content, which on a phone made this
-     column wider than the page. min-width:0 lets the text wrap instead. */
-  .product > *{min-width:0}
-  /* one-child product block: no figure to sit beside, so do not reserve a column */
-  .product.solo{grid-template-columns:1fr}
   .product-copy .tag{display:inline-block; margin-bottom:var(--s13)}
   .product-copy h3{font-size:var(--t-h3); font-weight:600; margin-bottom:var(--s13)}
   .product-copy p{max-width:52ch}
@@ -223,6 +211,12 @@
   .reveal{opacity:0; transform:translateY(16px); transition:opacity .55s var(--ease), transform .55s var(--ease)}
   .reveal.in{opacity:1; transform:none}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}.led.live{animation:none}}
+
+  /* page-specific: paired and quad screen grids */
+  .screens.two{grid-template-columns:1fr 1fr; align-items:start}
+  @media(max-width:860px){.screens.two{grid-template-columns:1fr}}
+  .screens.quad{grid-template-columns:1fr 1fr; align-items:start}
+  @media(max-width:640px){.screens.quad{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/style.css">
 </head>
@@ -239,102 +233,134 @@
   <section class="chero" aria-labelledby="h">
     <div class="kicker">
       <span class="tag">Case study</span>
-      <span class="tag">Data storytelling</span>
-      <span class="tag">Information design</span>
+      <span class="tag">Product &amp; UX</span>
+      <span class="tag">Healthcare</span>
     </div>
-    <h1 id="h">Data + Design</h1>
-    <p class="sub">Turning complex datasets into something a person can act on. Two decades of making data legible: dashboards leaders actually use, and a chart type invented because the existing ones were not telling the truth.</p>
+    <h1 id="h">Proof that does not feel like surveillance</h1>
+    <p class="sub">A consent session records the patient, watches whether they are looking, and will not let them skip ahead. Every one of those is a legal necessity and a reason to distrust the screen. The design work was making the enforcement legible instead of sneaky.</p>
     <div class="metarow">
-      <div class="m"><div class="k">My role</div><div class="v">Information design &amp; UX lead</div></div>
-      <div class="m"><div class="k">Where</div><div class="v">Playfair Data + independent</div></div>
-      <div class="m"><div class="k">Span</div><div class="v">2020 to 2024</div></div>
-      <div class="m"><div class="k">Tools</div><div class="v">Tableau, Figma, React, Python</div></div>
+      <div class="m"><div class="k">My role</div><div class="v">Co-founder &amp; CTO</div></div>
+      <div class="m"><div class="k">Scope</div><div class="v">Flow, states, failure design</div></div>
+      <div class="m"><div class="k">Year</div><div class="v">2026</div></div>
+      <div class="m"><div class="k">Context</div><div class="v">inFormed Consent</div></div>
     </div>
     <figure class="frame wide hero-figure reveal">
-      <div class="inner shot"><img src="../images/data-and-design/hero-dashboard-collection.png" alt="A collection of dashboards grouped by type: marketing analytics, media and content effectiveness, customer and sales analysis, and a financial overview." loading="lazy" decoding="async"></div>
-      <figcaption class="cap">Figure 01 &middot; selected dashboards</figcaption>
+      <div class="inner shot"><img src="../images/informed-consent-session/04-watch-and-record.png" alt="The consent session in progress: the procedure name and verified patient at the top, the patient's own camera feed running in the corner with a live indicator, and a split-screen clinical video with the presenter on one side and a medical animation on the other." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 01 &middot; The session, running. The patient can see they are being recorded.</figcaption>
     </figure>
   </section>
 
   <section aria-labelledby="p1">
     <div class="headblock reveal">
-      <p class="eyebrow">The through-line</p>
-      <h2 id="p1">Clarity is the whole job</h2>
+      <p class="eyebrow">The constraint</p>
+      <h2 id="p1">Two people read this session, and they want opposite things</h2>
     </div>
     <div class="body-col reveal" style="margin-top:var(--s21)">
-      <p>My design philosophy is clarity and function: users should navigate and interact with data without effort. I turn complex datasets into actionable insight, using charts, graphs, and custom dashboards to make a trend obvious in a glance. The work is not prettier dashboards. It is clearer, more usable, more scalable ones.</p>
+      <p>The first reader is a patient about to have something implanted in their spine. They are nervous, often alone, often on a phone, and if this feels like a hoop to jump through they will click through it the way everyone clicks through a terms of service.</p>
+      <p>The second reader shows up years later. A compliance officer, a records request, a plaintiff's attorney. That reader does not care how the session felt. They care whether the patient really watched, whether they were actually there, and whether the artifact can be trusted.</p>
+      <p>The temptation is to serve the second reader quietly. Track attention in the background. Record without dwelling on it. Keep the patient comfortable by not mentioning the machinery.</p>
+      <p>That is the version I did not want to build. A patient who finds out afterward that their face was analyzed has been handled, not informed, on a screen whose entire subject is being informed. So the rule for the whole flow became simple. Every mechanism gets announced before it happens, in plain language, and the patient gets to see it working.</p>
+    </div>
+    <div class="pullquote reveal">
+      <p>Surveillance is not the camera. It is the camera you were not told about.</p>
+      <div class="who">The rule the whole flow is built on</div>
     </div>
   </section>
 
   <section aria-labelledby="p2">
-    <div class="product solo reveal">
-      <div class="product-copy">
-        <span class="tag">Invented form</span>
-        <h3>The Leapfrog Chart</h3>
-        <p>A Fortune 10 automotive client needed dealerships to compete with each other. No existing chart type showed movement the way the story needed, so we made one. It became the company's strategic differentiator, and it is the clearest proof of the instinct: when the existing form lies, build a truer one.</p>
-        <ul class="feats">
-          <li>200+ interactive dashboards</li>
-          <li>First full-time hire at Playfair Data</li>
-          <li>Grew from 3 to about 20 people</li>
-          <li>2023 Inc. 5000</li>
-        </ul>
-      </div>
+    <div class="headblock reveal">
+      <p class="eyebrow">The setup</p>
+      <h2 id="p2">Ask before you take, four times over</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Nothing is captured until the patient has been told four separate times what is about to happen, and each telling does a different job.</p>
+      <p>The <b>email</b> sets the conditions before the link is even open. Find a quiet place. Do not do this while driving. That second line is not legal cover, it is the honest consequence of a session that demands your full attention for four minutes.</p>
+      <p>The <b>identity check</b> states it flatly, above the date-of-birth field rather than below it: your attention and presence will be recorded. A patient who wants out reads that before they have given anything up.</p>
+      <p>The <b>permission screen</b> separates two things most products bundle. Granting the camera is one act. Agreeing to be recorded is another, with its own checkbox and its own sentence about where the recording goes. Bundling them would have been one fewer tap and a worse consent.</p>
+      <p>The <b>readiness screen</b> shows the live camera preview next to a plain description of what the tracking does and what it will do to the video if you look away. The patient sees themselves before anything is captured. Nothing about the mechanism is a surprise later, because the surprise is the part that erodes trust.</p>
+    </div>
+    <div class="screens quad reveal" style="margin-top:var(--s34)">
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/00-email.png" alt="The invitation email: a personal greeting, the procedure named, and a before you begin block asking the patient to find a quiet environment and warning them not to complete the session while driving." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 02 &middot; Set the conditions before the link opens</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/01-welcome-identity.png" alt="Identity verification: a welcome video from the provider above a secure environment notice stating that attention and presence will be recorded, then a single date of birth field." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 03 &middot; Say what will be recorded, above the field</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/02-before-we-begin.png" alt="The permission screen: camera and microphone access as one block with its own button, and a separate recording agreement block with its own checkbox reading I agree to be recorded for this session." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 04 &middot; Permission and agreement are two acts</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/03-youre-all-set.png" alt="The readiness screen: a live camera preview beside a plain explanation that facial tracking verifies the patient stays in frame and that the video will pause automatically if they look away or leave." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 05 &middot; Show the mechanism working before it matters</figcaption></figure>
     </div>
   </section>
 
   <section aria-labelledby="p3">
     <div class="headblock reveal">
-      <p class="eyebrow">Range</p>
-      <h2 id="p3">One system, many analytical needs</h2>
-      <p>A collection of dashboards across very different problems, each a distinct approach to the same goal: clear, intuitive, actionable presentation for people who have to decide something.</p>
+      <p class="eyebrow">Enforcement</p>
+      <h2 id="p3">If the system is going to stop you, it has to say why</h2>
     </div>
-    <div class="screens three">
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/marketing-analytics.png" alt="Complex dashboards built in Figma and Tableau: a web analytics dashboard, a brand-fan lifetime value flow, a soybean-volume Sankey, and a mobile business health index." loading="lazy" decoding="async"></div><figcaption class="cap">Campaign reach &amp; engagement</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/financial-overview.png" alt="A business finance overview dashboard." loading="lazy" decoding="async"></div><figcaption class="cap">Business health at a glance</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/customer-and-sales.png" alt="A guided-interface dashboard that walks the viewer through the analysis." loading="lazy" decoding="async"></div><figcaption class="cap">Where the revenue moves</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/automotive-manufacturing.png" alt="A manufacturing cost dashboard for automotive plants." loading="lazy" decoding="async"></div><figcaption class="cap">Plant &amp; cost views</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/automotive-executive.png" alt="An automotive executive dashboard: the one-screen briefing." loading="lazy" decoding="async"></div><figcaption class="cap">The one-screen briefing</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/scenario-planning.png" alt="An automotive sales scenario-planning dashboard for testing what-ifs." loading="lazy" decoding="async"></div><figcaption class="cap">Sales what-ifs</figcaption></figure>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Three rules run during playback, and all three are the kind of thing that reads as hostile if it arrives without explanation.</p>
+      <p><b>No skipping.</b> A high-water mark tracks the furthest point actually watched, so the scrubber cannot be dragged past it. The attempt is logged rather than ignored. The banner that appears is a short sentence, not an error, and it sits over the video where the thumb already is.</p>
+      <p><b>Attention.</b> Look away and the video dims and pauses, with the reason on screen and nothing else changed. No lost progress, no scolding, no counter. It resumes when you look back. Because the readiness screen already promised exactly this, the pause reads as the system keeping its word rather than catching you out.</p>
+      <p><b>Privacy mode.</b> The patient can stop the camera without abandoning the session. This is the one that matters most to me. Without it, a patient who becomes uncomfortable mid-session has only one exit, which is to quit, and a consent process whose only escape hatch is failure is not a consent process. The indicator turns amber and says recording paused, so the state is never ambiguous in either direction.</p>
+      <p>Suspend is the honest end of that spectrum. The session stops, says so, and offers one button to resume. Nothing is lost and nothing is hidden.</p>
+    </div>
+    <div class="screens quad reveal" style="margin-top:var(--s34)">
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/state-no-skipping.png" alt="The no-skipping state: a short banner reading please watch full video sits over the playing video, with the scrubber stopped at the furthest point actually watched." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 06 &middot; No skipping, stated in one line</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/state-attention-lost.png" alt="The attention lost state: the video dimmed and paused with a face icon and the message please look at the screen to resume the procedure overview, while the patient's camera feed shows them looking away." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 07 &middot; Attention lost, with the reason and no penalty</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/state-privacy-mode.png" alt="Privacy mode: the camera feed replaced by an amber recording paused badge while the clinical video continues to play." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 08 &middot; Privacy mode, so quitting is not the only exit</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/state-session-suspended.png" alt="The suspended state: the video dark, the words session suspended, and a single resume session button." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 09 &middot; Suspended, with one way back</figcaption></figure>
     </div>
   </section>
 
   <section aria-labelledby="p4">
-    <div class="product reverse reveal">
-      <div class="product-copy">
-        <span class="tag">Data for good</span>
-        <h3>Coral Resilience Data Platform</h3>
-        <p>A platform to collect, analyze, and visualize coral reef health and resilience. A global interactive map of community-shared coral datasets, with environmental and biological analysis, phylogenetic trees, and heat maps that help researchers, conservationists, and policymakers decide where to act.</p>
-        <ul class="feats">
-          <li>Global interactive coral map</li>
-          <li>Environmental &amp; biological analysis</li>
-          <li>Community-shared datasets</li>
-          <li>Built with AWS Amplify, React, Python</li>
-        </ul>
-      </div>
-      <figure class="frame wide reveal">
-        <div class="inner shot"><img src="../images/data-and-design/coral-resilience.png" alt="The Coral Resilience Data Platform: user research, the community coral dataset dashboard, and the main data-analysis dashboard." loading="lazy" decoding="async"></div>
-        <figcaption class="cap">Figure &middot; Coral Resilience dashboard</figcaption>
-      </figure>
+    <div class="headblock reveal">
+      <p class="eyebrow">The artifact</p>
+      <h2 id="p4">Name the moment the record locks</h2>
     </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>The signature screen is where the two readers finally meet, so it stops being quiet.</p>
+      <p>Before the signature field there is a line saying the session evidence is secured and the recording is locked. That sentence is for both of them at once. The patient learns that the watching is over. The record gets a stated moment of finality, which is the thing the second reader will want to point at.</p>
+      <p>The authorization is one sentence in the first person, naming the procedure and the physician, and saying that the patient watched the full presentation and understands the risks, benefits, and alternatives. It is a claim the rest of the session has already earned rather than a box that stands in for the earning.</p>
+      <p>The session id sits at the top in plain sight, and the footer says where the recording and the signed consent are going. A patient should not have to file a request to learn what was just made about them.</p>
+    </div>
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/informed-consent-session/05-consent-signature.png" alt="The signature screen: a session evidence secured banner stating the recording is locked, the procedure and patient named, a one-sentence authorization, a tap to sign field, and a note that the recording and signed consent will be attached to the medical record." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 10 &middot; The recording locks, and the screen says so</figcaption>
+    </figure>
   </section>
 
   <section aria-labelledby="p5">
     <div class="headblock reveal">
-      <p class="eyebrow">How I work</p>
-      <h2 id="p5">Design systems, real research, shipped</h2>
+      <p class="eyebrow">Failure</p>
+      <h2 id="p5">A session that half worked is not a consent</h2>
     </div>
-    <div class="beats">
-      <div class="beat reveal"><span class="cap"><span class="led" style="background:var(--led-cyan);box-shadow:0 0 8px var(--led-cyan)"></span> Systems</span><h3>Consistency by design</h3><p>Comprehensive design systems so usability and consistency hold across every screen and every product.</p></div>
-      <div class="beat reveal"><span class="cap"><span class="led" style="background:var(--led-amber);box-shadow:0 0 8px var(--led-amber)"></span> Research</span><h3>User-centered, tested</h3><p>Extensive research and testing so the final product meets and exceeds what the user actually needs.</p></div>
-      <div class="beat reveal"><span class="cap"><span class="led" style="background:var(--led-green);box-shadow:0 0 8px var(--led-green)"></span> Delivery</span><h3>Multidisciplinary teams</h3><p>Working with developers, data scientists, and stakeholders to ship, from concept through refinement.</p></div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Proof of viewing is the product. Which means the failure states are not edge cases to tidy up later, they are the part of the product where the claim is either true or a lie.</p>
+      <p>If the recording could not be captured, the session does not quietly complete without it. It says so, in that language, and refuses to finalize. It also gives the one instruction that actually works, which is to try a different browser or device, because that is what the telemetry says fixes it. A screen that only apologizes wastes the patient's second attempt.</p>
+      <p>An expired link gets the same treatment. It says the session is no longer active and points at the practice, because the patient cannot fix an expired token and should not be left poking at a retry button hoping.</p>
+    </div>
+    <div class="screens two reveal" style="margin-top:var(--s34)">
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/edge-recording-failed.png" alt="The recording failure screen: recording couldn't be captured, this session can't be completed yet, with instructions to restart and, if it happens again, to switch to a different device or browser." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 11 &middot; It refuses to finish rather than finish falsely</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/edge-link-expired.png" alt="The expired link screen: link expired, this session is no longer active, with a note to contact the physician's office for a new link." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 12 &middot; Points at the person who can actually fix it</figcaption></figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="p6">
+    <div class="headblock reveal">
+      <p class="eyebrow">The ending</p>
+      <h2 id="p6">Two endings, because there are two rooms</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>The last screen has to work for a patient sitting on their own couch and for a patient holding a practice iPad in an exam room. Those are different endings, and one line of copy carries both: you may close this window, and underneath, on a kiosk, please return this device to the practice staff.</p>
+      <p>It also says the practitioner has been notified, which is the small thing that keeps a patient from wondering whether any of it registered.</p>
+      <p>The survey sits before that, optional and skippable, asking one question about how easy the session was with a few tappable reasons. It is deliberately not a satisfaction score. The thing worth measuring here is friction, because friction is what stops a nervous patient from finishing, and finishing is the whole point.</p>
+    </div>
+    <div class="screens two reveal" style="margin-top:var(--s34)">
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/06-patient-survey.png" alt="The optional survey: how easy was it to complete your consent today, a five star scale, tappable reasons including clear explanation and secure and private feel, an optional comment box, and a skip link." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 13 &middot; Measure friction, not satisfaction</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/07-session-complete.png" alt="The completion screen: session complete, your consent has been recorded securely, a note that the practitioner has been notified, and a kiosk variant asking the patient to return the device to practice staff." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 14 &middot; One screen, two rooms</figcaption></figure>
     </div>
   </section>
 
   <section>
     <div class="cta reveal">
       <span class="pill"><span class="led live" aria-hidden="true"></span> Taking on work</span>
-      <h2>Have a dataset nobody can read?</h2>
-      <p style="max-width:52ch">That is the work. Tell me what decision the data needs to support, and I will show you what to build.</p>
+      <h2>Building something that has to be trusted while it watches?</h2>
+      <p style="max-width:52ch">Attention tracking, recording, enforcement. The mechanism is rarely the hard part. Telling the person what you are doing, in a way that keeps them going, is. Tell me what you are working on.</p>
       <a class="btn primary" href="/#contact"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
     </div>
   </section>
@@ -343,7 +369,7 @@
 <footer class="wrap">
   <div class="row">
     <span><a href="/">&larr; Back to Jason Penrod</a></span>
-    <span>Data + Design &middot; case study</span>
+    <span>The consent session &middot; case study</span>
   </div>
 </footer>
 <script>

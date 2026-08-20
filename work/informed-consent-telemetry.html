@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Data + Design</title>
-<meta name="description" content="A data-storytelling case study: dashboards leaders actually use, the invented Leapfrog Chart, and the Coral Resilience Data Platform.">
+<title>The Consent That Never Recorded</title>
+<meta name="description" content="Recordings started going missing and most of them could not say why. Separating a telemetry gap from a real defect, and designing a failure vocabulary that names the action instead of the error.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -76,9 +76,7 @@
   /* framed image slot (placeholder until real assets are pulled) */
   .frame{border-radius:20px; box-shadow:var(--raise); background:var(--greige); padding:var(--s13)}
   .frame .inner{border-radius:12px; box-shadow:var(--press); background:linear-gradient(150deg, rgba(255,255,255,.30), rgba(201,196,184,.22)); position:relative; overflow:hidden; display:grid; place-items:center; min-height:200px}
-  .frame .inner .ph{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); text-align:center; padding:var(--s21); opacity:.75;
-    /* the placeholder label must never set the page's minimum width */
-    max-width:100%; overflow-wrap:anywhere}
+  .frame .inner .ph{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); text-align:center; padding:var(--s21); opacity:.75}
   .frame .cap{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--bronze); padding:var(--s13) var(--s8) var(--s5)}
   .frame.wide .inner{aspect-ratio:16/9}
   .frame.phone .inner{aspect-ratio:9/17}
@@ -178,11 +176,6 @@
 
   /* app screens */
   .screens{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s21); margin-top:var(--s21)}
-  /* fixed column counts live in a class: an inline style would out-rank the
-     media queries below and the grid would never collapse on a phone. */
-  .screens.three{grid-template-columns:repeat(3,1fr)}
-  @media(max-width:860px){.screens.three{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.screens.three{grid-template-columns:1fr}}
   @media(max-width:860px){.screens{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:520px){.screens{grid-template-columns:1fr 1fr}}
 
@@ -205,11 +198,6 @@
   /* products */
   .product{display:grid; grid-template-columns:1fr 1.1fr; gap:var(--s34); align-items:center; margin-top:var(--s34)}
   @media(max-width:860px){.product{grid-template-columns:1fr}}
-  /* a grid item's auto minimum is its min-content, which on a phone made this
-     column wider than the page. min-width:0 lets the text wrap instead. */
-  .product > *{min-width:0}
-  /* one-child product block: no figure to sit beside, so do not reserve a column */
-  .product.solo{grid-template-columns:1fr}
   .product-copy .tag{display:inline-block; margin-bottom:var(--s13)}
   .product-copy h3{font-size:var(--t-h3); font-weight:600; margin-bottom:var(--s13)}
   .product-copy p{max-width:52ch}
@@ -223,6 +211,23 @@
   .reveal{opacity:0; transform:translateY(16px); transition:opacity .55s var(--ease), transform .55s var(--ease)}
   .reveal.in{opacity:1; transform:none}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}.led.live{animation:none}}
+
+  /* page-specific */
+  .screens.two{grid-template-columns:1fr 1fr; align-items:start}
+  @media(max-width:860px){.screens.two{grid-template-columns:1fr}}
+  /* a fixed-column rail must still collapse; an inline style would beat the
+     base .rail media query, so the count lives in a class instead. */
+  .rail.three{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:900px){.rail.three{grid-template-columns:1fr; grid-auto-flow:row;
+    overflow:visible; padding:0; margin-inline:0}}
+  /* the reads: a dated log rendered as rows rather than a chart */
+  .log{margin-top:var(--s34); border-top:1px solid rgba(33,30,24,.12)}
+  .log .r{display:grid; grid-template-columns:140px 1fr; gap:var(--s21);
+          padding:var(--s21) 0; border-bottom:1px solid rgba(33,30,24,.12); align-items:start}
+  @media(max-width:640px){.log .r{grid-template-columns:1fr; gap:var(--s8)}}
+  .log .d{font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--bronze)}
+  .log .t{margin:0; font-size:15px}
+  .log .t b{color:var(--ink)}
 </style>
 <link rel="stylesheet" href="/style.css">
 </head>
@@ -236,105 +241,123 @@
 </div>
 
 <main class="wrap">
-  <section class="chero" aria-labelledby="h">
+  <section class="chero" aria-labeledby="h">
     <div class="kicker">
       <span class="tag">Case study</span>
-      <span class="tag">Data storytelling</span>
-      <span class="tag">Information design</span>
+      <span class="tag">Telemetry &amp; diagnostics</span>
+      <span class="tag">Healthcare</span>
     </div>
-    <h1 id="h">Data + Design</h1>
-    <p class="sub">Turning complex datasets into something a person can act on. Two decades of making data legible: dashboards leaders actually use, and a chart type invented because the existing ones were not telling the truth.</p>
+    <h1 id="h">The consent that never recorded</h1>
+    <p class="sub">Proof of viewing is the product. So when recordings started going missing, the first job was not fixing it. Nine of the eleven stranded sessions could not say what had gone wrong, and until they could, every fix was a guess.</p>
     <div class="metarow">
-      <div class="m"><div class="k">My role</div><div class="v">Information design &amp; UX lead</div></div>
-      <div class="m"><div class="k">Where</div><div class="v">Playfair Data + independent</div></div>
-      <div class="m"><div class="k">Span</div><div class="v">2020 to 2024</div></div>
-      <div class="m"><div class="k">Tools</div><div class="v">Tableau, Figma, React, Python</div></div>
+      <div class="m"><div class="k">My role</div><div class="v">Co-founder &amp; CTO</div></div>
+      <div class="m"><div class="k">Scope</div><div class="v">Telemetry, diagnostics, failure vocabulary</div></div>
+      <div class="m"><div class="k">Year</div><div class="v">2026</div></div>
+      <div class="m"><div class="k">Context</div><div class="v">inFormed Consent</div></div>
     </div>
     <figure class="frame wide hero-figure reveal">
-      <div class="inner shot"><img src="../images/data-and-design/hero-dashboard-collection.png" alt="A collection of dashboards grouped by type: marketing analytics, media and content effectiveness, customer and sales analysis, and a financial overview." loading="lazy" decoding="async"></div>
-      <figcaption class="cap">Figure 01 &middot; selected dashboards</figcaption>
+      <div class="inner shot"><img src="../images/informed-consent-telemetry/system-health.png" alt="The System Health panel: tiles for stranded, stalled, oldest stuck and strands with a reason, above a list of stuck sessions where each row carries a failure-reason chip, a device badge, a recording size and the practice name." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 01 &middot; Every stranded session now says what happened to it</figcaption>
     </figure>
   </section>
 
-  <section aria-labelledby="p1">
+  <section aria-labeledby="p1">
     <div class="headblock reveal">
-      <p class="eyebrow">The through-line</p>
-      <h2 id="p1">Clarity is the whole job</h2>
+      <p class="eyebrow">The report</p>
+      <h2 id="p1">Two problems, tangled together</h2>
     </div>
     <div class="body-col reveal" style="margin-top:var(--s21)">
-      <p>My design philosophy is clarity and function: users should navigate and interact with data without effort. I turn complex datasets into actionable insight, using charts, graphs, and custom dashboards to make a trend obvious in a glance. The work is not prettier dashboards. It is clearer, more usable, more scalable ones.</p>
+      <p>Mid-July, the recording-miss rate looked like it had roughly doubled after a deploy. A stranded session is one where the patient watched the whole video and reached the signature, but the recording never landed on the server. The session sits open forever. Nothing in the infrastructure alarms, because nothing in the infrastructure failed. It is a business-state problem, and you can only see it by querying the data.</p>
+      <p>Two things were tangled. There was a <b>telemetry gap</b>, where we could not see why a recording was missing. And there was a <b>real defect</b> somewhere underneath it. Both were live, and neither could be worked on honestly until they were pulled apart, because a fix aimed at the wrong one would still make the number move and we would have believed it.</p>
+      <p>So the first two weeks were not spent fixing recordings. They were spent making the next read able to tell the difference.</p>
     </div>
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/informed-consent-telemetry/system-health-before.png" alt="The same panel with the telemetry gap still open: eleven stranded sessions, only two of which carry a failure reason, the rest showing a dashed no reason recorded chip and a single generic resend button." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 02 &middot; The same board before. One button, and it is a guess.</figcaption>
+    </figure>
   </section>
 
-  <section aria-labelledby="p2">
-    <div class="product solo reveal">
-      <div class="product-copy">
-        <span class="tag">Invented form</span>
-        <h3>The Leapfrog Chart</h3>
-        <p>A Fortune 10 automotive client needed dealerships to compete with each other. No existing chart type showed movement the way the story needed, so we made one. It became the company's strategic differentiator, and it is the clearest proof of the instinct: when the existing form lies, build a truer one.</p>
-        <ul class="feats">
-          <li>200+ interactive dashboards</li>
-          <li>First full-time hire at Playfair Data</li>
-          <li>Grew from 3 to about 20 people</li>
-          <li>2023 Inc. 5000</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section aria-labelledby="p3">
+  <section aria-labeledby="p2">
     <div class="headblock reveal">
-      <p class="eyebrow">Range</p>
-      <h2 id="p3">One system, many analytical needs</h2>
-      <p>A collection of dashboards across very different problems, each a distinct approach to the same goal: clear, intuitive, actionable presentation for people who have to decide something.</p>
+      <p class="eyebrow">The vocabulary</p>
+      <h2 id="p2">Name the action, not the error</h2>
     </div>
-    <div class="screens three">
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/marketing-analytics.png" alt="Complex dashboards built in Figma and Tableau: a web analytics dashboard, a brand-fan lifetime value flow, a soybean-volume Sankey, and a mobile business health index." loading="lazy" decoding="async"></div><figcaption class="cap">Campaign reach &amp; engagement</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/financial-overview.png" alt="A business finance overview dashboard." loading="lazy" decoding="async"></div><figcaption class="cap">Business health at a glance</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/customer-and-sales.png" alt="A guided-interface dashboard that walks the viewer through the analysis." loading="lazy" decoding="async"></div><figcaption class="cap">Where the revenue moves</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/automotive-manufacturing.png" alt="A manufacturing cost dashboard for automotive plants." loading="lazy" decoding="async"></div><figcaption class="cap">Plant &amp; cost views</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/automotive-executive.png" alt="An automotive executive dashboard: the one-screen briefing." loading="lazy" decoding="async"></div><figcaption class="cap">The one-screen briefing</figcaption></figure>
-      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/data-and-design/scenario-planning.png" alt="An automotive sales scenario-planning dashboard for testing what-ifs." loading="lazy" decoding="async"></div><figcaption class="cap">Sales what-ifs</figcaption></figure>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>The obvious instinct is to record the error. Log the exception, put the code on the row, done. That produces a queue nobody can work.</p>
+      <p>The person reading this board is a staff member with a patient waiting. What they need from a row is not what went wrong. It is what it costs, and there are only two answers that matter.</p>
+      <p>If the recorder produced nothing at all, the patient has to start over. That is a phone call, an apology, and four minutes of their life again. If bytes existed and the transfer died, the patient reopens the link and it retries. That one is nearly free.</p>
+      <p>So the chip says <b>capture</b> or it says <b>upload</b>, and everything else about the failure lives behind the tooltip. Same underlying error taxonomy, sorted by consequence rather than by cause. The button next to the row changes with it, which is the point: the row is now an instruction rather than a notification.</p>
     </div>
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/informed-consent-telemetry/failure-taxonomy.png" alt="A table of the five recording-failure states: capture meaning re-record, stalled and upload meaning resend, failed meaning investigate, and a highlighted last row with no chip at all, marked open, for a tab that closed mid-transfer." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 03 &middot; Five states, sorted by what they cost the patient</figcaption>
+    </figure>
   </section>
 
-  <section aria-labelledby="p4">
-    <div class="product reverse reveal">
-      <div class="product-copy">
-        <span class="tag">Data for good</span>
-        <h3>Coral Resilience Data Platform</h3>
-        <p>A platform to collect, analyze, and visualize coral reef health and resilience. A global interactive map of community-shared coral datasets, with environmental and biological analysis, phylogenetic trees, and heat maps that help researchers, conservationists, and policymakers decide where to act.</p>
-        <ul class="feats">
-          <li>Global interactive coral map</li>
-          <li>Environmental &amp; biological analysis</li>
-          <li>Community-shared datasets</li>
-          <li>Built with AWS Amplify, React, Python</li>
-        </ul>
-      </div>
-      <figure class="frame wide reveal">
-        <div class="inner shot"><img src="../images/data-and-design/coral-resilience.png" alt="The Coral Resilience Data Platform: user research, the community coral dataset dashboard, and the main data-analysis dashboard." loading="lazy" decoding="async"></div>
-        <figcaption class="cap">Figure &middot; Coral Resilience dashboard</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section aria-labelledby="p5">
+  <section aria-labeledby="p3">
     <div class="headblock reveal">
-      <p class="eyebrow">How I work</p>
-      <h2 id="p5">Design systems, real research, shipped</h2>
+      <p class="eyebrow">The reads</p>
+      <h2 id="p3">What the instrumentation actually said</h2>
+      <p>Once the reasons were landing, four reads settled the whole thing in five days.</p>
     </div>
-    <div class="beats">
-      <div class="beat reveal"><span class="cap"><span class="led" style="background:var(--led-cyan);box-shadow:0 0 8px var(--led-cyan)"></span> Systems</span><h3>Consistency by design</h3><p>Comprehensive design systems so usability and consistency hold across every screen and every product.</p></div>
-      <div class="beat reveal"><span class="cap"><span class="led" style="background:var(--led-amber);box-shadow:0 0 8px var(--led-amber)"></span> Research</span><h3>User-centered, tested</h3><p>Extensive research and testing so the final product meets and exceeds what the user actually needs.</p></div>
-      <div class="beat reveal"><span class="cap"><span class="led" style="background:var(--led-green);box-shadow:0 0 8px var(--led-green)"></span> Delivery</span><h3>Multidisciplinary teams</h3><p>Working with developers, data scientists, and stakeholders to ship, from concept through refinement.</p></div>
+    <div class="log reveal">
+      <div class="r"><div class="d">Read one</div><p class="t">Three aged strands, and <b>zero fully silent</b>. The telemetry gap was closed. That mattered more than the count, because it meant no reconciliation pass was needed to classify the backlog.</p></div>
+      <div class="r"><div class="d">Read two</div><p class="t">Five misses, and <b>four of the five were upload-side</b>, not capture-side. The problem was not devices failing to record. It was recordings failing to arrive.</p></div>
+      <div class="r"><div class="d">The miscount</div><p class="t">The apparent doubling was <b>never a regression</b>. It was in-flight sessions being counted as misses inside the window. The deploy everyone suspected had nothing to do with it. Two weeks of pressure came from a number that was measuring itself wrong.</p></div>
+      <div class="r"><div class="d">The lever</div><p class="t">An incidental finding worth more than the fix: the server-side <b>optimized transcode does not actually compress mp4</b>. Raw and optimized come out identical. So the client-side bitrate cap is the only lever anyone has on recording size, and every plan that assumed otherwise was wrong.</p></div>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>What shipped was small: a recording-bitrate cap across every device class, a Firefox codec fix, and three additions to the diagnostics row. A device badge, a size chip, and the practice name.</p>
+      <p>Those three are the ones I would defend hardest. They turn the board into something a human can pattern-match on. Four rows in a row reading iPad and a large size is a story. The same four rows without those chips are just four rows.</p>
+    </div>
+    <div class="rail three reveal">
+      <div class="step"><span class="i">Immediately after</span><span class="name">39 sessions, 0 strands</span><p class="d">Across the fleet, the first day post-fix.</p></div>
+      <div class="step"><span class="i">Firefox</span><span class="name">0 of 4 &rarr; 2 of 2</span><p class="d">The codec fix, isolated.</p></div>
+      <div class="step"><span class="i">In-clinic iPad</span><span class="name">29 of 29</span><p class="d">The case that had been driving a two-week build proposal.</p></div>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>One more thing worth saying, because it nearly cost us the read. The trailing four-day rate still looked bad after the fix. Not because anything was still breaking, but because pre-fix strands were aging into the window. A trailing average read immediately after a fix will lie to you in exactly this way, and the discipline is to look at sessions started after the deploy rather than at the number that is easiest to pull.</p>
+      <p>The streaming-upload project that had been scoped as two weeks of work got downgraded to insurance. The bitrate cap alone had fixed the case that justified it.</p>
+    </div>
+  </section>
+
+  <section aria-labeledby="p4">
+    <div class="headblock reveal">
+      <p class="eyebrow">The residual</p>
+      <h2 id="p4">The one that cannot report itself</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>One case is left, and it is the interesting one, because it is structurally unreportable.</p>
+      <p>The recording captures fine. The upload starts. Then the patient closes the tab, or hands the iPad back and walks away, or the cellular connection drops in a parking garage. Every terminal branch in the upload code fires when the retry chain exhausts, and the retry chain can only exhaust <b>in a tab that is still open</b>. Nobody is home to write the failure down.</p>
+      <p>The fix is a beacon fired on the way out of the page, since that is the one request a browser will still deliver while it is closing. Until that ships, the honest thing is to leave the row unattributed rather than to guess a reason, which is why the last row in the table above is blank and labeled open rather than quietly folded into unknown.</p>
+      <p>Closing it means every strand is attributable, which is a very different sentence from most of them are.</p>
+    </div>
+    <div class="screens two reveal" style="margin-top:var(--s34)">
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-telemetry/stranded-session-card.png" alt="The practice-facing session card in its stranded state: a red-bordered card with a recording missing flag, a pending review badge, and a resend invite button." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 04 &middot; What the practice sees</figcaption></figure>
+      <figure class="frame wide reveal"><div class="inner shot"><img src="../images/informed-consent-session/edge-recording-failed.png" alt="The patient-facing failure screen: recording couldn't be captured, this session can't be completed yet, with instructions to restart or switch device or browser." loading="lazy" decoding="async"></div><figcaption class="cap">Figure 05 &middot; What the patient sees</figcaption></figure>
+    </div>
+  </section>
+
+  <section aria-labeledby="p5">
+    <div class="headblock reveal">
+      <p class="eyebrow">Why this is design</p>
+      <h2 id="p5">The board is where the claim is either true or not</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>It would be easy to file this under operations. It is not. The entire product claim is that we can prove a patient watched, understood, and agreed. A session whose recording quietly vanishes is precisely the artifact a records request or a plaintiff's attorney asks to see, and it is the same gap an enterprise security review opens with.</p>
+      <p>Which makes the diagnostics surface a product surface. Its job is to keep the company honest about its own central claim, in public, on a screen someone looks at every morning. That is a design problem, and the design decisions in it were the ones that mattered: sorting failures by what they cost rather than by what they were, putting device and size on the row so a person can see a pattern, and leaving one row deliberately blank because we do not yet know.</p>
+    </div>
+    <div class="pullquote reveal">
+      <p>A number that cannot say why is not a metric. It is a rumor with a decimal point.</p>
+      <div class="who">What two weeks of this taught me</div>
     </div>
   </section>
 
   <section>
     <div class="cta reveal">
       <span class="pill"><span class="led live" aria-hidden="true"></span> Taking on work</span>
-      <h2>Have a dataset nobody can read?</h2>
-      <p style="max-width:52ch">That is the work. Tell me what decision the data needs to support, and I will show you what to build.</p>
+      <h2>Got a number nobody trusts?</h2>
+      <p style="max-width:52ch">Usually the fix is not the fix. It is being able to tell two failures apart, and designing the surface where a person finally can. Tell me what you are chasing.</p>
       <a class="btn primary" href="/#contact"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
     </div>
   </section>
@@ -343,7 +366,7 @@
 <footer class="wrap">
   <div class="row">
     <span><a href="/">&larr; Back to Jason Penrod</a></span>
-    <span>Data + Design &middot; case study</span>
+    <span>The consent that never recorded &middot; case study</span>
   </div>
 </footer>
 <script>

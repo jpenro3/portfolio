@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>System Health mock, before telemetry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* The same panel with the telemetry gap still open: most stranded rows carry
+     no reason at all, so the queue is a mystery rather than a work list. */
+  :root{
+    --bg:#F4F5F7; --card:#FFFFFF; --sunk:#FAFAFB;
+    --line:#E5E7EB; --line-soft:#EFF0F2;
+    --ink:#111318; --mid:#5B6270; --dim:#8B92A0;
+    --green:#0E9F6E; --amber:#D98A00; --red:#DC2B4A; --violet:#6E56CF; --blue:#2563EB;
+    --amber-bg:#FDF3E2; --red-bg:#FCE9ED; --violet-bg:#EFEBFB; --blue-bg:#E8EEFD;
+    --sans:'Inter',system-ui,sans-serif; --mono:'Space Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{background:var(--bg); font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased; padding:28px}
+  #shot{width:1180px}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden}
+  .chead{display:flex; align-items:center; gap:12px; padding:18px 22px; border-bottom:1px solid var(--line-soft)}
+  .chead h1{font-size:17px; font-weight:600; letter-spacing:-.02em}
+  .chead .sub{font-size:12.5px; color:var(--mid)}
+  .spacer{flex:1}
+  .ghost{font-size:11px; font-family:var(--mono); color:var(--dim); border:1px solid var(--line); border-radius:7px; padding:5px 10px}
+
+  .tiles{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line-soft)}
+  .tile{background:var(--card); padding:18px 22px 20px}
+  .tile .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim)}
+  .tile .v{font-family:var(--mono); font-size:30px; font-weight:700; letter-spacing:-.02em; margin-top:8px; display:flex; align-items:baseline; gap:8px}
+  .tile .v small{font-size:13px; font-weight:400; color:var(--mid); letter-spacing:0}
+  .tile .s{font-family:var(--mono); font-size:11px; color:var(--mid); margin-top:6px}
+  .tile.warn .v{color:var(--amber)}
+  .tile.bad .v{color:var(--red)}
+  .tile.bad .s{color:var(--red)}
+
+  .sec{padding:16px 22px; border-top:1px solid var(--line-soft); display:flex; align-items:center; gap:10px}
+  .sec h2{font-size:13.5px; font-weight:600}
+  .sec .count{font-family:var(--mono); font-size:11px; color:var(--dim)}
+
+  .rows{border-top:1px solid var(--line-soft)}
+  .row{display:grid; grid-template-columns:1fr auto; gap:16px; align-items:center; padding:14px 22px; border-bottom:1px solid var(--line-soft)}
+  .row:last-child{border-bottom:0}
+  .who{display:flex; align-items:center; gap:10px}
+  .who .nm{font-size:14px; font-weight:600; letter-spacing:-.01em}
+  .who .pr{font-size:12.5px; color:var(--mid)}
+  .meta{display:flex; flex-wrap:wrap; align-items:center; gap:7px; margin-top:7px}
+  .chip{font-family:var(--mono); font-size:10.5px; letter-spacing:.03em; padding:3px 8px; border-radius:6px; border:1px solid var(--line); color:var(--mid); background:var(--card)}
+  .chip.kind{border-color:transparent; background:var(--amber-bg); color:var(--amber); font-weight:700; text-transform:uppercase; letter-spacing:.08em}
+  .chip.rsn{border-color:transparent; background:var(--violet-bg); color:var(--violet); font-weight:700}
+  .chip.silent{border-style:dashed; color:var(--dim); font-style:italic}
+  .act{display:flex; align-items:center; gap:8px}
+  .btn{font-size:12.5px; font-weight:600; padding:8px 14px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--dim)}
+  .age{font-family:var(--mono); font-size:11px; color:var(--dim); min-width:52px; text-align:right}
+
+  .foot{padding:14px 22px; border-top:1px solid var(--line-soft); display:flex; align-items:center; gap:8px}
+  .foot p{font-size:12px; color:var(--mid)}
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--red); flex:none}
+</style>
+</head>
+<body>
+<div id="shot">
+  <div class="card">
+    <div class="chead">
+      <span class="dot"></span>
+      <h1>System Health</h1>
+      <span class="sub">Session signals, derived from the data rather than from infra metrics</span>
+      <span class="spacer"></span>
+      <span class="ghost">auto-refresh 60s</span>
+    </div>
+
+    <div class="tiles">
+      <div class="tile warn">
+        <div class="k">Stranded</div>
+        <div class="v">11</div>
+        <div class="s">7 recent &middot; 4 aged</div>
+      </div>
+      <div class="tile warn">
+        <div class="k">Stalled</div>
+        <div class="v">6</div>
+        <div class="s">4 surgery &middot; 2 consult</div>
+      </div>
+      <div class="tile">
+        <div class="k">Oldest stuck</div>
+        <div class="v">9d <small>1h</small></div>
+        <div class="s">worst-case stuck age</div>
+      </div>
+      <div class="tile bad">
+        <div class="k">Strands with a reason</div>
+        <div class="v">2<small>of 11</small></div>
+        <div class="s">nine are silent</div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h2>Stuck sessions</h2>
+      <span class="count">17 open &middot; newest first</span>
+    </div>
+
+    <div class="rows">
+      <div class="row">
+        <div>
+          <div class="who"><span class="nm">E. Reyes</span><span class="pr">&middot; Crimson Spine &amp; Pain</span></div>
+          <div class="meta"><span class="chip kind">stranded</span><span class="chip silent">no reason recorded</span></div>
+        </div>
+        <div class="act"><span class="age">2h 05m</span><span class="btn">Resend</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="who"><span class="nm">M. Gonzalez</span><span class="pr">&middot; Cascade Orthopedics</span></div>
+          <div class="meta"><span class="chip kind">stranded</span><span class="chip silent">no reason recorded</span></div>
+        </div>
+        <div class="act"><span class="age">7h 22m</span><span class="btn">Resend</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="who"><span class="nm">J. Park</span><span class="pr">&middot; Cascade Orthopedics</span></div>
+          <div class="meta"><span class="chip kind">stranded</span><span class="chip rsn">upload</span></div>
+        </div>
+        <div class="act"><span class="age">1d 6h</span><span class="btn">Resend</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="who"><span class="nm">D. Okafor</span><span class="pr">&middot; Crimson Spine &amp; Pain</span></div>
+          <div class="meta"><span class="chip kind">stranded</span><span class="chip silent">no reason recorded</span></div>
+        </div>
+        <div class="act"><span class="age">3d 2h</span><span class="btn">Resend</span></div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span class="dot"></span>
+      <p>Nine of eleven stranded sessions carry no failure reason at all. There is no way to tell a device that could not record from an upload that died, so there is one button and it is a guess.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

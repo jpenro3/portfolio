@@ -115,7 +115,15 @@
   /* ---- What I do ---- */
   .lanes{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s34)}
   @media(max-width:860px){.lanes{grid-template-columns:1fr}}
+  .lanes{align-items:start}
   .lane{background:var(--greige); border-radius:24px; box-shadow:var(--raise); padding:var(--s34); display:flex; flex-direction:column; gap:var(--s13)}
+  /* one piece of proof per lane, sitting under the claim it backs up */
+  .lane .proof{margin-top:var(--s8); padding-top:var(--s21); border-top:1px solid rgba(33,30,24,.14);
+    display:flex; flex-direction:column; gap:var(--s5)}
+  .lane .proof .pk{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--bronze)}
+  .lane .proof .pn{font-family:var(--grotesk); font-weight:600; font-size:var(--t-lead); color:var(--ink)}
+  .lane .proof p{font-size:13.5px}
+  .lane .proof .go{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; margin-top:var(--s5)}
   .lane .num{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--bronze)}
   .lane h3{font-size:var(--t-lead); font-weight:600}
   .lane p{font-size:15px; margin:0}
@@ -123,6 +131,31 @@
   /* ---- Selected work ---- */
   .work{display:grid; grid-template-columns:1fr 1fr; gap:var(--s34)}
   @media(max-width:860px){.work{grid-template-columns:1fr}}
+
+  /* career chapters: a full-width parent card for the employer, its case
+     studies hanging off a hairline spine below it. The spine is the only thing
+     tying them together, which is enough, and it stays light as chapters pile up. */
+  .chapters{display:flex; flex-direction:column; gap:var(--s55)}
+  .chapter{position:relative}
+  .chapter .kids{position:relative; margin-top:var(--s21); padding-left:var(--s34);
+    display:grid; grid-template-columns:1fr 1fr; gap:var(--s21)}
+  .chapter .kids.one{grid-template-columns:1fr}
+  .chapter .kids.three{grid-template-columns:repeat(3,1fr)}
+  .chapter .kids::before{content:""; position:absolute; left:0; top:calc(var(--s21) * -1);
+    bottom:var(--s34); width:1px; background:rgba(33,30,24,.38)}
+  @media(max-width:900px){
+    .chapter .kids,.chapter .kids.three{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:640px){
+    .chapter .kids,.chapter .kids.three,.chapter .kids.one{grid-template-columns:1fr; padding-left:var(--s21)}
+  }
+  /* the employer card carries the resume line, so the role reads as a header.
+     Hierarchy is size and indent only; no extra decoration. */
+  .card.head .role{color:var(--bronze)}
+  .card.head h3{font-size:clamp(30px,3.6vw,44px)}
+  .card.head .led.past{background:var(--graphite); box-shadow:none}
+  .chapter .kids .card h3{font-size:26px}
+  @media(max-width:640px){.chapter .kids .card h3{font-size:23px}}
   .card{background:var(--greige); border-radius:24px; box-shadow:var(--raise); padding:var(--s34); display:flex; flex-direction:column; gap:var(--s13); position:relative}
   .card .role{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite); display:flex; align-items:center; gap:var(--s8)}
   .card h3{font-size:var(--t-h3); font-weight:600}
@@ -254,11 +287,23 @@
         <span class="num">01</span>
         <h3>Figure out what to build first</h3>
         <p>Most projects do not fail on execution. They fail because everything looked equally important on day one. I sit with the vision, find the one thing that has to be true, and tell you what to cut. You get a scope you can actually start.</p>
+        <div class="proof">
+          <span class="pk">Proof</span>
+          <span class="pn">MVP Scoper</span>
+          <p>You describe what you want to build. It tells you what to build first and what to cut. Built on my own design system, running live against the Claude API. The scoping conversation I have with clients, turned into a thing you can use.</p>
+          <a class="go" href="#contact">Ask me for a link &rarr;</a>
+        </div>
       </div>
       <div class="lane reveal">
         <span class="num">02</span>
         <h3>Build it</h3>
         <p>Not a deck about the thing. The thing. Working software, in front of real users, in weeks. Twenty years of product judgment plus AI-augmented build speed is a strange combination, and it is the point.</p>
+        <div class="proof">
+          <span class="pk">Proof</span>
+          <span class="pn">Tarot CoPilot</span>
+          <p>A CustomGPT that encodes the seventy-eight-card Rider-Waite deck for a personalized reading. Built for nobody but me, which is how you can tell I keep my hands in the current medium rather than just talking about it.</p>
+          <a class="go" href="/work/tarot-copilot.html">Read the case study &rarr;</a>
+        </div>
       </div>
       <div class="lane reveal">
         <span class="num">03</span>
@@ -274,70 +319,111 @@
       <p class="eyebrow">Selected work</p>
       <h2 id="work-h">A claim, and the proof of the claim</h2>
     </div>
-    <div class="work">
-      <div class="card feature reveal">
-        <div class="inner">
-          <div>
-            <span class="role"><span class="led" aria-hidden="true"></span> Co-founder &amp; CTO &middot; 2020 to now</span>
-            <h3 style="margin:var(--s13) 0">inFormed Consent</h3>
-            <p>A patented platform that turns informed consent from a signature into something a patient actually understands. I built the technology from nothing: personalized AI avatars, video-tracked comprehension, live with clinicians.</p>
+    <div class="chapters">
+
+      <!-- chapter 1 -->
+      <div class="chapter reveal">
+        <div class="card feature head">
+          <div class="inner">
+            <div>
+              <span class="role"><span class="led" aria-hidden="true"></span> Co-founder &amp; CTO &middot; 2020 to now &middot; Orlando</span>
+              <h3 style="margin:var(--s13) 0">inFormed Consent</h3>
+              <p>A patented platform that turns informed consent from a signature into something a patient actually understands. I built the technology from nothing: personalized AI avatars, video-tracked comprehension, live with clinicians.</p>
+            </div>
+            <div class="faceplate">
+              <span class="mono">US Patent</span>
+              <span class="big">11,501,875</span>
+              <span class="mono">Informed patient consent<br>through video tracking</span>
+            </div>
           </div>
-          <div class="faceplate">
-            <span class="mono">US Patent</span>
-            <span class="big">11,501,875</span>
-            <span class="mono">Informed patient consent<br>through video tracking</span>
+          <div class="spec">
+            <span>Next.js</span><span>AI avatars</span><span>Healthtech</span>
+            <span><a href="https://patents.google.com/patent/US11501875B2" target="_blank" rel="noopener">View the patent &rarr;</a></span>
           </div>
         </div>
-        <div class="spec">
-          <span>Next.js</span><span>AI avatars</span><span>Healthtech</span>
-          <span><a href="https://patents.google.com/patent/US11501875B2" target="_blank" rel="noopener">View the patent &rarr;</a></span>
+        <div class="kids three">
+          <a class="card link reveal" href="/work/informed-consent-research.html">
+            <span class="role">AI system design</span>
+            <h3>What a doctor has to disclose</h3>
+            <p>A research agent reads the literature. A clinician signs what a patient will hear. The system in between, and why the hard part was deciding what a risk list even is.</p>
+            <div class="go">Read the case study &rarr;</div>
+          </a>
+          <a class="card link reveal" href="/work/informed-consent-session.html">
+            <span class="role">Product &amp; UX</span>
+            <h3>The consent session</h3>
+            <p>It records you, watches whether you are looking, and will not let you skip. Every one of those is a legal necessity and a reason to distrust the screen. Making the enforcement legible instead of sneaky.</p>
+            <div class="go">Read the case study &rarr;</div>
+          </a>
+          <a class="card link reveal" href="/work/informed-consent-telemetry.html">
+            <span class="role">Telemetry &amp; diagnostics</span>
+            <h3>The consent that never recorded</h3>
+            <p>Recordings started going missing and most of them could not say why. Separating a telemetry gap from a real defect, and a failure vocabulary that names what it costs the patient.</p>
+            <div class="go">Read the case study &rarr;</div>
+          </a>
         </div>
       </div>
 
-      <a class="card link reveal" href="/work/youth-as-experts.html">
-        <span class="role">UX &middot; facilitation</span>
-        <h3>Youth as Experts</h3>
-        <p>Design-thinking workshops where the teenagers were the experts and I was the facilitator, then the two-product prototype their own ideas asked for. The clearest proof of how I run discovery.</p>
-        <div class="go">Read the case study &rarr;</div>
-      </a>
-
-      <a class="card link reveal" href="/work/data-and-design.html">
-        <span class="role">Data storytelling</span>
-        <h3>Data + Design</h3>
-        <p>Dashboards leaders actually use, the invented Leapfrog Chart for a Fortune 10 client, and the Coral Resilience Data Platform. Turning complex data into a decision someone can make.</p>
-        <div class="go">Read the case study &rarr;</div>
-      </a>
-
-      <a class="card link reveal" href="/work/step-up-your-game.html">
-        <span class="role">Product &amp; UX</span>
-        <h3>Step Up Your Game</h3>
-        <p>Wireframing a one-stop platform that gives young athletes a high athletic IQ, combining physical therapists, dietitians, and coaches into one guided experience.</p>
-        <div class="go">Read the case study &rarr;</div>
-      </a>
-
-      <div class="card reveal">
-        <span class="role">Hallmark</span>
-        <h3>Six patents</h3>
-        <p>Light and shadow projection. Real-time sound. A fill-in-the-blank audio story engine. A holiday toy microphone. This is where I learned that an idea can become a product, a patent, and a line of revenue, and that the distance between those three is mostly nerve.</p>
-        <div class="spec">
-          <span><a href="https://patents.google.com/patent/US8961183B2" target="_blank" rel="noopener">US 8,961,183</a></span>
-          <span><a href="https://patents.google.com/patent/US8819169B2" target="_blank" rel="noopener">US 8,819,169</a></span>
+      <!-- chapter 2 -->
+      <div class="chapter reveal">
+        <div class="card head">
+          <span class="role"><span class="led past" aria-hidden="true"></span> Director of User Experience &middot; 2021 to 2024 &middot; Orlando</span>
+          <h3>Playfair Data</h3>
+          <p>Where the work bent hard toward data. Not prettier dashboards. Clearer ones, more usable, more scalable, built as products rather than one-offs. I hired and led the UX team, and built the internal design system that let the work scale past what any one designer could hold in their head.</p>
+        </div>
+        <div class="kids one">
+          <a class="card link reveal" href="/work/data-and-design.html">
+            <span class="role">Data storytelling</span>
+            <h3>Data + Design</h3>
+            <p>Dashboards leaders actually use, the invented Leapfrog Chart for a Fortune 10 client, and the Coral Resilience Data Platform. Turning complex data into a decision someone can make.</p>
+            <div class="go">Read the case study &rarr;</div>
+          </a>
         </div>
       </div>
 
-      <a class="card link reveal" href="/work/tarot-copilot.html">
-        <span class="role">AI experiment</span>
-        <h3>Tarot CoPilot</h3>
-        <p>A CustomGPT that encodes the seventy-eight-card Rider-Waite deck for a personalized reading. Proof I keep my hands in the current medium, not just talk about it.</p>
-        <div class="go">Read the case study &rarr;</div>
-      </a>
-
-      <div class="card reveal">
-        <span class="role">Live tool</span>
-        <h3>MVP Scoper</h3>
-        <p>You describe what you want to build. It tells you what to build first and what to cut. Built on my own design system, running live against the Claude API. The scoping conversation I have with clients, turned into a thing you can use.</p>
-        <div class="spec"><span>Live app</span><span><a href="#contact">Ask me for a link &rarr;</a></span></div>
+      <!-- chapter 3 -->
+      <div class="chapter reveal">
+        <div class="card head">
+          <span class="role"><span class="led past" aria-hidden="true"></span> UX Design Consultant &middot; 2017 to 2020 &middot; Kansas City</span>
+          <h3>JP Creative</h3>
+          <p>My own practice, and the stretch that looks like wandering on paper. Different sectors, different problem types, same job every time: walk into a messy system and make it understandable enough that someone can act. Research and facilitation at the front, wireframes and prototypes in the middle, and enough technical judgment to know what was actually buildable.</p>
+        </div>
+        <div class="kids">
+          <a class="card link reveal" href="/work/youth-as-experts.html">
+            <span class="role">UX &middot; facilitation</span>
+            <h3>Youth as Experts</h3>
+            <p>Design-thinking workshops where the teenagers were the experts and I was the facilitator, then the two-product prototype their own ideas asked for. The clearest proof of how I run discovery.</p>
+            <div class="go">Read the case study &rarr;</div>
+          </a>
+          <a class="card link reveal" href="/work/step-up-your-game.html">
+            <span class="role">Product &amp; UX</span>
+            <h3>Step Up Your Game</h3>
+            <p>Wireframing a one-stop platform that gives young athletes a high athletic IQ, combining physical therapists, dietitians, and coaches into one guided experience.</p>
+            <div class="go">Read the case study &rarr;</div>
+          </a>
+        </div>
       </div>
+
+      <!-- chapter 4 -->
+      <div class="chapter reveal">
+        <div class="card head">
+          <span class="role"><span class="led past" aria-hidden="true"></span> Innovation Manager, then Director &middot; 2010 to 2017 &middot; Kansas City</span>
+          <h3>Hallmark Cards</h3>
+          <p>Where creative work became intellectual property. I came up through photo shoots and physical product, then moved into innovation and learned that an idea can become a product, a patent, and a line of revenue, and that the distance between those three is mostly nerve. Teams up to forty people, and a lot of things you could hold in your hand.</p>
+        </div>
+        <div class="kids one">
+          <div class="card reveal">
+            <span class="role">Invention</span>
+            <h3>Six patents</h3>
+            <p>Light and shadow projection. Real-time sound. A fill-in-the-blank audio story engine. A holiday toy microphone. Three issued, three filed.</p>
+            <div class="spec">
+              <span><a href="https://patents.google.com/patent/US8961183B2" target="_blank" rel="noopener">US 8,961,183</a></span>
+              <span><a href="https://patents.google.com/patent/US8819169B2" target="_blank" rel="noopener">US 8,819,169</a></span>
+              <span><a href="https://patents.google.com/patent/USD739293S1" target="_blank" rel="noopener">US D739,293</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 

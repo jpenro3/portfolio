@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Failure reason taxonomy mock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* The recording-failure reason vocabulary, drawn in the Consent360 admin light
+     language. Reasons and their meanings come from failureReasonMeta() in
+     apps/admin/components/dashboard/SystemHealthPanel.tsx. */
+  :root{
+    --bg:#F4F5F7; --card:#FFFFFF; --sunk:#FAFAFB;
+    --line:#E5E7EB; --line-soft:#EFF0F2;
+    --ink:#111318; --mid:#5B6270; --dim:#8B92A0;
+    --green:#0E9F6E; --amber:#D98A00; --red:#DC2B4A; --violet:#6E56CF;
+    --red-bg:#FCE9ED; --violet-bg:#EFEBFB; --amber-bg:#FDF3E2;
+    --sans:'Inter',system-ui,sans-serif; --mono:'Space Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{background:var(--bg); font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased; padding:28px}
+  #shot{width:1180px}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden}
+  .chead{padding:20px 24px 18px; border-bottom:1px solid var(--line-soft)}
+  .chead h1{font-size:17px; font-weight:600; letter-spacing:-.02em}
+  .chead p{font-size:12.5px; color:var(--mid); margin-top:5px; max-width:80ch}
+
+  table{width:100%; border-collapse:collapse}
+  th{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim);
+     text-align:left; padding:12px 24px; border-bottom:1px solid var(--line-soft); font-weight:400}
+  td{padding:16px 24px; border-bottom:1px solid var(--line-soft); vertical-align:top; font-size:13.5px; color:var(--mid)}
+  tr:last-child td{border-bottom:0}
+  td.what{color:var(--ink)}
+  .code{font-family:var(--mono); font-size:11px; color:var(--dim); display:block; margin-top:5px}
+
+  .chip{display:inline-block; font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.03em;
+        padding:4px 10px; border-radius:6px; background:var(--violet-bg); color:var(--violet)}
+  .chip.danger{background:var(--red-bg); color:var(--red)}
+  .chip.none{background:var(--line-soft); color:var(--dim); font-weight:400; font-style:italic}
+
+  .act{font-family:var(--mono); font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase}
+  .act.re{color:var(--red)}
+  .act.rs{color:var(--violet)}
+  .act.dig{color:var(--mid)}
+  .act.no{color:var(--dim)}
+
+  tr.hole td{background:#FFF9F0}
+  tr.hole td.what{color:var(--ink)}
+  .open{display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:10.5px;
+        letter-spacing:.08em; text-transform:uppercase; color:var(--amber); background:var(--amber-bg);
+        padding:3px 8px; border-radius:6px; margin-left:8px}
+
+  .foot{padding:16px 24px; border-top:1px solid var(--line-soft); font-size:12.5px; color:var(--mid)}
+  .foot b{color:var(--ink); font-weight:600}
+</style>
+</head>
+<body>
+<div id="shot">
+  <div class="card">
+    <div class="chead">
+      <h1>Why a recording is missing, and what it costs the patient</h1>
+      <p>The chip on a stranded session does not name the error. It names what has to happen next, because that is the only thing the person reading the queue can act on.</p>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:150px">Chip</th>
+          <th style="width:400px">What actually happened</th>
+          <th style="width:190px">What it costs</th>
+          <th>Who can fix it</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="chip danger">capture</span></td>
+          <td class="what">The recorder produced no usable video at all. Usually a device or codec problem.
+            <span class="code">CAPTURE_EMPTY</span></td>
+          <td><span class="act re">Re-record</span></td>
+          <td>The patient, from the top. The only expensive one.</td>
+        </tr>
+        <tr>
+          <td><span class="chip">stalled</span></td>
+          <td class="what">The recording existed. The transfer made no progress for thirty seconds and died.
+            <span class="code">UPLOAD_STALLED</span></td>
+          <td><span class="act rs">Resend</span></td>
+          <td>Staff. The patient reopens the link and it retries.</td>
+        </tr>
+        <tr>
+          <td><span class="chip">upload</span></td>
+          <td class="what">The recording existed. The transfer failed after its retries were exhausted.
+            <span class="code">UPLOAD_FAILED</span></td>
+          <td><span class="act rs">Resend</span></td>
+          <td>Staff. Same as above.</td>
+        </tr>
+        <tr>
+          <td><span class="chip">failed</span></td>
+          <td class="what">Something went wrong that does not fit the three above.
+            <span class="code">UNKNOWN</span></td>
+          <td><span class="act dig">Investigate</span></td>
+          <td>Us. A row here is a gap in this table.</td>
+        </tr>
+        <tr class="hole">
+          <td><span class="chip none">no chip</span></td>
+          <td class="what">The tab closed mid-transfer. Nothing reports, because every terminal branch needs a tab that is still open.
+            <span class="code">UPLOAD_ABANDONED &middot; not yet emitted</span></td>
+          <td><span class="act no">Unknown</span><span class="open">open</span></td>
+          <td>Nobody, until the page can speak on its way out.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="foot">
+      <b>The last row is the honest one.</b> Four of the five states are now attributable. The fifth is the case where the patient handed the device back and walked away, and the only fix is a beacon fired on the way out of the page.
+    </div>
+  </div>
+</div>
+</body>
+</html>
