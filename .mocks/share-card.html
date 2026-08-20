@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Share card template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* 1200x630 Open Graph card, drawn in Dot Matrix Light so a shared link looks
+     like the site it points at. Rendered to PNG with headless Chrome; params
+     come in on the query string. See .mocks/README for the build command. */
+  :root{
+    --greige:#F2F1ED; --paper:#F7F6F2; --ink:#0F0F0E; --graphite:#4A4A45;
+    --muted:#77776F; --rule:#D5D4CD; --signal:#FF2D1A; --dot:#DAD9D1;
+    --grotesk:'Space Grotesk',system-ui,sans-serif; --mono:'Space Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{width:1200px; height:630px; overflow:hidden}
+  body{
+    background:var(--greige);
+    background-image:radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size:10px 10px;
+    font-family:var(--grotesk); color:var(--ink); -webkit-font-smoothing:antialiased;
+    display:grid; grid-template-columns:1fr; position:relative;
+  }
+  body.hasshot{grid-template-columns:1fr 470px}
+
+  .left{padding:64px 56px 56px; display:flex; flex-direction:column; height:630px}
+  .eyebrow{font-family:var(--mono); font-size:16px; letter-spacing:.18em; text-transform:uppercase; color:var(--signal)}
+  h1{font-size:66px; line-height:1.02; letter-spacing:-.035em; margin-top:26px; text-wrap:balance}
+  body.hasshot h1{font-size:54px}
+  .sub{font-size:21px; line-height:1.45; color:var(--graphite); margin-top:24px; max-width:34ch}
+  body.hasshot .sub{font-size:18px; max-width:30ch}
+  .foot{margin-top:auto; display:flex; align-items:center; gap:16px; padding-top:28px; border-top:1px solid var(--rule)}
+  .foot .nm{font-weight:700; font-size:22px; letter-spacing:-.02em}
+  .foot .dm{font-family:var(--mono); font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-left:auto}
+  .dot{width:11px; height:11px; background:var(--signal); flex:none}
+
+  /* the artwork bleeds off the right edge, cropped to its most legible corner */
+  .shot{position:relative; overflow:hidden; border-left:1px solid var(--rule); background:var(--paper)}
+  .shot img{position:absolute; top:0; left:0; width:auto; height:100%; max-width:none}
+  .shot.wide img{width:150%; height:auto; top:50%; transform:translateY(-50%)}
+</style>
+</head>
+<body>
+<div class="left">
+  <span class="eyebrow" id="k">Case study</span>
+  <h1 id="t">Title</h1>
+  <p class="sub" id="s"></p>
+  <div class="foot">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="nm">Jason Penrod</span>
+    <span class="dm">jpcreativesolutions.com</span>
+  </div>
+</div>
+<div class="shot" id="shot" hidden><img id="img" alt=""></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  document.getElementById('k').textContent = q.get('k') || 'Case study';
+  document.getElementById('t').textContent = q.get('t') || '';
+  document.getElementById('s').textContent = q.get('s') || '';
+  const src = q.get('img');
+  if (src) {
+    document.body.classList.add('hasshot');
+    const shot = document.getElementById('shot');
+    shot.hidden = false;
+    if (q.get('fit') === 'wide') shot.classList.add('wide');
+    document.getElementById('img').src = src;
+  }
+</script>
+</body>
+</html>
