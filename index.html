@@ -110,15 +110,25 @@
   .console .screen{min-height:252px; justify-content:flex-start; gap:var(--s13)}
   @media(max-width:900px){.console .screen{min-height:0}}
   /* the proof shot: the claim on the screen, and the thing that backs it up */
-  .proofshot{display:block; margin-top:var(--s13); border-radius:16px; overflow:hidden;
-    box-shadow:var(--press); background:var(--greige); color:inherit;
-    transition:box-shadow var(--ease) .144s}
+  .proofshot{position:relative; margin-top:var(--s13); border-radius:16px; overflow:hidden;
+    box-shadow:var(--press); background:var(--greige)}
+  .proofshot .plink{display:block; color:inherit}
   .proofshot img{display:block; width:100%; height:auto}
-  .proofshot .pmeta{display:flex; align-items:baseline; gap:var(--s8); flex-wrap:wrap; padding:var(--s13) var(--s13) var(--s8)}
+  .proofshot .pmeta{display:flex; align-items:baseline; gap:var(--s8); flex-wrap:wrap; padding:var(--s13) var(--s13) 0}
   .proofshot .pk{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--bronze)}
   .proofshot .pn{font-family:var(--grotesk); font-weight:600; font-size:15px; color:var(--ink); letter-spacing:-.01em}
-  .proofshot .pgo{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite); margin-left:auto}
+  /* pinned to three lines so sliding through proofs does not resize the card */
+  .proofshot .pwhy{display:block; font-size:13px; line-height:1.4; color:var(--graphite); padding:var(--s5) var(--s13) 0; min-height:4.2em}
+  @media(max-width:900px){.proofshot .pwhy{min-height:0}}
+  .proofshot .pgo{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite); padding:var(--s8) var(--s13) var(--s13)}
   .proofshot:hover .pgo{color:var(--ink)}
+  /* slide control, sitting on the artwork so it never pushes the copy around */
+  .pnav{position:absolute; top:var(--s8); right:var(--s8); display:flex; align-items:center; gap:2px;
+    background:var(--greige); border-radius:999px; padding:3px; box-shadow:var(--raise-sm)}
+  .pnav .pb{width:26px; height:26px; border:0; border-radius:50%; background:transparent; cursor:pointer;
+    font-family:var(--grotesk); font-size:17px; line-height:1; color:var(--graphite); padding:0}
+  .pnav .pb:hover{color:var(--ink); background:var(--greige-hi)}
+  .pnav .pix{font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--graphite); padding:0 var(--s5)}
   .console .knobrow{display:flex; align-items:center; gap:var(--s21); margin-top:var(--s21)}
   .knob{width:104px; height:104px; border-radius:50%; position:relative; background:var(--greige); box-shadow:var(--raise); cursor:grab; flex:none; border:0; padding:0; touch-action:none}
   .knob:active,.knob.dragging{cursor:grabbing}
@@ -284,14 +294,22 @@
           <span class="read-era" id="readEra">Figure out what to build first</span>
           <p class="read-cap" id="readCap">Most projects do not fail on execution. They fail because everything looked equally important on day one. I find the one thing that has to be true, and tell you what to cut.</p>
         </div>
-        <a class="proofshot" id="proofLink" href="/work/youth-as-experts.html">
-          <img id="proofImg" src="/images/thumbs/scope.png" alt="" width="700" height="394" decoding="async">
-          <span class="pmeta">
-            <span class="pk">Proof</span>
-            <span class="pn" id="proofName">Youth as Experts</span>
+        <div class="proofshot">
+          <a class="plink" id="proofLink" href="/work/informed-consent-telemetry.html">
+            <img id="proofImg" src="/images/thumbs/telemetry.png" alt="" width="700" height="394" decoding="async">
+            <span class="pmeta">
+              <span class="pk">Proof</span>
+              <span class="pn" id="proofName">The consent that never recorded</span>
+            </span>
+            <span class="pwhy" id="proofWhy">Two weeks of planned build, cut because the telemetry said the cheap fix was enough.</span>
             <span class="pgo">Read the case study &rarr;</span>
-          </span>
-        </a>
+          </a>
+          <div class="pnav">
+            <button class="pb" id="proofPrev" type="button" aria-label="Previous proof">&lsaquo;</button>
+            <span class="pix" id="proofIdx" aria-live="polite">1 / 2</span>
+            <button class="pb" id="proofNext" type="button" aria-label="Next proof">&rsaquo;</button>
+          </div>
+        </div>
         <div class="knobrow">
           <button class="knob" id="knob" role="slider" aria-label="Turn to change what I do" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" aria-valuetext="Figure out what to build first" title="Drag to turn, or tap to advance">
             <span class="ticks" id="ticks" aria-hidden="true"></span>
@@ -521,18 +539,38 @@
     var eras = [
       { name:'Figure out what to build first',
         cap:'Most projects do not fail on execution. They fail because everything looked equally important on day one. I find the one thing that has to be true, and tell you what to cut.',
-        proof:'Youth as Experts', href:'/work/youth-as-experts.html', img:'/images/thumbs/scope.png',
-        alt:'Teenagers\u2019 prototype from a design-thinking workshop, built in paper and clay.' },
+        proofs:[
+          { n:'The consent that never recorded', href:'/work/informed-consent-telemetry.html', img:'/images/thumbs/telemetry.png',
+            why:'Two weeks of planned build, cut because the telemetry said the cheap fix was enough.',
+            alt:'A diagnostics board listing stuck consent sessions, each with the reason it failed.' },
+          { n:'Youth as Experts', href:'/work/youth-as-experts.html', img:'/images/thumbs/youth.png',
+            why:'A room of teenagers decided what the product should be. I facilitated, then built what they asked for.',
+            alt:'A prototype built in paper and clay during a design-thinking workshop.' }
+        ] },
       { name:'Build it',
         cap:'Not a deck about the thing. The thing. Working software, in front of real users, in weeks. Twenty years of product judgment plus AI-augmented build speed.',
-        proof:'The consent session', href:'/work/informed-consent-session.html', img:'/images/thumbs/build.png',
-        alt:'A patient consent session mid-playback, the patient\u2019s own camera feed running beside the clinical video.' },
+        proofs:[
+          { n:'The consent session', href:'/work/informed-consent-session.html', img:'/images/thumbs/session.png',
+            why:'Records the patient, tracks attention, enforces no-skip, and says so before it does. Live in clinics.',
+            alt:'A patient consent session mid-playback, the patient\u2019s camera feed running beside the clinical video.' },
+          { n:'Step Up Your Game', href:'/work/step-up-your-game.html', img:'/images/thumbs/stepup.png',
+            why:'Wireframes to a working product flow for a sports-medicine platform for young athletes.',
+            alt:'Major screens from a sports-medicine platform for young athletes.' },
+          { n:'Tarot CoPilot', href:'/work/tarot-copilot.html', img:'/images/thumbs/tarot.png',
+            why:'Built for nobody but me, which is how you can tell I keep my hands in the current medium.',
+            alt:'The Tarot CoPilot custom GPT landing screen.' }
+        ] },
       { name:'Make the complicated thing clear',
         cap:'Data products, decision tools, anything where someone has to understand something hard and then act on it. I invented a chart type once because the existing ones were not telling the truth.',
-        proof:'Data + Design', href:'/work/data-and-design.html', img:'/images/thumbs/clarify.png',
-        alt:'A collection of dashboards grouped by the decision each one supports.' }
-    ];
-    var ticks = document.getElementById('ticks');
+        proofs:[
+          { n:'What a doctor has to disclose', href:'/work/informed-consent-research.html', img:'/images/thumbs/research.png',
+            why:'A legal standard nobody can state precisely, made legible enough for a clinician to sign in eight minutes.',
+            alt:'The research cockpit: a readiness gauge, a review pipeline, and two flagged findings.' },
+          { n:'Data + Design', href:'/work/data-and-design.html', img:'/images/thumbs/data.png',
+            why:'Dashboards leaders actually use, and a chart type invented because the existing ones were not telling the truth.',
+            alt:'A collection of dashboards grouped by the decision each one supports.' }
+        ] }
+    ];    var ticks = document.getElementById('ticks');
     if(ticks){
       // Fibonacci-feeling tick ring, three champagne detents at the era stops
       var N = 21, span = 300, start = -150;
@@ -551,6 +589,29 @@
     var pLink  = document.getElementById('proofLink');
     var pImg   = document.getElementById('proofImg');
     var pName  = document.getElementById('proofName');
+    var pWhy   = document.getElementById('proofWhy');
+    var pIdx   = document.getElementById('proofIdx');
+    var pPrev  = document.getElementById('proofPrev');
+    var pNext  = document.getElementById('proofNext');
+    var slide  = 0;   // which proof within the current position
+
+    // Paint one proof. Kept separate from paint() so the arrows can move
+    // through a position's proofs without re-rendering the dial.
+    function paintProof(){
+      var list = eras[cur].proofs, p = list[slide];
+      if(pLink) pLink.setAttribute('href', p.href);
+      if(pName) pName.textContent = p.n;
+      if(pWhy)  pWhy.textContent  = p.why;
+      if(pImg){ pImg.setAttribute('src', p.img); pImg.setAttribute('alt', p.alt); }
+      if(pIdx)  pIdx.textContent  = (slide+1) + ' / ' + list.length;
+    }
+    function nudge(step){
+      var n = eras[cur].proofs.length;
+      slide = (slide + step + n) % n;
+      paintProof();
+    }
+    if(pPrev) pPrev.addEventListener('click', function(e){ e.preventDefault(); nudge(-1); });
+    if(pNext) pNext.addEventListener('click', function(e){ e.preventDefault(); nudge(1); });
     var knob   = document.getElementById('knob');
     var labels = Array.prototype.slice.call(document.querySelectorAll('.kl'));
     var stops  = [-150, 0, 150];  // three detents across the 300deg sweep
@@ -561,9 +622,8 @@
       if(readE) readE.textContent = eras[cur].name;
       if(readI) readI.textContent = '0' + (cur+1) + ' / 03';
       if(readC) readC.textContent = eras[cur].cap;
-      if(pLink) pLink.setAttribute('href', eras[cur].href);
-      if(pName) pName.textContent = eras[cur].proof;
-      if(pImg){ pImg.setAttribute('src', eras[cur].img); pImg.setAttribute('alt', eras[cur].alt); }
+      slide = 0;            // a new position always opens on its strongest proof
+      paintProof();
       labels.forEach(function(l,idx){ l.setAttribute('aria-selected', idx===cur ? 'true':'false'); });
       if(knob){ knob.setAttribute('aria-valuenow', cur); knob.setAttribute('aria-valuetext', eras[cur].name); }
     }
