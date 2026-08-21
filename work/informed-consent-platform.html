@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Two Apps</title>
+<meta name="description" content="inFormed Consent from the inside: the practice portal a clinic staffer drives, and the admin app behind it.">
+<link rel="canonical" href="https://jpcreativesolutions.com/work/informed-consent-platform.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Jason Penrod">
+<meta property="og:url" content="https://jpcreativesolutions.com/work/informed-consent-platform.html">
+<meta property="og:title" content="The Two Apps">
+<meta property="og:description" content="inFormed Consent from the inside: the practice portal a clinic staffer drives, and the admin app behind it.">
+<meta property="og:image" content="https://jpcreativesolutions.com/images/share/informed-consent-platform.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Two Apps">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Two Apps">
+<meta name="twitter:description" content="inFormed Consent from the inside: the practice portal a clinic staffer drives, and the admin app behind it.">
+<meta name="twitter:image" content="https://jpcreativesolutions.com/images/share/informed-consent-platform.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/work/case.css">
+<style>
+  /* page-specific: a screen and its commentary, side by side, alternating */
+  .screen-row{display:grid; grid-template-columns:1fr 1fr; gap:var(--s34); align-items:start;
+              padding-top:var(--s55); margin-top:var(--s55); border-top:1px solid rgba(33,30,24,.1)}
+  .screen-row:first-of-type{border-top:0; margin-top:var(--s21); padding-top:0}
+  @media(max-width:900px){.screen-row{grid-template-columns:1fr; gap:var(--s21)}}
+  .screen-row .note{display:flex; flex-direction:column; gap:var(--s13); position:sticky; top:var(--s89)}
+  @media(max-width:900px){.screen-row .note{position:static}}
+  .screen-row .step{background:transparent; box-shadow:none; padding:0; display:block}
+  .screen-row .n{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--bronze)}
+  .screen-row h3{font-size:var(--t-h3); font-weight:600; letter-spacing:-.02em; line-height:1.1}
+  .screen-row p{margin:0; font-size:15px}
+  .screen-row .why{padding:var(--s21); box-shadow:var(--press); background:linear-gradient(160deg, rgba(255,255,255,.32), rgba(201,196,184,.22))}
+  .screen-row .why .k{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--bronze); margin-bottom:var(--s8)}
+  .screen-row .why p{color:var(--ink)}
+  /* the artwork column, reversed on alternate rows so the eye keeps moving */
+  @media(min-width:901px){
+    .screen-row.flip .note{order:2}
+    .screen-row.flip .art{order:1}
+  }
+
+  /* the relative-schedule diagram */
+  .anchors{margin-top:var(--s21); box-shadow:var(--raise); background:var(--greige); padding:var(--s34)}
+  .anchors .axis{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:var(--s21)}
+  @media(max-width:640px){.anchors .axis{grid-template-columns:1fr}}
+  .anchors .st{padding:var(--s21) var(--s13); border-top:1px solid var(--rule-strong, rgba(33,30,24,.35)); display:flex; flex-direction:column; gap:var(--s5)}
+  .anchors .st .w{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--bronze)}
+  .anchors .st .nm{font-family:var(--grotesk); font-weight:600; font-size:var(--t-lead)}
+  .anchors .st .ch{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite)}
+
+  .patentline{display:flex; flex-wrap:wrap; gap:var(--s13); align-items:baseline; margin-top:var(--s21)}
+  .patentline .num{font-family:var(--mono); font-weight:700; font-size:var(--t-lead); letter-spacing:-.01em; color:var(--ink)}
+
+  .pending{padding:var(--s34); box-shadow:var(--press); background:linear-gradient(160deg, rgba(255,255,255,.32), rgba(201,196,184,.22)); margin-top:var(--s21)}
+  .pending p{margin:0; max-width:56ch}
+
+  /* the dashboard is the establishing shot: full wrap width, its own height */
+  .establish{margin:var(--s34) 0 0}
+  .establish .inner.shot{aspect-ratio:auto; min-height:0}
+  .establish .inner.shot img{max-height:none}
+
+  /* the funnel the stat row actually is */
+  .funnel{display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:var(--s21); box-shadow:var(--raise)}
+  @media(max-width:760px){.funnel{grid-template-columns:1fr 1fr}}
+  .fstep{padding:var(--s21); border-right:1px solid var(--greige-lo); display:flex; flex-direction:column; gap:var(--s5)}
+  .fstep:last-child{border-right:0}
+  @media(max-width:760px){.fstep:nth-child(2n){border-right:0} .fstep:nth-child(-n+2){border-bottom:1px solid var(--greige-lo)}}
+  .fstep .v{font-family:var(--mono); font-weight:700; font-size:34px; letter-spacing:-.02em; color:var(--ink); line-height:1}
+  .fstep .k{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--bronze)}
+  .fstep .d{font-size:13px; margin:0}
+  .fstep.drop .v{color:var(--bronze)}
+
+  /* status vocabulary */
+  .verbs{display:flex; flex-wrap:wrap; gap:var(--s13); margin-top:var(--s21)}
+  .verb{padding:var(--s8) var(--s13); box-shadow:var(--raise-sm); font-family:var(--mono); font-size:11px;
+        letter-spacing:.12em; text-transform:uppercase; color:var(--ink)}
+</style>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap row">
+    <a class="back" href="/">&larr; Jason Penrod</a>
+    <a class="pill" href="/#contact"><span class="led live" aria-hidden="true"></span> Available</a>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="chero" aria-labelledby="h">
+    <div class="kicker">
+      <span class="tag">Case study</span>
+      <span class="tag">Product &amp; UX</span>
+      <span class="tag">Healthtech</span>
+    </div>
+    <h1 id="h">The two apps</h1>
+    <p class="sub">Everything patients see gets written about. This is the other side: the portal a clinic staffer actually drives, and the admin app behind it. Two audiences, one system, and almost none of it visible from the outside.</p>
+    <div class="metarow">
+      <div class="m"><div class="k">My role</div><div class="v">Co-founder &amp; CTO</div></div>
+      <div class="m"><div class="k">Company</div><div class="v">inFormed Consent</div></div>
+      <div class="m"><div class="k">Year</div><div class="v">2020 to now</div></div>
+      <div class="m"><div class="k">Stack</div><div class="v">Next.js, AI avatars</div></div>
+    </div>
+    <div class="patentline">
+      <span class="mono">US Patent</span>
+      <span class="num">11,501,875 B1</span>
+      <span class="mono">Informed patient consent through video tracking</span>
+      <span><a href="https://patents.google.com/patent/US11501875B1/en" target="_blank" rel="noopener">View the patent &rarr;</a></span>
+    </div>
+    <figure class="frame establish reveal">
+      <div class="inner shot"><img src="../images/informed-consent-platform/practice-00-dashboard.jpg" alt="The practice portal dashboard: a four-card funnel reading created, viewed by patient, signed by patient and countersigned; an Active Sessions panel grouping patient sessions under Active now, Today and Tomorrow with a live progress bar on one; and a right column carrying the practice, the clinician profile, a seven-day delivery-channel breakdown and a security audit card." width="1440" height="1390" loading="eager" decoding="async"></div>
+      <figcaption class="cap">Figure 01 &middot; the practice portal dashboard</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="p0">
+    <div class="headblock reveal">
+      <p class="eyebrow">The shape of it</p>
+      <h2 id="p0">The patient app is the easy one to design</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>A patient uses this product once. They get a link, they watch, they sign, they never come back. You can afford to be generous with their attention, explain everything, and design every screen for someone who has never seen it before.</p>
+      <p>The staff side is the opposite. A scheduler at the front desk touches it forty times a week between phone calls, on a shared machine, with a patient standing there. Nothing can require reading. Nothing can require remembering. And the whole thing has to survive the fact that the surgery date, which is what the entire sequence hangs off, usually does not exist yet when the journey starts.</p>
+      <p>That is the design problem. It resolves across two surfaces: a dashboard that says what is stuck, and a five-step flow for sending a patient down a journey. Both are below, screen by screen.</p>
+    </div>
+  </section>
+
+  <!-- ============================ THE DASHBOARD ============================ -->
+  <section aria-labelledby="pd">
+    <div class="headblock reveal">
+      <p class="eyebrow">Part one &middot; the dashboard</p>
+      <h2 id="pd">What a Monday morning looks like</h2>
+      <p>This is the first screen after sign-in, and it has to answer one question before anybody reads a word: is anything wrong right now.</p>
+    </div>
+
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Four numbers across the top. They look like a stat row, and every dashboard has one. This one is not four metrics, it is a funnel, and the order is the whole point.</p>
+    </div>
+
+    <div class="funnel reveal">
+      <div class="fstep">
+        <span class="k">Created</span>
+        <span class="v">12</span>
+        <p class="d">Sessions the practice sent today. The only number staff control directly.</p>
+      </div>
+      <div class="fstep drop">
+        <span class="k">Viewed by patient</span>
+        <span class="v">8</span>
+        <p class="d">Four never opened it. This is the gap worth chasing, and the only one a phone call fixes.</p>
+      </div>
+      <div class="fstep">
+        <span class="k">Signed by patient</span>
+        <span class="v">5</span>
+        <p class="d">Three opened it and did not finish. A different problem, needing a different intervention.</p>
+      </div>
+      <div class="fstep">
+        <span class="k">Countersigned</span>
+        <span class="v">5</span>
+        <p class="d">The clinician's signature. Until this lands, the consent is not complete.</p>
+      </div>
+    </div>
+
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>Reading left to right you get a story rather than a scoreboard. Twelve went out, four were never opened, three stalled part way, five are done. Each drop-off has a different cause and a different fix, and a practice can work the list without anybody explaining the numbers to them.</p>
+      <p>The last column is the one people forget. A patient signature does not finish a consent. The clinician has to countersign, and if that number trails the one beside it, the practice has a pile of incomplete legal records and no idea. Putting countersigned in the funnel makes the clinician's own backlog visible to the clinician.</p>
+    </div>
+
+    <div class="readout reveal">
+      <div class="k">What the top of the screen is for</div>
+      <p>Not how much did we do. Which of these is stuck, and who has to move it.</p>
+    </div>
+
+    <div class="headblock reveal" style="margin-top:var(--s55)">
+      <p class="eyebrow">The session list</p>
+      <h2>Grouped by when, described in verbs</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Sessions sit under <strong>active now</strong>, <strong>today</strong> and <strong>tomorrow</strong>, not under a status column you sort. Same principle as the journeys board further down: a clinic schedules by day, so the software should too.</p>
+      <p>And every session says what is happening in the present tense, with a timestamp attached.</p>
+    </div>
+    <div class="verbs reveal">
+      <span class="verb">Watching video &middot; just now</span>
+      <span class="verb">Ready to sign &middot; 1h ago</span>
+      <span class="verb">Link opened &middot; 4h ago</span>
+      <span class="verb">Not sent &middot; scheduled tomorrow</span>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>None of those is a percentage or a state name. They are descriptions of a person, which is what a scheduler is actually tracking. <em>Ready to sign</em> tells someone to make a call. <em>In progress, 64 percent</em> tells them nothing they can act on.</p>
+      <p>The one exception earns it: the patient part-way through a video gets a live bar, because that is the patented video tracking surfacing in the staff view. Someone watching right now is the one case where a percentage is a fact rather than a summary.</p>
+    </div>
+
+    <div class="headblock reveal" style="margin-top:var(--s55)">
+      <p class="eyebrow">The right column</p>
+      <h2>Three cards that answer questions nobody asked out loud</h2>
+    </div>
+    <div class="three reveal" style="margin-top:var(--s21)">
+      <div class="qcard">
+        <span class="n">1</span>
+        <p><strong>Who am I, here.</strong> Practice, colleagues, the clinician's own profile and their procedure library count. Consent is attributed to a person, so the person is on screen.</p>
+      </div>
+      <div class="qcard">
+        <span class="n">2</span>
+        <p><strong>How are we reaching people.</strong> Seven days of delivery split across SMS, email and in-clinic. When more than half of everything lands by text, that changes how the content gets written.</p>
+      </div>
+      <div class="qcard">
+        <span class="n">3</span>
+        <p><strong>Is this still safe.</strong> A live security audit card with the compliance state on it, in the sidebar rather than the footer.</p>
+      </div>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>The third one is the least obvious and the most deliberate. Compliance badges normally live in a footer or a marketing page, where they are a claim. Putting the audit state in the working sidebar makes it a reading, and a reading can be wrong in a way a badge never is. That is the point: a practice handling consent needs to be told when something has changed, not reassured that it has not.</p>
+    </div>
+
+    <div class="pullquote reveal">
+      <p>The top of a dashboard should say what is stuck, not what got done.</p>
+      <div class="who">The rule this screen is built on</div>
+    </div>
+  </section>
+
+  <!-- ============================ PRACTICE PORTAL ============================ -->
+  <section aria-labelledby="p1">
+    <div class="headblock reveal">
+      <p class="eyebrow">Part two &middot; the journeys</p>
+      <h2 id="p1">Sending one</h2>
+      <p>Five screens, start to finish. This is the whole job: pick a journey, pick a patient, anchor it to two appointments, and then watch it run itself.</p>
+    </div>
+
+    <div class="screen-row reveal">
+      <div class="note">
+        <span class="n">Screen 01</span>
+        <h3>The unit of work is a journey, not a form</h3>
+        <p>A practice does not send a consent document. It moves a patient through a sequence: an introduction, an answer to the questions everyone asks, then the consent itself. The library holds journeys, each with a stage count and a mix of information and consent steps.</p>
+        <div class="why">
+          <div class="k">Why it matters</div>
+          <p>Naming the object correctly closes off a whole family of bad screens. Call it a form and you get a document manager, a send button, and a patient who receives a legal PDF cold.</p>
+        </div>
+      </div>
+      <figure class="frame art">
+        <div class="inner shot"><img src="../images/informed-consent-platform/practice-01-journey-templates.png" alt="The Journey templates tab in the practice portal, listing two journeys, Abbott SCS Trial and Standard SCS Implant, each with three stages, a consent-and-info badge pair, a Send button and a View stages link." loading="lazy" decoding="async"></div>
+        <figcaption class="cap">Journey templates &middot; synced with the cloud library</figcaption>
+      </figure>
+    </div>
+
+    <div class="screen-row flip reveal">
+      <div class="note">
+        <span class="n">Screen 02</span>
+        <h3>Provider first, then patient</h3>
+        <p>Send opens a three-step wizard: patient, schedule, done. The provider selector sits above the patient search, and it is not a convenience field.</p>
+        <div class="why">
+          <div class="k">Why it matters</div>
+          <p>A consent is attributed to a named clinician. It is a legal artefact, not a mailing, and whoever is named on it is the one whose disclosure obligation was discharged. Putting the provider above the patient makes that ordering visible instead of burying it in a default.</p>
+        </div>
+      </div>
+      <figure class="frame art">
+        <div class="inner shot"><img src="../images/informed-consent-platform/practice-02-choose-patient.png" alt="The send wizard on its Patient step: a three-dot progress indicator reading patient, schedule, done, a provider dropdown, a patient search field, and a scrollable list of patient rows with their names and email addresses blurred out." loading="lazy" decoding="async"></div>
+        <figcaption class="cap">Choose the patient and provider &middot; names and addresses redacted for publication</figcaption>
+      </figure>
+    </div>
+
+    <div class="screen-row reveal">
+      <div class="note">
+        <span class="n">Screen 03</span>
+        <h3>Two dates, and the sequence places itself</h3>
+        <p>The scheduler enters a consultation date and, if it is known, a surgery date. Every stage then schedules relative to those anchors rather than to the calendar: the introduction goes at journey start, the FAQ one day after the consultation, the consent two days before surgery. Each stage also carries its own delivery channel.</p>
+        <div class="why">
+          <div class="k">Why it matters</div>
+          <p>Surgery is marked optional, set after consult, and that single word carries the hardest requirement in the product. In a real clinic the surgery date does not exist yet at consultation time. A system that demands it up front is a system that never gets used. So the journey starts on one date and back-fills the second, and the consent stage stays unscheduled until it can be.</p>
+        </div>
+      </div>
+      <figure class="frame art">
+        <div class="inner shot"><img src="../images/informed-consent-platform/practice-03-schedule-and-delivery.png" alt="The wizard's Schedule step: consultation and surgery date fields, with surgery marked optional, above three stage cards. Introduction is an info stage at journey start delivered by email, FAQ is an info stage one day after consultation delivered by SMS, and Consent is an e-consent stage two days before surgery delivered by launch." loading="lazy" decoding="async"></div>
+        <figcaption class="cap">Set appointment anchors and delivery</figcaption>
+      </figure>
+    </div>
+
+    <div class="anchors reveal">
+      <p class="eyebrow" style="margin:0">The relative schedule, in full</p>
+      <div class="axis">
+        <div class="st">
+          <span class="w">At journey start</span>
+          <span class="nm">Introduction</span>
+          <span class="ch">Info &middot; email</span>
+        </div>
+        <div class="st">
+          <span class="w">Consultation &plus; 1 day</span>
+          <span class="nm">FAQ</span>
+          <span class="ch">Info &middot; SMS</span>
+        </div>
+        <div class="st">
+          <span class="w">Surgery &minus; 2 days</span>
+          <span class="nm">Consent</span>
+          <span class="ch">E-consent &middot; launch</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>The channel changes down the sequence and that is deliberate too. The introduction is an email, because it can be long and it can wait. The FAQ is an SMS, because it lands the day after a consultation when the questions are actually forming and nobody opens email. The consent launches a session, because it is the only step that has to be watched.</p>
+    </div>
+
+    <div class="screen-row flip reveal">
+      <div class="note">
+        <span class="n">Screen 04</span>
+        <h3>Confirm what will happen, not that something saved</h3>
+        <p>The final step does not say &ldquo;success.&rdquo; It says all three stages are scheduled, they appear in the Schedule, and each one sends automatically when its date arrives.</p>
+        <div class="why">
+          <div class="k">Why it matters</div>
+          <p>The scheduler is about to walk away and trust an automation with a legal document. A tick and the word saved answers a question nobody asked. Stating the mechanism is what lets someone stop thinking about it, which is the entire value of the feature.</p>
+        </div>
+      </div>
+      <figure class="frame art">
+        <div class="inner shot"><img src="../images/informed-consent-platform/practice-04-journey-started.png" alt="The wizard's Done step: a green check, the heading Journey started, and text explaining that all three stages are scheduled, appear in the Schedule, and each sends automatically when its date arrives." loading="lazy" decoding="async"></div>
+        <figcaption class="cap">Journey started</figcaption>
+      </figure>
+    </div>
+
+    <div class="screen-row reveal">
+      <div class="note">
+        <span class="n">Screen 05</span>
+        <h3>A board about what is next, not what happened</h3>
+        <p>Journeys in progress, filtered by active, on hold, stopped and all. Each card carries the stage position, a segmented progress bar, both appointment dates, and one line in accent colour: the next scheduled message and its date.</p>
+        <div class="why">
+          <div class="k">Why it matters</div>
+          <p>Most operational dashboards are activity logs pointed backwards. The only question a clinic has is whether anything is about to go wrong before an appointment, so the next action is the most prominent thing on every card and history is a click away.</p>
+        </div>
+      </div>
+      <figure class="frame art">
+        <div class="inner shot"><img src="../images/informed-consent-platform/practice-05-journeys-in-progress.png" alt="The Journeys in progress board: five active patient cards, each showing the patient initials, journey name, stage position out of three, a segmented progress bar, consultation and surgery dates, and the next scheduled message with its date." loading="lazy" decoding="async"></div>
+        <figcaption class="cap">Journeys in progress &middot; active</figcaption>
+      </figure>
+    </div>
+
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>Two details on that board took longer to settle than the layout. The progress bar is segmented rather than continuous, because a journey is three discrete legal events and a smooth bar implies a percentage that does not exist. And a stage that is waiting on a date the practice has not entered yet reads <em>awaiting next stage</em> rather than showing as stalled, because it is not a failure, it is the surgery date problem showing up again downstream.</p>
+    </div>
+
+    <div class="pullquote reveal">
+      <p>The staff app is used forty times a week, between phone calls, with a patient standing there.</p>
+      <div class="who">The constraint every screen above is answering</div>
+    </div>
+
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>One last thing, in the top right of every screen: a <strong>masked</strong> toggle, sitting beside the theme switch. One click blanks patient-identifying text across the whole portal.</p>
+      <p>It exists because of where this software actually runs. A front-desk monitor faces a waiting room. A laptop gets turned around to show someone a date. The privacy requirement is not really about databases, it is about people walking past a screen, and that needs a control the person at the desk can hit in one motion without navigating anywhere.</p>
+    </div>
+  </section>
+
+  <!-- ============================ ADMIN APP ============================ -->
+  <section aria-labelledby="p2">
+    <div class="headblock reveal">
+      <p class="eyebrow">Part three &middot; the admin app</p>
+      <h2 id="p2">What sits behind it</h2>
+    </div>
+    <div class="pending reveal">
+      <p>The research cockpit, the governance queue and the diagnostics board all live on this side. Selected screens and commentary are being pulled together now, and land here next.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p3">
+    <div class="headblock reveal">
+      <p class="eyebrow">Related</p>
+      <h2 id="p3">Three pieces of this system, in depth</h2>
+    </div>
+    <div class="three reveal" style="margin-top:var(--s21)">
+      <a class="card link" href="/work/informed-consent-research.html">
+        <span class="role">AI system design</span>
+        <h3>What a doctor has to disclose</h3>
+        <p>A research agent reads the literature. A clinician signs what a patient will hear.</p>
+        <div class="go">Read the case study &rarr;</div>
+      </a>
+      <a class="card link" href="/work/informed-consent-session.html">
+        <span class="role">Product &amp; UX</span>
+        <h3>The consent session</h3>
+        <p>It records you, watches whether you are looking, and will not let you skip.</p>
+        <div class="go">Read the case study &rarr;</div>
+      </a>
+      <a class="card link" href="/work/informed-consent-telemetry.html">
+        <span class="role">Telemetry &amp; diagnostics</span>
+        <h3>The consent that never recorded</h3>
+        <p>Recordings started going missing and most of them could not say why.</p>
+        <div class="go">Read the case study &rarr;</div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta reveal">
+      <span class="pill"><span class="led live" aria-hidden="true"></span> Taking on work</span>
+      <h2>Have an internal app nobody wants to use?</h2>
+      <p style="max-width:52ch">Staff software gets designed last and used most. Tell me who has to drive it and what it costs them when it is slow.</p>
+      <a class="btn primary" href="/#contact"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="row">
+    <span><a href="/">&larr; Back to Jason Penrod</a></span>
+    <span>The two apps &middot; case study</span>
+  </div>
+</footer>
+<script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = [].slice.call(document.querySelectorAll('.reveal'));
+    if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>
