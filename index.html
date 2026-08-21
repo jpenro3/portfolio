@@ -110,11 +110,20 @@
   /* Dot-matrix readout. The page is printed on a 10px dot grid that until now
      carried no information; this is the same grid, finer, lit. Unlit dots take
      the page's own --dot so the display reads as the ground switched on. */
-  .dmx{display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,3px);
-    grid-auto-columns:3px; gap:1px; justify-content:start; margin:0 0 var(--s13)}
+  .dmx{--pitch:3px;
+    display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,var(--pitch));
+    grid-auto-columns:var(--pitch); gap:1px; justify-content:start; margin:0 0 var(--s13)}
   .dmx i{border-radius:50%; background:var(--dot)}
   .dmx i.on{background:var(--ink)}
-  @media(max-width:900px){.dmx{transform-origin:left center}}
+  /* the strip is a fixed number of columns, so on a narrow console the dot
+     shrinks rather than the display pushing the page sideways */
+  @media(max-width:900px){
+    .dmx{--pitch:2px}
+    /* the dial is a fixed 104px and the label stack wants 182 more; on a phone
+       that sum was dragging the whole hero column past the viewport edge. */
+    .knobrow{flex-wrap:wrap}
+    .knoblabels{flex:1 1 100%; min-width:0}
+  }
   .console .screen{min-height:256px; justify-content:flex-start; gap:var(--s13)}
   @media(max-width:900px){.console .screen{min-height:0}}
   /* the proof shot: the claim on the screen, and the thing that backs it up */
@@ -125,7 +134,13 @@
   .proofshot .plink{display:block; color:inherit}
   .proofshot .pimg{display:block}
   .proofshot img{display:block; width:100%; height:auto; border-bottom:1px solid var(--rule-strong)}
-  .proofshot .pmeta{display:flex; align-items:baseline; gap:var(--s8); flex-wrap:wrap; padding:var(--s13) var(--s13) 0}
+  /* nowrap, so a long proof name ellipsises instead of pushing the label to a
+     second line and growing the card. .pn needs min-width:0 to be shrinkable. */
+  .proofshot .pmeta{display:flex; align-items:baseline; gap:var(--s8); flex-wrap:nowrap; padding:var(--s13) var(--s13) 0}
+  .proofshot .pk{flex:none}
+  /* nowrap is a desktop fix for card height; on a narrow card it becomes a
+     minimum width the hero column cannot shrink under, so wrap comes back. */
+  @media(max-width:900px){.proofshot .pmeta{flex-wrap:wrap}}
   .proofshot .pk{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--bronze)}
   .proofshot .pn{font-family:var(--grotesk); font-weight:600; font-size:15px; color:var(--ink); letter-spacing:-.01em}
   /* hard-pinned so the card cannot resize as you slide through it. Three lines is
@@ -134,7 +149,7 @@
   .proofshot .pwhy{display:block; font-size:13px; line-height:1.4; color:var(--graphite);
     padding:var(--s5) var(--s13) 0; height:60px; overflow:hidden}
   /* the title is one line, ellipsised, for the same reason */
-  .proofshot .pn{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%}
+  .proofshot .pn{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; flex:1}
   @media(max-width:900px){.proofshot .pwhy{height:auto; min-height:60px}}
   .proofshot .pgo{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite); padding:var(--s8) var(--s13) var(--s13)}
   .proofshot:hover .pgo{color:var(--ink)}
@@ -321,6 +336,19 @@
           <span class="mono">What I do</span>
         </div>
         <div class="dmx" id="dmx" role="img" aria-label="Position readout"></div>
+        <div class="knobrow">
+          <button class="knob" id="knob" role="slider" aria-label="Turn to change what I do" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" aria-valuetext="Figure out what to build first" title="Drag to turn, or tap to advance">
+            <span class="ticks" id="ticks" aria-hidden="true"></span>
+            <span class="grip" aria-hidden="true"></span>
+            <span class="ind" id="ind" aria-hidden="true"></span>
+          </button>
+          <div class="knoblabels" role="tablist" aria-label="What I do">
+            <button class="kl" role="tab" aria-selected="true"  data-era="0"><span class="dot" aria-hidden="true"></span> Scope</button>
+            <button class="kl" role="tab" aria-selected="false" data-era="1"><span class="dot" aria-hidden="true"></span> Build</button>
+            <button class="kl" role="tab" aria-selected="false" data-era="2"><span class="dot" aria-hidden="true"></span> Clarify</button>
+          </div>
+        </div>
+        <div class="hint">Turn the dial &middot; every claim has a receipt</div>
         <div class="screen" role="status" aria-live="polite">
           <span class="read-era" id="readEra">Figure out what to build first</span>
           <p class="read-cap" id="readCap">Most projects do not fail on execution. They fail because everything looked equally important on day one. I find the one thing that has to be true, and tell you what to cut.</p>
@@ -344,19 +372,6 @@
             <span class="pgo">Read the case study &rarr;</span>
           </a>
         </div>
-        <div class="knobrow">
-          <button class="knob" id="knob" role="slider" aria-label="Turn to change what I do" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" aria-valuetext="Figure out what to build first" title="Drag to turn, or tap to advance">
-            <span class="ticks" id="ticks" aria-hidden="true"></span>
-            <span class="grip" aria-hidden="true"></span>
-            <span class="ind" id="ind" aria-hidden="true"></span>
-          </button>
-          <div class="knoblabels" role="tablist" aria-label="What I do">
-            <button class="kl" role="tab" aria-selected="true"  data-era="0"><span class="dot" aria-hidden="true"></span> Scope</button>
-            <button class="kl" role="tab" aria-selected="false" data-era="1"><span class="dot" aria-hidden="true"></span> Build</button>
-            <button class="kl" role="tab" aria-selected="false" data-era="2"><span class="dot" aria-hidden="true"></span> Clarify</button>
-          </div>
-        </div>
-        <div class="hint">Turn the dial &middot; every claim has a receipt</div>
       </div>
     </div>
   </section>
