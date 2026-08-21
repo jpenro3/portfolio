@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Overdose Epidemic</title>
+<meta name="description" content="A data storytelling case study: a public dashboard for the American Medical Association that makes an argument, not just a chart.">
+<link rel="canonical" href="https://jpcreativesolutions.com/work/overdose-epidemic.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Jason Penrod">
+<meta property="og:url" content="https://jpcreativesolutions.com/work/overdose-epidemic.html">
+<meta property="og:title" content="The Overdose Epidemic">
+<meta property="og:description" content="A data storytelling case study: a public dashboard for the American Medical Association that makes an argument, not just a chart.">
+<meta property="og:image" content="https://jpcreativesolutions.com/images/share/overdose-epidemic.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Overdose Epidemic">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Overdose Epidemic">
+<meta name="twitter:description" content="A data storytelling case study: a public dashboard for the American Medical Association that makes an argument, not just a chart.">
+<meta name="twitter:image" content="https://jpcreativesolutions.com/images/share/overdose-epidemic.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/work/case.css">
+<style>
+  /* page-specific: the two-number contradiction that is the whole argument */
+  .contradiction{display:grid; grid-template-columns:1fr auto 1fr; gap:var(--s34); align-items:center; margin-top:var(--s34)}
+  @media(max-width:760px){.contradiction{grid-template-columns:1fr; gap:var(--s21)}}
+  .cnum{background:var(--greige); box-shadow:var(--raise); padding:var(--s34); text-align:center}
+  .cnum .big{font-family:var(--mono); font-weight:700; font-size:clamp(38px,6vw,64px); line-height:.95; letter-spacing:-.03em; color:var(--ink)}
+  .cnum .dir{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; margin-top:var(--s13); color:var(--bronze)}
+  .cnum .lbl{font-size:14px; color:var(--graphite); margin:var(--s8) 0 0}
+  .versus{font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--graphite); text-align:center}
+  @media(max-width:760px){.versus{padding:var(--s5) 0}}
+
+  /* the panel set */
+  .panels{display:flex; flex-direction:column; gap:var(--s34); margin-top:var(--s21)}
+  .panel-note{display:flex; gap:var(--s13); align-items:baseline; flex-wrap:wrap; margin-bottom:var(--s13)}
+  .panel-note .tab{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--graphite); padding:var(--s5) var(--s13); box-shadow:var(--raise-sm)}
+  .panel-note .tab.on{color:var(--ink); box-shadow:var(--raise-sm), inset 0 0 0 1.5px var(--champagne)}
+
+  /* the hero artwork is a full page, portrait. Give it a page's width, not a
+     hero band's, so it reads as a screenshot of a site instead of a stretched banner. */
+  .pageshot{max-width:620px; margin-left:0}
+  .pageshot .inner.shot img{max-height:none}
+
+  /* the sequence of questions */
+  .qseq{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s21); margin-top:var(--s34)}
+  @media(max-width:900px){.qseq{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.qseq{grid-template-columns:1fr}}
+</style>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap row">
+    <a class="back" href="/">&larr; Jason Penrod</a>
+    <a class="pill" href="/#contact"><span class="led live" aria-hidden="true"></span> Available</a>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="chero" aria-labelledby="h">
+    <div class="kicker">
+      <span class="tag">Case study</span>
+      <span class="tag">Data storytelling</span>
+      <span class="tag">Public health</span>
+    </div>
+    <h1 id="h">The Overdose Epidemic</h1>
+    <p class="sub">A public data dashboard for the American Medical Association. The hard part was never the chart. It was finding the one sentence the data could actually defend, and then building everything around it.</p>
+    <div class="metarow">
+      <div class="m"><div class="k">My role</div><div class="v">Director of UX</div></div>
+      <div class="m"><div class="k">With</div><div class="v">Playfair Data</div></div>
+      <div class="m"><div class="k">Client</div><div class="v">American Medical Association</div></div>
+      <div class="m"><div class="k">Tools</div><div class="v">Figma, Tableau</div></div>
+    </div>
+    <figure class="frame pageshot reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/overdose-epidemic/hero-dashboard-page.png" alt="The published dashboard on the AMA's End the Epidemic site: a National Snapshot with headline overdose and prescription figures, a per-capita mortality map of the United States, a combined bar and line chart, and a Polysubstance Use section below it." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 01 &middot; the published dashboard, in place on the AMA&rsquo;s End the Epidemic site</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="p1">
+    <div class="headblock reveal">
+      <p class="eyebrow">The argument</p>
+      <h2 id="p1">Two numbers that should not both be true</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Physicians had done the thing they were asked to do. Opioid prescribing fell, year over year, for more than a decade. If prescribing was the cause of the epidemic, the epidemic should have receded with it.</p>
+      <p>It did not. Overdose deaths kept climbing the whole time.</p>
+      <p>That contradiction is the dashboard. Everything else on the page exists to make it hold up under scrutiny, because the conclusion it points to is uncomfortable: if the prescription pad is not what is killing people any more, then policy aimed at the prescription pad is not what will save them.</p>
+    </div>
+    <div class="contradiction reveal">
+      <div class="cnum">
+        <div class="big">49%</div>
+        <div class="dir">Down, 2012 to 2022</div>
+        <p class="lbl">Opioid prescriptions</p>
+      </div>
+      <div class="versus">and yet</div>
+      <div class="cnum">
+        <div class="big">107,941</div>
+        <div class="dir">Still rising</div>
+        <p class="lbl">Overdose deaths, most recent year</p>
+      </div>
+    </div>
+    <div class="readout reveal">
+      <div class="k">The line the dashboard has to earn</div>
+      <p>Policies must focus on increasing access to treatment, not on cutting prescriptions further.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p2">
+    <div class="headblock reveal">
+      <p class="eyebrow">How it was made</p>
+      <h2 id="p2">Ethnography first, then the data schema</h2>
+      <p>Most dashboard projects start with a data extract and a request for &ldquo;something visual.&rdquo; This one started with listening.</p>
+    </div>
+    <div class="rail reveal">
+      <div class="step"><span class="i">01</span><span class="name">Listen</span><p class="d">Sessions with AMA leadership to find the goals and the message they were actually trying to land.</p></div>
+      <div class="step"><span class="i">02</span><span class="name">Hypothesize</span><p class="d">Wrote the hypotheses the dashboard would test, so there was something to be wrong about.</p></div>
+      <div class="step"><span class="i">03</span><span class="name">Interview</span><p class="d">Interview questions built from those hypotheses, to sharpen the narrative before any design.</p></div>
+      <div class="step"><span class="i">04</span><span class="name">Define</span><p class="d">Requested the prior year&rsquo;s raw data. Where it would not carry the argument, defined the schema that would.</p></div>
+      <div class="step"><span class="i">05</span><span class="name">Design</span><p class="d">Iterative design with a junior designer, aesthetic and narrative structure developed together.</p></div>
+      <div class="step"><span class="i">06</span><span class="name">Ship</span><p class="d">Published to the AMA&rsquo;s public site, with the underlying workbook on Tableau Public.</p></div>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>Step four is the one that gets skipped, and it is the one that decides whether the dashboard can make an argument at all. Raw data arrives shaped by whoever collected it, for whatever they needed at the time. If nobody redefines it, the visualisation inherits their question instead of asking yours.</p>
+      <p>Step five is a leadership step as much as a design one. I guided a junior designer through the iteration rather than taking the file. The output is better when the person drawing it understands the argument, and there is a second designer at the end of it who can do this again.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p3">
+    <div class="headblock reveal">
+      <p class="eyebrow">The second half</p>
+      <h2 id="p3">If not prescriptions, then what</h2>
+      <p>Proving the contradiction is only useful if the page then answers the question it raises. The lower half of the dashboard does that, as a four-step sequence rather than a wall of charts.</p>
+    </div>
+    <div class="qseq reveal">
+      <div class="qcard"><span class="n">1</span><p>What is actually causing synthetic opioid overdoses?</p></div>
+      <div class="qcard"><span class="n">2</span><p>What is fentanyl, and why does potency change the math?</p></div>
+      <div class="qcard"><span class="n">3</span><p>Is it fentanyl alone, or fentanyl plus something else?</p></div>
+      <div class="qcard"><span class="n">4</span><p>Which combinations, specifically?</p></div>
+    </div>
+    <div class="panels">
+      <div class="reveal">
+        <div class="panel-note">
+          <span class="tab">Synthetic opioid overdoses</span>
+          <span class="tab on">What is fentanyl?</span>
+          <span class="tab">Polysubstance use</span>
+          <span class="tab">Drug combinations</span>
+        </div>
+        <figure class="frame wide">
+          <div class="inner shot"><img src="../images/overdose-epidemic/panel-what-is-fentanyl.png" alt="The What is Fentanyl panel: explanatory text about pharmaceutical versus illegally made fentanyl beside a half-donut gauge showing fentanyl and fentanyl analogs found in 79 percent of test samples." loading="lazy" decoding="async"></div>
+          <figcaption class="cap">Figure 02 &middot; potency, stated in milligrams, because percentages do not make it real</figcaption>
+        </figure>
+      </div>
+
+      <div class="reveal">
+        <div class="panel-note">
+          <span class="tab">Synthetic opioid overdoses</span>
+          <span class="tab">What is fentanyl?</span>
+          <span class="tab on">Polysubstance use</span>
+          <span class="tab">Drug combinations</span>
+        </div>
+        <figure class="frame wide">
+          <div class="inner shot"><img src="../images/overdose-epidemic/panel-polysubstance-use.png" alt="The Polysubstance Use panel: a donut chart splitting fentanyl-positive samples into 36 percent fentanyl only, 47 percent with one or two additional substances, and 18 percent with three or more." loading="lazy" decoding="async"></div>
+          <figcaption class="cap">Figure 03 &middot; the donut carries its own conclusion in the middle of it</figcaption>
+        </figure>
+      </div>
+
+      <div class="reveal">
+        <div class="panel-note">
+          <span class="tab">Synthetic opioid overdoses</span>
+          <span class="tab">What is fentanyl?</span>
+          <span class="tab">Polysubstance use</span>
+          <span class="tab on">Drug combinations</span>
+        </div>
+        <figure class="frame wide">
+          <div class="inner shot"><img src="../images/overdose-epidemic/panel-drug-combinations.png" alt="The Drug Combinations panel: a ranked bar chart of substance pairings, with bars containing fentanyl coloured separately from those that do not." loading="lazy" decoding="async"></div>
+          <figcaption class="cap">Figure 04 &middot; two colours, one question: does this combination include fentanyl or not</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>The colour rule on the last chart is the whole information-design decision. Every bar could have been one colour and sorted by size. Splitting them into &ldquo;includes fentanyl&rdquo; and &ldquo;no fentanyl&rdquo; turns a ranked list into an answer, and it is legible from across a room.</p>
+      <p>Each panel cites its source in the margin. The claims are the CDC&rsquo;s and the AMA&rsquo;s, linked back so a sceptical reader can leave the page and check. On a public health dashboard, the citation is not a footnote. It is load-bearing.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p4">
+    <div class="headblock reveal">
+      <p class="eyebrow">What I take from it</p>
+      <h2 id="p4">A dashboard is a claim with evidence attached</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Nobody arrives at a public health dashboard wanting to explore. They arrive wanting to know whether the thing they believe is right, and they leave in ninety seconds either way. That is not a data problem. It is a rhetoric problem with a data budget.</p>
+      <p>So the work is: find the claim, test whether the data can defend it, define the schema if it cannot, then design the shortest honest path from the top of the page to the reader believing you.</p>
+    </div>
+    <div class="pullquote reveal">
+      <p>Make it arguable, not just visible.</p>
+      <div class="who">The brief I actually worked to</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta reveal">
+      <span class="pill"><span class="led live" aria-hidden="true"></span> Taking on work</span>
+      <h2>Have data that should be changing someone&rsquo;s mind?</h2>
+      <p style="max-width:52ch">This is finding the argument inside a dataset and building the page that makes it stick. Tell me what you need people to understand.</p>
+      <a class="btn primary" href="/#contact"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="row">
+    <span><a href="/">&larr; Back to Jason Penrod</a></span>
+    <span>The Overdose Epidemic &middot; case study</span>
+  </div>
+</footer>
+<script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = [].slice.call(document.querySelectorAll('.reveal'));
+    if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>

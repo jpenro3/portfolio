@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coral Resilience Data Platform</title>
+<meta name="description" content="A research and information architecture case study: one reef dataset, served at four different resolutions, because a policymaker and a field inspector need the same data differently.">
+<link rel="canonical" href="https://jpcreativesolutions.com/work/coral-resilience.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Jason Penrod">
+<meta property="og:url" content="https://jpcreativesolutions.com/work/coral-resilience.html">
+<meta property="og:title" content="Coral Resilience Data Platform">
+<meta property="og:description" content="A research and information architecture case study: one reef dataset, served at four different resolutions, because a policymaker and a field inspector need the same data differently.">
+<meta property="og:image" content="https://jpcreativesolutions.com/images/share/coral-resilience.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Coral Resilience Data Platform">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Coral Resilience Data Platform">
+<meta name="twitter:description" content="A research and information architecture case study: one reef dataset, served at four different resolutions, because a policymaker and a field inspector need the same data differently.">
+<meta name="twitter:image" content="https://jpcreativesolutions.com/images/share/coral-resilience.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/work/case.css">
+<style>
+  /* page-specific: the context ladder, drawn as a ladder */
+  .ladder{margin-top:var(--s34); display:grid; gap:var(--s13)}
+  .rung{display:grid; grid-template-columns:210px 120px 1fr; gap:var(--s21); align-items:center;
+        padding:var(--s21); box-shadow:var(--raise-sm); background:var(--greige)}
+  @media(max-width:820px){.rung{grid-template-columns:1fr; gap:var(--s8)}}
+  .rung .who{font-family:var(--grotesk); font-weight:600; font-size:16px; color:var(--ink)}
+  .rung .who small{display:block; font-family:var(--mono); font-size:11px; letter-spacing:.06em;
+        text-transform:uppercase; color:var(--graphite); font-weight:400; margin-top:3px}
+  .rung .lvl{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+        color:var(--bronze); display:flex; align-items:center; gap:var(--s8)}
+  .rung .lvl i{display:block; height:1px; background:var(--champagne); flex:1}
+  .rung.high .lvl i{width:56px; flex:none}
+  .rung.mid  .lvl i{width:34px; flex:none}
+  .rung.low  .lvl i{width:12px; flex:none}
+  .rung p{margin:0; font-size:15px}
+
+  /* the two resolutions, side by side */
+  .twoshot{display:grid; grid-template-columns:1fr; gap:var(--s34); margin-top:var(--s21)}
+
+  /* the filter vocabulary */
+  .vocab{display:grid; grid-template-columns:1fr 1fr; gap:var(--s21); margin-top:var(--s21)}
+  @media(max-width:760px){.vocab{grid-template-columns:1fr}}
+  .vocab .col{padding:var(--s21); box-shadow:var(--raise-sm); background:var(--greige)}
+  .vocab .col h3{font-size:var(--t-body); font-weight:700; margin-bottom:var(--s13)}
+  .vocab .chips{display:flex; flex-wrap:wrap; gap:var(--s8)}
+  .vocab .chips span{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+        color:var(--graphite); padding:var(--s5) var(--s13); box-shadow:var(--raise-sm)}
+</style>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap row">
+    <a class="back" href="/">&larr; Jason Penrod</a>
+    <a class="pill" href="/#contact"><span class="led live" aria-hidden="true"></span> Available</a>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="chero" aria-labelledby="h">
+    <div class="kicker">
+      <span class="tag">Case study</span>
+      <span class="tag">User research</span>
+      <span class="tag">Information architecture</span>
+    </div>
+    <h1 id="h">Coral Resilience Data Platform</h1>
+    <p class="sub">Collect, analyse and visualise coral reef health for researchers, conservationists and policymakers. The research question that decided the whole architecture was not what the data should show. It was who needed it at which altitude.</p>
+    <div class="metarow">
+      <div class="m"><div class="k">My role</div><div class="v">Head of UX strategy</div></div>
+      <div class="m"><div class="k">With</div><div class="v">FIVE, LLC</div></div>
+      <div class="m"><div class="k">Year</div><div class="v">2019 to 2020</div></div>
+      <div class="m"><div class="k">Deliverable</div><div class="v">Research &amp; platform IA</div></div>
+    </div>
+    <figure class="frame wide hero-figure reveal">
+      <div class="inner shot"><img src="../images/coral-resilience/hero-my-coral-datasets.png" alt="The My Coral Datasets view: a project called Galapagos Temperature Resilience, with four study sites listed down the left, each carrying a reef photograph, an alert level and a temperature sparkline, beside a heat map of the Galapagos with numbered pins matching the sites." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 01 &middot; a single project view: four study sites, their alert levels, and where they sit on the water</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="p1">
+    <div class="headblock reveal">
+      <p class="eyebrow">The problem</p>
+      <h2 id="p1">The same data, needed at four different altitudes</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Marine conservation runs on a dataset that has to serve people who could not be further apart. A policymaker needs one defensible number and a map. A geneticist needs the phylogenetic tree and a sequence search. A field inspector needs something simple enough to use standing on a dock.</p>
+      <p>Build for the middle of that range and you build a tool nobody uses. The policymaker finds it unreadable, the researcher finds it shallow, and the inspector never opens it.</p>
+      <p>So the research was not about features. It was about resolution.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p2">
+    <div class="headblock reveal">
+      <p class="eyebrow">The research</p>
+      <h2 id="p2">Five experts, four countries, one ladder</h2>
+      <p>I interviewed five domain experts working in marine conservation and the international wildlife trade, and plotted each of them on a context ladder rather than writing personas.</p>
+    </div>
+
+    <div class="ladder reveal">
+      <div class="rung high">
+        <div class="who">Luke Warwick<small>Wildlife Conservation Society</small></div>
+        <div class="lvl"><i></i> High level</div>
+        <p>High level orientation to the overview. Leads global shark strategy; needs the shape of the picture, not the rows underneath it.</p>
+      </div>
+      <div class="rung mid">
+        <div class="who">Daniel Fernando<small>Blue Resources Trust &middot; Sri Lanka</small></div>
+        <div class="lvl"><i></i> Mid level</div>
+        <p>Very knowledgeable about the need for both low level training and high level policy. The rung that proved the ladder had to be continuous, not two products.</p>
+      </div>
+      <div class="rung low">
+        <div class="who">Stan Shea<small>Bloom Association &middot; Hong Kong</small></div>
+        <div class="lvl"><i></i> Low level</div>
+        <p>Social aspects of the trade; working with government is critical. Detail, in context, with the politics attached.</p>
+      </div>
+      <div class="rung low">
+        <div class="who">Rima Jabado<small>Gulf Elasmo Project &middot; UAE</small></div>
+        <div class="lvl"><i></i> Low level</div>
+        <p>Simple tools for inspectors on the ground, grass roots focus. Lead author of a visual identification guide, so the bar for &ldquo;simple&rdquo; was set by someone who had already built one.</p>
+      </div>
+      <div class="rung high">
+        <div class="who">Michael F. Tlusty<small>Real-time trade monitoring</small></div>
+        <div class="lvl"><i></i> High level</div>
+        <p>Building capacity for real-time monitoring of the aquatic trade. Cares about the feed and the flow, not any single record.</p>
+      </div>
+    </div>
+
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot"><img src="../images/coral-resilience/user-research-context-ladder.png" alt="The user research artefact: five expert profile cards in a row, and beneath them a line chart labelled CONTEXT plotting each expert at High, Mid or Low level, with a note under each explaining what they need." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 02 &middot; the research artefact itself. The line is the finding</figcaption>
+    </figure>
+
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>Plotted, the five experts do not cluster. They fall into a U: high, mid, low, low, high. That shape is the entire argument for the architecture. There is no single default view that serves this group, and there is no clean split into &ldquo;expert mode&rdquo; and &ldquo;simple mode&rdquo; either, because Daniel sits in the middle and needs to move between both.</p>
+      <p>A persona deck would have produced three archetypes and hidden that. The ladder made it impossible to ignore.</p>
+    </div>
+
+    <div class="pullquote reveal">
+      <p>They did not need different data. They needed different altitudes over the same data.</p>
+      <div class="who">What the ladder settled</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="p3">
+    <div class="headblock reveal">
+      <p class="eyebrow">The architecture</p>
+      <h2 id="p3">One dataset, two doors</h2>
+      <p>The ladder resolved into a platform with a shared spine and two entry points, so a user can start at their own altitude and climb in either direction without changing tools.</p>
+    </div>
+
+    <div class="twoshot">
+      <figure class="frame wide reveal">
+        <div class="inner shot"><img src="../images/coral-resilience/community-datasets-analysis.png" alt="The Community Coral Datasets view: a global map dense with coloured data points across the Pacific and Indian oceans, beside a phylogenetic tree search, a BLAST sequence search, and a data summary panel of counts for projects, primary sites, files, cases, genes and mutations." loading="lazy" decoding="async"></div>
+        <figcaption class="cap">Figure 03 &middot; the community view: everything, everywhere, with search that assumes you are a scientist</figcaption>
+      </figure>
+    </div>
+
+    <div class="three reveal" style="margin-top:var(--s34)">
+      <div class="qcard"><span class="n">A</span><p><strong>Community datasets.</strong> The whole shared corpus. A global map to orient, then phylogenetic and sequence search for people who came to dig.</p></div>
+      <div class="qcard"><span class="n">B</span><p><strong>My datasets.</strong> One project, a handful of study sites, alert levels and trend lines. The working view for the person collecting the data.</p></div>
+      <div class="qcard"><span class="n">C</span><p><strong>The shared spine.</strong> Projects, Exploration, Analysis, Repository. Same four words in both doors, so moving between them costs nothing.</p></div>
+    </div>
+
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>The study-site row is where the ladder shows up most concretely. Each site carries a photograph, a named location, an alert level and a sparkline, in that order. The photograph and the alert level answer the low-altitude question in under a second. The sparkline answers the mid-altitude one. The click answers the rest.</p>
+      <p>Nothing is hidden behind a mode switch. The resolution is stacked inside the row.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p4">
+    <div class="headblock reveal">
+      <p class="eyebrow">The vocabulary</p>
+      <h2 id="p4">Two filter families, named the way the field names them</h2>
+      <p>Filters are an information architecture decision disguised as a UI control. These are split the way the science is split, and they use the field&rsquo;s own abbreviations rather than friendlier invented ones.</p>
+    </div>
+    <div class="vocab reveal">
+      <div class="col">
+        <h3>Environmental</h3>
+        <div class="chips">
+          <span>SST</span><span>SST anomaly</span><span>SST trend</span>
+          <span>Hot spots</span><span>DHW</span><span>BAA</span>
+        </div>
+      </div>
+      <div class="col">
+        <h3>Biological</h3>
+        <div class="chips">
+          <span>Phylogenetic</span><span>Biological interactions</span>
+          <span>Genomics</span><span>Thermal responses</span>
+        </div>
+      </div>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Degree heating weeks and bleaching alert areas are not friendly terms. They are also the terms every person in this study already uses, in papers and in the field. Translating them would have made the platform easier for someone who was never going to use it and harder for everyone who was.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p5">
+    <div class="headblock reveal">
+      <p class="eyebrow">What I take from it</p>
+      <h2 id="p5">Plot the users before you segment them</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>The useful move on this project cost about an hour: instead of sorting five interviews into personas, I put them on one axis and looked at the shape. The shape was a U, and a U cannot be served by a default view or by a two-mode split.</p>
+      <p>Segmentation decides the answer before you have looked. Plotting lets the answer be surprising.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta reveal">
+      <span class="pill"><span class="led live" aria-hidden="true"></span> Taking on work</span>
+      <h2>Have one dataset and several audiences who disagree about it?</h2>
+      <p style="max-width:52ch">This is the research that decides the architecture, before anyone draws a screen. Tell me who has to use it.</p>
+      <a class="btn primary" href="/#contact"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="row">
+    <span><a href="/">&larr; Back to Jason Penrod</a></span>
+    <span>Coral Resilience Data Platform &middot; case study</span>
+  </div>
+</footer>
+<script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = [].slice.call(document.querySelectorAll('.reveal'));
+    if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>

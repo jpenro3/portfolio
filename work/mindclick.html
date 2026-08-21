@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MindClick</title>
+<meta name="description" content="A data pipeline and information design case study: three unrelated sustainability measures joined into one supplier grade a buyer can act on in a single page.">
+<link rel="canonical" href="https://jpcreativesolutions.com/work/mindclick.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Jason Penrod">
+<meta property="og:url" content="https://jpcreativesolutions.com/work/mindclick.html">
+<meta property="og:title" content="MindClick">
+<meta property="og:description" content="A data pipeline and information design case study: three unrelated sustainability measures joined into one supplier grade a buyer can act on in a single page.">
+<meta property="og:image" content="https://jpcreativesolutions.com/images/share/mindclick.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="MindClick">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MindClick">
+<meta name="twitter:description" content="A data pipeline and information design case study: three unrelated sustainability measures joined into one supplier grade a buyer can act on in a single page.">
+<meta name="twitter:image" content="https://jpcreativesolutions.com/images/share/mindclick.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/work/case.css">
+<style>
+  /* page-specific: the three-input model, drawn as a join */
+  .model{margin-top:var(--s34)}
+  .inputs{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s21)}
+  @media(max-width:860px){.inputs{grid-template-columns:1fr}}
+  .inp{background:var(--greige); box-shadow:var(--raise); padding:var(--s21); display:flex; flex-direction:column; gap:var(--s8)}
+  .inp .src{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--bronze)}
+  .inp h3{font-size:var(--t-body); font-weight:700}
+  .inp p{margin:0; font-size:14px}
+  .inp .unit{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--graphite); margin-top:auto; padding-top:var(--s13)}
+
+  .joinbar{display:grid; place-items:center; padding:var(--s21) 0}
+  .joinbar .arrow{font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--graphite)}
+
+  .grade{background:var(--greige); box-shadow:var(--raise); padding:var(--s34); text-align:center}
+  .grade .lbl{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--bronze)}
+  .grade .val{font-family:var(--grotesk); font-weight:700; font-size:clamp(28px,4vw,44px); letter-spacing:-.03em; margin-top:var(--s8)}
+
+  /* the five-tier scale */
+  .scale{display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin-top:var(--s21); box-shadow:var(--raise)}
+  @media(max-width:760px){.scale{grid-template-columns:1fr}}
+  .tier{padding:var(--s21); border-right:1px solid var(--greige-lo); display:flex; flex-direction:column; gap:var(--s8)}
+  .tier:last-child{border-right:0}
+  @media(max-width:760px){.tier{border-right:0; border-bottom:1px solid var(--greige-lo)} .tier:last-child{border-bottom:0}}
+  .tier .t{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink)}
+  .tier .bar{height:4px; background:var(--greige-lo)}
+  .tier p{margin:0; font-size:13px}
+  .tier.t0 .bar{background:var(--greige-lo)}
+  .tier.t1 .bar{background:var(--led-magenta)}
+  .tier.t2 .bar{background:var(--led-amber)}
+  .tier.t3 .bar{background:var(--champagne)}
+  .tier.t4 .bar{background:var(--led-green)}
+
+  /* the nine dimensions */
+  .dims{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s13); margin-top:var(--s21)}
+  @media(max-width:640px){.dims{grid-template-columns:1fr 1fr}}
+  .dim{padding:var(--s13) var(--s21); box-shadow:var(--raise-sm); font-family:var(--mono); font-size:11px;
+       letter-spacing:.1em; text-transform:uppercase; color:var(--graphite); display:flex; align-items:center; gap:var(--s8)}
+  .dim b{font-family:var(--grotesk); font-size:15px; color:var(--ink); letter-spacing:-.01em}
+</style>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap row">
+    <a class="back" href="/">&larr; Jason Penrod</a>
+    <a class="pill" href="/#contact"><span class="led live" aria-hidden="true"></span> Available</a>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="chero" aria-labelledby="h">
+    <div class="kicker">
+      <span class="tag">Case study</span>
+      <span class="tag">Data pipeline</span>
+      <span class="tag">Information design</span>
+    </div>
+    <h1 id="h">MindClick</h1>
+    <p class="sub">A supplier sustainability rating for a global hospitality brand. Three measures that had nothing to do with each other, joined into one grade a buyer could act on without leaving the page.</p>
+    <div class="metarow">
+      <div class="m"><div class="k">My role</div><div class="v">Head of UX strategy</div></div>
+      <div class="m"><div class="k">With</div><div class="v">FIVE, LLC</div></div>
+      <div class="m"><div class="k">Year</div><div class="v">2019 to 2020</div></div>
+      <div class="m"><div class="k">Tools</div><div class="v">Tableau Prep, Tableau</div></div>
+    </div>
+    <div class="readout reveal" style="margin-top:var(--s34)">
+      <div class="k">The buyer&rsquo;s actual question</div>
+      <p>Is this supplier better or worse than the others I could buy from, and by how much?</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p1">
+    <div class="headblock reveal">
+      <p class="eyebrow">The problem</p>
+      <h2 id="p1">Sustainability data does not arrive comparable</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>A procurement lead choosing between two suppliers is not running an ESG audit. They have a category to fill, a shortlist, and about a minute. They need a comparison.</p>
+      <p>What exists instead is three unrelated things. A facility reports emissions against whatever baseline year it picked. The same facility self-declares environmental and labour commitments, in prose. Somewhere else entirely, individual products get scored on their own attributes. None of the three share a unit, a scale, or a scope, and two of them are about the factory while the third is about the box.</p>
+      <p>Nobody can hold that in their head. So the work was not visualisation. It was deciding, defensibly, how three incompatible measures become one number.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p2">
+    <div class="headblock reveal">
+      <p class="eyebrow">The model</p>
+      <h2 id="p2">Three inputs, one join, one grade</h2>
+    </div>
+    <div class="model">
+      <div class="inputs reveal">
+        <div class="inp">
+          <span class="src">Tier 1 &middot; facility</span>
+          <h3>Emissions against a baseline</h3>
+          <p>What the facility actually emits now, measured against the year it started counting. Movement, not absolute size, so a small supplier is not automatically the winner.</p>
+          <span class="unit">Unit: change vs. baseline year</span>
+        </div>
+        <div class="inp">
+          <span class="src">Tier 2 &middot; facility</span>
+          <h3>Environmental and labour commitments</h3>
+          <p>What the facility says it is committed to, on the environment and on labour. Declared rather than measured, and weighted accordingly.</p>
+          <span class="unit">Unit: commitment coverage</span>
+        </div>
+        <div class="inp">
+          <span class="src">Tier 3 &middot; product</span>
+          <h3>Product scoring, nine dimensions</h3>
+          <p>The item itself, scored across nine attributes. The only tier that answers &ldquo;is this specific thing any good,&rdquo; and the one a buyer recognises.</p>
+          <span class="unit">Unit: nine scored dimensions</span>
+        </div>
+      </div>
+
+      <div class="joinbar reveal"><span class="arrow">joined in Tableau Prep &darr;</span></div>
+
+      <div class="grade reveal">
+        <div class="lbl">One comparable rating, per supplier, per category</div>
+        <div class="val">Substandard &rarr; Starter &rarr; Achiever &rarr; Leader</div>
+      </div>
+    </div>
+
+    <div class="body-col reveal" style="margin-top:var(--s34)">
+      <p>The join is the product. Everything downstream is presentation, and everything upstream is somebody else&rsquo;s data collection. The decisions that matter all live in the middle: which tier dominates, what happens when a tier is missing, and whether a supplier who declines to answer is scored as bad or scored as unknown.</p>
+      <p>That last one is not a technical question. It is an editorial one, and it changes who wins.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p3">
+    <div class="headblock reveal">
+      <p class="eyebrow">The scale</p>
+      <h2 id="p3">Five tiers, and one of them is not a score</h2>
+      <p>The rating a buyer sees has five positions. The first is deliberately not a grade.</p>
+    </div>
+    <div class="scale reveal">
+      <div class="tier t0"><div class="bar"></div><span class="t">No response</span><p>The supplier did not answer. Reported as absent, never averaged into a grade as if it were a low one.</p></div>
+      <div class="tier t1"><div class="bar"></div><span class="t">Substandard</span><p>Answered, and below the floor. A real finding, not a missing one.</p></div>
+      <div class="tier t2"><div class="bar"></div><span class="t">Starters</span><p>Has begun. Enough to be worth a conversation.</p></div>
+      <div class="tier t3"><div class="bar"></div><span class="t">Achievers</span><p>Meeting the standard across the tiers that were measured.</p></div>
+      <div class="tier t4"><div class="bar"></div><span class="t">Leaders</span><p>Ahead of the category. The bar the rest are compared against.</p></div>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Keeping <em>no response</em> outside the scale is the single most consequential decision on the page. Fold silence into the low end and every scorecard quietly punishes suppliers for having a slow compliance team rather than a dirty factory, and the buyer cannot tell which is which.</p>
+      <p>Held separate, silence stays legible. A category that is 25 percent unanswered is telling the buyer something true, and it is telling the client where to go chase paperwork.</p>
+    </div>
+    <div class="pullquote reveal">
+      <p>Missing is not the same as bad. If the chart cannot say that, the chart is lying.</p>
+      <div class="who">The rule the scale is built on</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="p4">
+    <div class="headblock reveal">
+      <p class="eyebrow">The page</p>
+      <h2 id="p4">One supplier, one category, one comparison</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>The scorecard resolves to a single screen with the same three moves every time. Pick a product category. See this supplier&rsquo;s distribution across the five tiers. See the category total beside it, as the thing to beat.</p>
+      <p>Two bars and a table. The bars answer the question at a glance and the table lets someone check the arithmetic, because a procurement lead who cannot check the arithmetic will not stake a contract on it.</p>
+    </div>
+    <div class="three reveal" style="margin-top:var(--s21)">
+      <div class="qcard"><span class="n">1</span><p><strong>Filter to the category.</strong> Ratings only mean anything within a category. Comparing a diaper supplier to a flooring supplier is noise.</p></div>
+      <div class="qcard"><span class="n">2</span><p><strong>Supplier against category total.</strong> Side by side, same scale, same colours. The comparison is the visual, not a computed delta.</p></div>
+      <div class="qcard"><span class="n">3</span><p><strong>The table underneath.</strong> Exact percentages per tier, so the claim can be audited rather than trusted.</p></div>
+    </div>
+    <p class="mono reveal" style="margin-top:var(--s21)">Live scorecards carry named suppliers and their ratings, so the built pages are not published here. The structure above is the deliverable; the data belongs to the client.</p>
+  </section>
+
+  <section aria-labelledby="p5">
+    <div class="headblock reveal">
+      <p class="eyebrow">The system underneath</p>
+      <h2 id="p5">A design system, because there was never going to be one scorecard</h2>
+      <p>Every supplier in every category needs this page. That is not a design problem, it is a manufacturing problem, and it gets solved once.</p>
+    </div>
+    <div class="dims reveal">
+      <div class="dim"><b>Type scale</b></div>
+      <div class="dim"><b>Sector palettes</b></div>
+      <div class="dim"><b>Rating colours</b></div>
+      <div class="dim"><b>Chart grammar</b></div>
+      <div class="dim"><b>Table styling</b></div>
+      <div class="dim"><b>Prep flow</b></div>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Two parts of that system did more work than the rest. The rating colours, because five tiers used consistently everywhere means a reader learns the scale once and never re-reads a legend. And the Prep flow, because the join has to be reproducible: the same three tiers, the same missing-data rule, every refresh, or the ratings stop being comparable across time.</p>
+      <p>The palette also had to carry sector, since the same index gets applied to more than hospitality. A colour per sector, defined centrally, so a scorecard reads as itself before you have read a word of it.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="p6">
+    <div class="headblock reveal">
+      <p class="eyebrow">What I take from it</p>
+      <h2 id="p6">The hardest decisions are editorial, not technical</h2>
+    </div>
+    <div class="body-col reveal" style="margin-top:var(--s21)">
+      <p>Joining three datasets is a Tuesday. Deciding what a non-response means, which tier outranks which, and whether a facility&rsquo;s promise counts as much as its meter reading, is the actual work, and no amount of tooling makes those calls for you.</p>
+      <p>Get them right and a buyer trusts a single grade. Get them wrong and you have built a very fast way to be confidently unfair to a supplier.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta reveal">
+      <span class="pill"><span class="led live" aria-hidden="true"></span> Taking on work</span>
+      <h2>Have several measures that need to become one number?</h2>
+      <p style="max-width:52ch">This is the join, the missing-data rule, and the page that makes the result defensible. Tell me what has to be compared.</p>
+      <a class="btn primary" href="/#contact"><span class="dotled" aria-hidden="true"></span> Start the conversation</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="row">
+    <span><a href="/">&larr; Back to Jason Penrod</a></span>
+    <span>MindClick &middot; case study</span>
+  </div>
+</footer>
+<script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = [].slice.call(document.querySelectorAll('.reveal'));
+    if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>
