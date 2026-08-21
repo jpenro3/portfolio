@@ -107,6 +107,14 @@
   .screen .read-cap{font-size:14px; color:var(--graphite); line-height:1.45; margin:0; max-width:none; min-height:2.9em}
   /* the readout must not change height as the dial turns, or the whole console
      jumps under the cursor. Pinned to the tallest of the three positions. */
+  /* Dot-matrix readout. The page is printed on a 10px dot grid that until now
+     carried no information; this is the same grid, finer, lit. Unlit dots take
+     the page's own --dot so the display reads as the ground switched on. */
+  .dmx{display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,3px);
+    grid-auto-columns:3px; gap:1px; justify-content:start; margin:0 0 var(--s13)}
+  .dmx i{border-radius:50%; background:var(--dot)}
+  .dmx i.on{background:var(--ink)}
+  @media(max-width:900px){.dmx{transform-origin:left center}}
   .console .screen{min-height:256px; justify-content:flex-start; gap:var(--s13)}
   @media(max-width:900px){.console .screen{min-height:0}}
   /* the proof shot: the claim on the screen, and the thing that backs it up */
@@ -311,8 +319,8 @@
       <div class="console" aria-hidden="false">
         <div class="facehead">
           <span class="mono">What I do</span>
-          <span class="mono" style="color:var(--bronze)" id="readIdx">01 / 03</span>
         </div>
+        <div class="dmx" id="dmx" role="img" aria-label="Position readout"></div>
         <div class="screen" role="status" aria-live="polite">
           <span class="read-era" id="readEra">Figure out what to build first</span>
           <p class="read-cap" id="readCap">Most projects do not fail on execution. They fail because everything looked equally important on day one. I find the one thing that has to be true, and tell you what to cut.</p>
@@ -597,6 +605,56 @@
 <script>
   // ---- Medium dial: the thesis you can turn ----
   (function(){
+    // ---- 5x7 dot font -------------------------------------------------
+    // Only the glyphs this readout needs. Each row is five bits, MSB left.
+    var FONT = {
+      ' ':[0,0,0,0,0,0,0],
+      '/':[1,1,2,4,8,8,16],
+      '0':[14,17,19,21,25,17,14], '1':[4,12,4,4,4,4,14],
+      '2':[14,17,1,2,4,8,31],     '3':[31,2,4,2,1,17,14],
+      '4':[2,6,10,18,31,2,2],     '5':[31,16,30,1,1,17,14],
+      '6':[6,8,16,30,17,17,14],   '7':[31,1,2,4,8,8,8],
+      '8':[14,17,17,14,17,17,14], '9':[14,17,17,15,1,2,12],
+      'A':[14,17,17,31,17,17,17], 'B':[30,17,17,30,17,17,30],
+      'C':[14,17,16,16,16,17,14], 'D':[28,18,17,17,17,18,28],
+      'E':[31,16,16,30,16,16,31], 'F':[31,16,16,30,16,16,16],
+      'I':[14,4,4,4,4,4,14],      'L':[16,16,16,16,16,16,31],
+      'O':[14,17,17,17,17,17,14], 'P':[30,17,17,30,16,16,16],
+      'R':[30,17,17,30,20,18,17], 'S':[15,16,16,14,1,1,30],
+      'U':[17,17,17,17,17,17,14], 'Y':[17,17,10,4,4,4,4]
+    };
+    var dmx = document.getElementById('dmx');
+    var dmxCols = [];           // one array of 7 <i> per column
+    function dmxWrite(text){
+      if(!dmx) return;
+      var cols = [];            // each entry is a 7-bit column, top bit = row 0
+      for(var c = 0; c < text.length; c++){
+        var g = FONT[text.charAt(c)] || FONT[' '];
+        for(var x = 4; x >= 0; x--){          // glyph is 5 columns wide
+          var col = 0;
+          for(var y = 0; y < 7; y++) if(g[y] & (1 << x)) col |= (1 << y);
+          cols.push(col);
+        }
+        cols.push(0);                          // one blank column between glyphs
+      }
+      // Build the grid once, then only toggle. Rebuilding on every turn of the
+      // dial would thrash 500 nodes for a change of a few pixels.
+      while(dmxCols.length < cols.length){
+        var holder = [];
+        for(var r = 0; r < 7; r++){
+          var dot = document.createElement('i');
+          dmx.appendChild(dot); holder.push(dot);
+        }
+        dmxCols.push(holder);
+      }
+      for(var i = 0; i < dmxCols.length; i++){
+        var bits = i < cols.length ? cols[i] : 0;
+        for(var r2 = 0; r2 < 7; r2++){
+          dmxCols[i][r2].className = (bits & (1 << r2)) ? 'on' : '';
+        }
+      }
+    }
+
     var eras = [
       { name:'Figure out what to build first',
         cap:'Most projects do not fail on execution. They fail because everything looked equally important on day one. I find the one thing that has to be true, and tell you what to cut.',
@@ -654,7 +712,6 @@
     }
     var ind    = document.getElementById('ind');
     var readE  = document.getElementById('readEra');
-    var readI  = document.getElementById('readIdx');
     var readC  = document.getElementById('readCap');
     var pLink  = document.getElementById('proofLink');
     var pImg   = document.getElementById('proofImg');
@@ -699,12 +756,13 @@
     var knob   = document.getElementById('knob');
     var labels = Array.prototype.slice.call(document.querySelectorAll('.kl'));
     var stops  = [-150, 0, 150];  // three detents across the 300deg sweep
+    var SHORT  = ['SCOPE', 'BUILD', 'CLARIFY'];   // the machine label, for the readout
     var cur = 0;
 
     function paint(i){
       cur = (i + eras.length) % eras.length;
       if(readE) readE.textContent = eras[cur].name;
-      if(readI) readI.textContent = '0' + (cur+1) + ' / 03';
+      dmxWrite('0' + (cur+1) + '/03 ' + SHORT[cur]);
       if(readC) readC.textContent = eras[cur].cap;
       slide = 0;            // a new position always opens on its strongest proof
       buildLeds(eras[cur].proofs.length);
