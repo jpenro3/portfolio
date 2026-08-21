@@ -119,21 +119,36 @@
   .proofshot .pmeta{display:flex; align-items:baseline; gap:var(--s8); flex-wrap:wrap; padding:var(--s13) var(--s13) 0}
   .proofshot .pk{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--bronze)}
   .proofshot .pn{font-family:var(--grotesk); font-weight:600; font-size:15px; color:var(--ink); letter-spacing:-.01em}
-  /* hard-pinned to three lines: the card must not resize as you slide through it */
+  /* hard-pinned so the card cannot resize as you slide through it. Four lines,
+     because the knob's gutter narrows the column and the longest proof needs them.
+     Height is in px, not em: with border-box, an em height would eat the padding. */
   .proofshot .pwhy{display:block; font-size:13px; line-height:1.4; color:var(--graphite);
-    padding:var(--s5) var(--s13) 0; height:4.2em; overflow:hidden}
+    padding:var(--s5) var(--s13) 0; height:78px; overflow:hidden}
   /* the title is one line, ellipsised, for the same reason */
   .proofshot .pn{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%}
-  @media(max-width:900px){.proofshot .pwhy{height:auto; min-height:4.2em}}
+  @media(max-width:900px){.proofshot .pwhy{height:auto; min-height:60px}}
   .proofshot .pgo{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite); padding:var(--s8) var(--s13) var(--s13)}
   .proofshot:hover .pgo{color:var(--ink)}
   /* slide control, sitting on the artwork so it never pushes the copy around */
-  .pnav{position:absolute; top:var(--s8); right:var(--s8); display:flex; align-items:center; gap:0;
-    background:var(--greige); border:1px solid var(--rule-strong); padding:2px}
-  .pnav .pb{width:24px; height:24px; border:0; background:transparent; cursor:pointer;
-    font-family:var(--grotesk); font-size:17px; line-height:1; color:var(--graphite); padding:0}
-  .pnav .pb:hover{color:var(--ink); background:var(--greige-hi)}
-  .pnav .pix{font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--graphite); padding:0 var(--s5)}
+  /* the slide picker, as a small sibling of the era dial below it. It sits on the
+     card's chin rather than over the artwork, which it was covering a third of. */
+  .pnav{position:absolute; right:var(--s13); bottom:var(--s13); display:flex; flex-direction:column;
+    align-items:center; gap:3px}
+  .pnav .pix{font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--graphite)}
+  /* the copy keeps clear of it instead of flowing under it */
+  .proofshot .pwhy,.proofshot .pgo{padding-right:78px}
+  .pknob{position:relative; width:52px; height:52px; flex:none; padding:0; cursor:grab;
+    border:1px solid var(--rule-strong); border-radius:50%; background:var(--greige);
+    touch-action:none; -webkit-user-select:none; user-select:none}
+  .pknob:active,.pknob.dragging{cursor:grabbing}
+  .pknob .grip{position:absolute; inset:7px; border-radius:50%; border:1px solid var(--rule); background:var(--paper)}
+  .pknob .ind{position:absolute; left:50%; top:5px; width:2px; height:14px; margin-left:-1px; background:var(--signal);
+    transform-origin:50% 21px; transition:transform .34s cubic-bezier(.2,1.2,.3,1)}
+  .pknob.dragging .ind{transition:none}
+  .pknob .ticks i{position:absolute; left:50%; top:-3px; width:1px; height:4px; margin-left:-.5px;
+    background:var(--rule); transform-origin:50% 29px}
+  .pknob .ticks i.on{background:var(--rule-strong); height:6px}
+  @media(prefers-reduced-motion:reduce){.pknob .ind{transition:none}}
   .console .knobrow{display:flex; align-items:center; gap:var(--s21); margin-top:var(--s21)}
   .knob{width:104px; height:104px; border-radius:50%; position:relative; background:var(--greige); box-shadow:var(--raise); cursor:grab; flex:none; border:0; padding:0; touch-action:none}
   .knob:active,.knob.dragging{cursor:grabbing}
@@ -310,9 +325,14 @@
             <span class="pgo">Read the case study &rarr;</span>
           </a>
           <div class="pnav">
-            <button class="pb" id="proofPrev" type="button" aria-label="Previous proof">&lsaquo;</button>
+            <button class="pknob" id="proofKnob" type="button" role="slider"
+                    aria-label="Turn to change the proof" aria-valuemin="1" aria-valuemax="2" aria-valuenow="1"
+                    title="Turn, or tap to advance">
+              <span class="ticks" id="proofTicks" aria-hidden="true"></span>
+              <span class="grip" aria-hidden="true"></span>
+              <span class="ind" aria-hidden="true"></span>
+            </button>
             <span class="pix" id="proofIdx" aria-live="polite">1 / 2</span>
-            <button class="pb" id="proofNext" type="button" aria-label="Next proof">&rsaquo;</button>
           </div>
         </div>
         <div class="knobrow">
@@ -596,9 +616,24 @@
     var pName  = document.getElementById('proofName');
     var pWhy   = document.getElementById('proofWhy');
     var pIdx   = document.getElementById('proofIdx');
-    var pPrev  = document.getElementById('proofPrev');
-    var pNext  = document.getElementById('proofNext');
+    var pKnob  = document.getElementById('proofKnob');
+    var pTicks = document.getElementById('proofTicks');
+    var pInd   = pKnob ? pKnob.querySelector('.ind') : null;
     var slide  = 0;   // which proof within the current position
+    var SWEEP  = 104; // degrees across the whole set, matching the era dial's feel
+
+    // A position can hold two proofs or three, so the detent ring is rebuilt
+    // whenever the dial moves rather than drawn once.
+    function knobAngle(idx, n){ return n < 2 ? 0 : -SWEEP/2 + idx * (SWEEP/(n-1)); }
+    function buildTicks(n){
+      if(!pTicks) return;
+      pTicks.textContent = '';
+      for(var t=0; t<n; t++){
+        var el = document.createElement('i');
+        el.style.transform = 'rotate(' + knobAngle(t,n) + 'deg)';
+        pTicks.appendChild(el);
+      }
+    }
 
     // Paint one proof. Kept separate from paint() so the arrows can move
     // through a position's proofs without re-rendering the dial.
@@ -609,14 +644,47 @@
       if(pWhy)  pWhy.textContent  = p.why;
       if(pImg){ pImg.setAttribute('src', p.img); pImg.setAttribute('alt', p.alt); }
       if(pIdx)  pIdx.textContent  = (slide+1) + ' / ' + list.length;
+      if(pInd)  pInd.style.transform = 'rotate(' + knobAngle(slide, list.length) + 'deg)';
+      if(pTicks) Array.prototype.forEach.call(pTicks.children, function(t,idx){
+        t.className = idx === slide ? 'on' : '';
+      });
+      if(pKnob){
+        pKnob.setAttribute('aria-valuemax', list.length);
+        pKnob.setAttribute('aria-valuenow', slide+1);
+        pKnob.setAttribute('aria-valuetext', p.n);
+      }
     }
     function nudge(step){
       var n = eras[cur].proofs.length;
       slide = (slide + step + n) % n;
       paintProof();
     }
-    if(pPrev) pPrev.addEventListener('click', function(e){ e.preventDefault(); nudge(-1); });
-    if(pNext) pNext.addEventListener('click', function(e){ e.preventDefault(); nudge(1); });
+    if(pKnob){
+      // tap advances; drag turns; arrows step. Same three affordances as the big dial.
+      pKnob.addEventListener('click', function(e){ e.preventDefault(); if(!pKnob.dragged) nudge(1); });
+      pKnob.addEventListener('keydown', function(e){
+        var k = e.key;
+        if(k==='ArrowRight'||k==='ArrowUp'){ e.preventDefault(); nudge(1); }
+        else if(k==='ArrowLeft'||k==='ArrowDown'){ e.preventDefault(); nudge(-1); }
+      });
+      var from = null, base = 0;
+      pKnob.addEventListener('pointerdown', function(e){
+        from = e.clientX; base = slide; pKnob.dragged = false;
+        pKnob.classList.add('dragging'); pKnob.setPointerCapture(e.pointerId);
+      });
+      pKnob.addEventListener('pointermove', function(e){
+        if(from === null) return;
+        var d = e.clientX - from;
+        if(Math.abs(d) > 3) pKnob.dragged = true;
+        var n = eras[cur].proofs.length;
+        var want = Math.max(0, Math.min(n-1, base + Math.round(d/26)));
+        if(want !== slide){ slide = want; paintProof(); }
+      });
+      function release(){ from = null; pKnob.classList.remove('dragging'); }
+      pKnob.addEventListener('pointerup', release);
+      pKnob.addEventListener('pointercancel', release);
+      pKnob.addEventListener('lostpointercapture', release);
+    }
     var knob   = document.getElementById('knob');
     var labels = Array.prototype.slice.call(document.querySelectorAll('.kl'));
     var stops  = [-150, 0, 150];  // three detents across the 300deg sweep
@@ -628,6 +696,7 @@
       if(readI) readI.textContent = '0' + (cur+1) + ' / 03';
       if(readC) readC.textContent = eras[cur].cap;
       slide = 0;            // a new position always opens on its strongest proof
+      buildTicks(eras[cur].proofs.length);
       paintProof();
       labels.forEach(function(l,idx){ l.setAttribute('aria-selected', idx===cur ? 'true':'false'); });
       if(knob){ knob.setAttribute('aria-valuenow', cur); knob.setAttribute('aria-valuetext', eras[cur].name); }
