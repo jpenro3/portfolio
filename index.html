@@ -229,6 +229,12 @@
   .faceplate .big{font-family:var(--grotesk); font-weight:700; font-size:40px; letter-spacing:-.02em; color:#2a2416; line-height:1}
   .faceplate .mono{color:#5b5446}
 
+  /* the head card now shows the product instead of the patent plate */
+  .faceshot{align-self:stretch; display:flex; flex-direction:column; gap:var(--s8); margin:0}
+  .faceshot .win{box-shadow:var(--raise-sm); background:var(--greige); overflow:hidden}
+  .faceshot img{display:block; width:100%; height:auto}
+  .faceshot figcaption{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--bronze)}
+
   /* ---- The arc (real sequence) ---- */
   .arc{position:relative}
   .arc .spine{position:absolute; left:19px; top:8px; bottom:8px; width:2px; background:linear-gradient(to bottom, transparent, rgba(167,127,74,.4) 8%, rgba(167,127,74,.4) 92%, transparent)}
@@ -399,24 +405,24 @@
 
       <!-- chapter 1 -->
       <div class="chapter reveal">
-        <div class="card feature head">
+        <a class="card feature head link" href="/work/informed-consent-platform.html">
           <div class="inner">
             <div>
               <span class="role"><span class="led" aria-hidden="true"></span> Co-founder &amp; CTO &middot; 2020 to now &middot; Orlando</span>
               <h3 style="margin:var(--s13) 0">inFormed Consent</h3>
               <p>A patented platform that turns informed consent from a signature into something a patient actually understands. I built the technology from nothing: personalized AI avatars, video-tracked comprehension, live with clinicians.</p>
             </div>
-            <div class="faceplate">
-              <span class="mono">US Patent</span>
-              <span class="big">11,501,875</span>
-              <span class="mono">Informed patient consent<br>through video tracking</span>
-            </div>
+            <figure class="faceshot">
+              <div class="win"><img src="/images/informed-consent-platform/faceplate-dashboard.jpg" alt="The practice portal dashboard: a four-card funnel of created, viewed, signed and countersigned above an Active Sessions list grouped by active now and today." width="1440" height="1030" loading="lazy" decoding="async"></div>
+              <figcaption>Practice portal &middot; dashboard</figcaption>
+            </figure>
           </div>
           <div class="spec">
             <span>Next.js</span><span>AI avatars</span><span>Healthtech</span>
-            <span><a href="https://patents.google.com/patent/US11501875B2" target="_blank" rel="noopener">View the patent &rarr;</a></span>
+            <span>US 11,501,875 B1</span>
           </div>
-        </div>
+          <div class="go">See the two apps &rarr;</div>
+        </a>
         <div class="kids three">
           <a class="card link reveal" href="/work/informed-consent-research.html">
             <span class="role">AI system design</span>
@@ -446,34 +452,69 @@
           <h3>Playfair Data</h3>
           <p>Where the work bent hard toward data. Not prettier dashboards. Clearer ones, more usable, more scalable, built as products rather than one-offs. I hired and led the UX team, and built the internal design system that let the work scale past what any one designer could hold in their head.</p>
         </div>
-        <div class="kids one">
+        <div class="kids">
+          <a class="card link reveal" href="/work/overdose-epidemic.html">
+            <span class="role">Data storytelling &middot; public health</span>
+            <h3>The Overdose Epidemic</h3>
+            <p>A public data dashboard for the American Medical Association. I started with listening sessions with AMA leadership to find the argument, wrote the hypotheses and interview questions to sharpen it, then defined the data schema where the raw data would not carry it. Opioid prescriptions down 49 percent while overdoses kept climbing, made arguable rather than just visible.</p>
+            <div class="go">Read the case study &rarr;</div>
+          </a>
           <a class="card link reveal" href="/work/data-and-design.html">
             <span class="role">Data storytelling</span>
             <h3>Data + Design</h3>
-            <p>Dashboards leaders actually use, the invented Leapfrog Chart for a Fortune 10 client, and the Coral Resilience Data Platform. Turning complex data into a decision someone can make.</p>
+            <p>Dashboards leaders actually use, and the invented Leapfrog Chart for a Fortune 10 client. Turning complex data into a decision someone can make.</p>
             <div class="go">Read the case study &rarr;</div>
           </a>
         </div>
       </div>
 
-      <!-- chapter 3 -->
+      <!-- chapter: FIVE -->
       <div class="chapter reveal">
         <div class="card head">
-          <span class="role"><span class="led past" aria-hidden="true"></span> UX Design Consultant &middot; 2017 to 2020 &middot; Kansas City</span>
-          <h3>JP Creative</h3>
-          <p>My own practice, and the stretch that looks like wandering on paper. Different sectors, different problem types, same job every time: walk into a messy system and make it understandable enough that someone can act. Research and facilitation at the front, wireframes and prototypes in the middle, and enough technical judgment to know what was actually buildable.</p>
+          <span class="role"><span class="led past" aria-hidden="true"></span> Head of User Experience Strategy &middot; 2019 to 2020 &middot; Seattle</span>
+          <h3>FIVE</h3>
+          <p>A strategic product design firm founded by people who had run product teams from the inside rather than from an agency. The house method was systems thinking, which they described as traversing abstraction: break a problem into its parts, move up and down the levels, and generate the context that makes a decision possible. I ran user experience strategy. The work went from coral reef science to youth sports to hotel supply chains, which sounds scattered and was not.</p>
         </div>
         <div class="kids">
-          <a class="card link reveal" href="/work/youth-as-experts.html">
-            <span class="role">UX &middot; facilitation</span>
-            <h3>Youth as Experts</h3>
-            <p>Design-thinking workshops where the teenagers were the experts and I was the facilitator, then the two-product prototype their own ideas asked for. The clearest proof of how I run discovery.</p>
+          <a class="card link reveal" href="/work/coral-resilience.html">
+            <span class="role">Research &middot; information architecture</span>
+            <h3>Coral Resilience Data Platform</h3>
+            <p>Collect, analyse and visualise coral reef health for researchers, conservationists and policymakers. I interviewed five domain experts across four countries and plotted each on a context ladder, because a policymaker and a field inspector need the same data at different resolutions. That shape drove the dashboard.</p>
+            <div class="go">Read the case study &rarr;</div>
+          </a>
+          <a class="card link reveal" href="/work/mindclick.html">
+            <span class="role">Data pipeline &middot; information design</span>
+            <h3>MindClick</h3>
+            <p>A supplier sustainability rating for a global hospitality brand. Facility emissions measured against a baseline year, facility environmental and labour commitments, and product scoring across nine dimensions, joined into one grade a buyer can act on in a single page.</p>
             <div class="go">Read the case study &rarr;</div>
           </a>
           <a class="card link reveal" href="/work/step-up-your-game.html">
             <span class="role">Product &amp; UX</span>
             <h3>Step Up Your Game</h3>
             <p>Wireframing a one-stop platform that gives young athletes a high athletic IQ, combining physical therapists, dietitians, and coaches into one guided experience.</p>
+            <div class="go">Read the case study &rarr;</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- chapter: JP Creative -->
+      <div class="chapter reveal">
+        <div class="card head">
+          <span class="role"><span class="led" aria-hidden="true"></span> UX Design Consultant &middot; 2017 to now &middot; Kansas City, then Orlando</span>
+          <h3>JP Creative</h3>
+          <p>My own practice, and the stretch that looks like wandering on paper. Different sectors, different problem types, same job every time: walk into a messy system and make it understandable enough that someone can act. Research and facilitation at the front, wireframes and prototypes in the middle, and enough technical judgment to know what was actually buildable.</p>
+        </div>
+        <div class="kids">
+          <a class="card link reveal" href="/work/youth-as-experts.html">
+            <span class="role">Research &middot; UX &middot; facilitation</span>
+            <h3>Youth as Experts</h3>
+            <p>For the Kauffman Foundation and Kansas City Public Library. Design-thinking workshops where the teenagers were the experts and I was the facilitator, then the clickable prototype their own ideas asked for, and the insights report that went in for funding.</p>
+            <div class="go">Read the case study &rarr;</div>
+          </a>
+          <a class="card link reveal" href="/work/youth-entrepreneurship.html">
+            <span class="role">Research &middot; facilitation</span>
+            <h3>Youth Entrepreneurship</h3>
+            <p>Back at the Kauffman Foundation a year later. Six months of landscape research, then a concept-pitch exercise with a cross-programme committee. Halfway through summarising the pitches I cut the planned vote, because the eight of them were describing one strategy, not eight.</p>
             <div class="go">Read the case study &rarr;</div>
           </a>
         </div>
@@ -565,7 +606,10 @@
             alt:'A diagnostics board listing stuck consent sessions, each with the reason it failed.' },
           { n:'Youth as Experts', href:'/work/youth-as-experts.html', img:'/images/thumbs/youth.png',
             why:'The teenagers decided what to build. I facilitated, then built what they asked for.',
-            alt:'A prototype built in paper and clay during a design-thinking workshop.' }
+            alt:'The Youth as Experts cover: the title beside a design thinking diagram of empathize, define, ideate, prototype and test.' },
+          { n:'Re-engaging Youth Entrepreneurship', href:'/work/youth-entrepreneurship.html', img:'/images/thumbs/youthent.png',
+            why:'Cut the vote I had planned, mid-exercise, because the room had already agreed.',
+            alt:'A slide listing the key characteristics of an entrepreneurial mindset as a set of chips.' }
         ] },
       { name:'Build it',
         cap:'Not a deck about the thing. The thing. Working software, in front of real users, in weeks. Twenty years of product judgment plus AI-augmented build speed.',
@@ -588,7 +632,13 @@
             alt:'The research cockpit: a readiness gauge, a review pipeline, and two flagged findings.' },
           { n:'Data + Design', href:'/work/data-and-design.html', img:'/images/thumbs/data.png',
             why:'Dashboards leaders actually use, and a chart type invented because the others lied.',
-            alt:'A manufacturing cost dashboard: three headline cost metrics above a breakdown by driver.' }
+            alt:'A manufacturing cost dashboard: three headline cost metrics above a breakdown by driver.' },
+          { n:'The Overdose Epidemic', href:'/work/overdose-epidemic.html', img:'/images/thumbs/overdose.png',
+            why:'Prescriptions down 49 percent, overdoses still climbing. Made arguable, for the AMA.',
+            alt:'A ranked bar chart of drug combinations, bars containing fentanyl coloured apart from those that do not.' },
+          { n:'Coral Resilience Data Platform', href:'/work/coral-resilience.html', img:'/images/thumbs/coral.png',
+            why:'Five experts plotted on one axis, and the shape decided the whole architecture.',
+            alt:'A reef monitoring dashboard: four study sites with alert levels beside a heat map of the Galapagos.' }
         ] }
     ];    var ticks = document.getElementById('ticks');
     if(ticks){

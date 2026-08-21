@@ -107,6 +107,12 @@
   .hero-figure{margin-top:var(--s34)}
   .hero-figure .inner{min-height:340px; aspect-ratio:16/7}
 
+  /* the cover frame is near-square and carries its own lockup, so it gets a
+     document's width rather than a hero band's */
+  .cover{max-width:820px; margin:var(--s34) 0 0}
+  .cover .inner.shot{aspect-ratio:auto; min-height:0}
+  .cover .inner.shot img{max-height:none}
+
   /* quote */
   .pullquote{margin:var(--s21) 0; padding:var(--s34); border-radius:20px; box-shadow:var(--raise); background:var(--greige)}
   .pullquote p{font-family:var(--grotesk); font-weight:600; font-size:clamp(21px,2.6vw,30px); color:var(--ink); letter-spacing:-.01em; line-height:1.2; margin:0; max-width:30ch}
@@ -256,9 +262,9 @@
       <div class="m"><div class="k">Methods</div><div class="v">Design thinking, research, UX</div></div>
     </div>
 
-    <figure class="frame wide hero-figure reveal">
-      <div class="inner shot crop"><img src="../images/youth-as-experts/hero-workshop.jpg" alt="A hand-built model from the workshop: a foam-board floor plan of &quot;The Ultimate Hangout&quot; with a game room, movie theater, snack bar, and chill-out cave modelled in clay." loading="lazy" decoding="async"></div>
-      <figcaption class="cap">Figure 01 &middot; workshop, Kansas City Public Library</figcaption>
+    <figure class="frame cover reveal">
+      <div class="inner shot"><img src="../images/youth-as-experts/hero-cover.png" alt="The case study cover: a UX Case Study tag above the title Youth as Experts, Co-Creating Innovative Youth Programs, with the Kansas City Public Library mark beneath it, set against a tilted page showing the five-stage design thinking diagram of Empathize, Define, Ideate, Prototype and Test." width="1130" height="1042" loading="lazy" decoding="async"></div>
+      <figcaption class="cap">Figure 01 &middot; the deck this write-up is drawn from</figcaption>
     </figure>
   </section>
 
@@ -357,6 +363,10 @@
       <div class="sol reveal"><div class="glass"><h3>Gamer Space</h3><p>"We don't just want to play games, we want to make games."</p></div></div>
       <div class="sol reveal"><div class="glass"><h3>Binge Watch</h3><p>A comfortable place to connect with friends while catching up on the current series.</p></div></div>
     </div>
+    <figure class="frame wide reveal" style="margin-top:var(--s34)">
+      <div class="inner shot crop"><img src="../images/youth-as-experts/hero-workshop.jpg" alt="A hand-built model from the workshop: a foam-board floor plan of &quot;The Ultimate Hangout&quot; with a game room, movie theater, snack bar, and chill-out cave modelled in clay." loading="lazy" decoding="async"></div>
+      <figcaption class="cap">The Ultimate Hangout, built in foam board and clay by the teenagers who proposed it</figcaption>
+    </figure>
   </section>
 
   <!-- RESEARCH -->
